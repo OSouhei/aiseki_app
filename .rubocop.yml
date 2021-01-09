@@ -23,8 +23,10 @@ Rails/FilePath:
     - 'spec/rails_helper.rb'
     - 'config/environments/development.rb'
 
-## 日本語コメントを許可
-Style/AsciiComments:
+RSpec/Rails/HttpStatus:
+  EnforcedStyle: numeric
+
+Bundler/OrderedGems:
   Enabled: false
 
 Layout/SpaceInsideArrayLiteralBrackets:
@@ -43,13 +45,14 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 10
 
+Style/AsciiComments:
+  Enabled: false
+
 Style/Documentation:
-  Exclude:
-    - 'spec/**/*'
-    - 'test/**/*'
-    - 'app/helpers/application_helper.rb'
-    - 'app/models/application_record.rb'
-    - 'config/application.rb'
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: false
 
 Style/FrozenStringLiteralComment:
   Enabled: false
