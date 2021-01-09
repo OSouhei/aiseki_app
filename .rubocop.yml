@@ -23,6 +23,9 @@ Rails/FilePath:
     - 'spec/rails_helper.rb'
     - 'config/environments/development.rb'
 
+RSpec/ExampleLength:
+  Enabled: false
+
 RSpec/Rails/HttpStatus:
   EnforcedStyle: numeric
 
@@ -35,6 +38,9 @@ Layout/SpaceInsideArrayLiteralBrackets:
 
 Metrics/AbcSize:
   Max: 18
+
+Metrics/BlockLength:
+  Enabled: false
 
 Metrics/CyclomaticComplexity:
   Max: 10
@@ -61,12 +67,19 @@ Style/GlobalStdStream:
   Exclude:
     - 'config/environments/production.rb'
 
+Style/MutableConstant:
+  Enabled: false
+
 Style/RedundantFetchBlock:
   Exclude:
     - 'config/puma.rb'
 
 Style/StringLiterals:
   Enabled: false
+
+Style/StringConcatenation:
+  Exclude:
+    - 'spec/models/user_spec.rb'
 
 Style/SymbolArray:
   EnforcedStyle: brackets
