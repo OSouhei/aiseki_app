@@ -23,6 +23,9 @@ Rails/FilePath:
     - 'spec/rails_helper.rb'
     - 'config/environments/development.rb'
 
+RSpec/Capybara/FeatureMethods:
+  Enabled: false
+
 RSpec/ExampleLength:
   Enabled: false
 
