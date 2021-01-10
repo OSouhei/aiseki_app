@@ -29,6 +29,7 @@ group :development do
   gem 'spring'
   gem 'spring-commands-rspec'
   gem 'web-console', '>= 4.1.0'
+  gem 'pre-commit', require: false
 end
 
 group :test do
