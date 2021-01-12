@@ -31,7 +31,11 @@ RSpec/ExampleLength:
 
 RSpec/MultipleExpectations:
   Exclude:
+    - "spec/features/*"
     - "spec/helpers/application_helper_spec.rb"
+
+RSpec/NotToNot:
+  Enabled: false
 
 RSpec/Rails/HttpStatus:
   EnforcedStyle: numeric
@@ -59,6 +63,9 @@ Metrics/PerceivedComplexity:
   Max: 10
 
 Style/AsciiComments:
+  Enabled: false
+
+Style/BlockDelimiters:
   Enabled: false
 
 Style/ClassAndModuleChildren:
