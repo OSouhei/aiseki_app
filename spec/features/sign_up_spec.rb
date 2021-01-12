@@ -8,6 +8,7 @@ RSpec.feature "Sign Up", type: :feature do
     expect(page).to have_content "ユーザー登録"
     click_link "ユーザー登録"
     expect(page).to have_current_path(new_user_registration_path)
+    expect(page).to have_title "sign up - 相席app"
     expect {
       fill_in "Name", with: user.name
       fill_in "Email", with: user.email
