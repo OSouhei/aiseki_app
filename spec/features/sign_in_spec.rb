@@ -3,6 +3,11 @@ require 'rails_helper'
 RSpec.feature "Sign In", type: :feature do
   let(:user) { FactoryBot.create(:user) }
 
+  scenario "sign in page have right title" do
+    visit new_user_session_path
+    expect(page).to have_title "Login - 相席app"
+  end
+
   scenario "user sign in successfully" do
     visit root_path
     click_link "ログイン"
