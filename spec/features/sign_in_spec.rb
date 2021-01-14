@@ -25,4 +25,11 @@ RSpec.feature "Sign In", type: :feature do
     click_button "Log in"
     expect(page).to have_current_path(user_session_path)
   end
+
+  scenario "user has already signed in" do
+    sign_in user
+    visit new_user_session_path
+    expect(page).to have_current_path(root_path)
+    expect(page).to have_content "You are already signed in."
+  end
 end

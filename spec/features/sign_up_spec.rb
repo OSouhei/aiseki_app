@@ -38,4 +38,11 @@ RSpec.feature "Sign Up", type: :feature do
       expect(page).to have_content "Name can't be blank"
     }.to_not change(User, :count)
   end
+
+  scenario "user has already signed in" do
+    sign_in user
+    visit new_user_registration_path
+    expect(page).to have_content "You are already signed in."
+    expect(page).to have_current_path(root_path)
+  end
 end
