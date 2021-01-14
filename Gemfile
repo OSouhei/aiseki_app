@@ -36,8 +36,8 @@ end
 
 group :test do
   gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver'
   gem 'webdrivers'
+  gem 'launchy'
   gem 'rails-controller-testing'
 end
 
