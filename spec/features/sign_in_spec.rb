@@ -8,7 +8,7 @@ RSpec.feature "Sign In", type: :feature do
     expect(page).to have_title "Login - 相席app"
   end
 
-  scenario "user sign in successfully" do
+  scenario "user sign in and sign out successfully" do
     visit root_path
     click_link "ログイン"
     expect(page).to have_current_path(new_user_session_path)
@@ -16,6 +16,16 @@ RSpec.feature "Sign In", type: :feature do
     fill_in "Password", with: user.password
     click_button "Log in"
     expect(page).to have_current_path(root_path)
+    expect(page).to have_content "Signed in successfully."
+    expect(page).to_not have_content "ログイン"
+    expect(page).to_not have_content "ユーザー登録"
+    expect(page).to have_content "ログアウト"
+    click_link "ログアウト"
+    expect(page).to have_current_path(root_path)
+    expect(page).to have_content "Signed out successfully."
+    expect(page).to have_content "ユーザー登録"
+    expect(page).to have_content "ログイン"
+    expect(page).to_not have_content "ログアウト"
   end
 
   scenario "user fail to sign in" do

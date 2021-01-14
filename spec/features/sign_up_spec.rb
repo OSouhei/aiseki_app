@@ -21,6 +21,9 @@ RSpec.feature "Sign Up", type: :feature do
       click_button "Sign up"
       expect(page).to have_current_path(root_path)
     }.to change(User, :count).by(1)
+    expect(page).to have_content "ログアウト"
+    expect(page).to_not have_content "ログイン"
+    expect(page).to_not have_content "ユーザー登録"
   end
 
   scenario "user fail to sign up" do
