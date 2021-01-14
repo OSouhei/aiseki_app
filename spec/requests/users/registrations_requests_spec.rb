@@ -143,4 +143,46 @@ RSpec.describe "Users::Registrations", type: :request do
       end
     end
   end
+
+  describe "DELETE /users" do
+    context "when user signed in" do
+      before do
+        sign_in user
+      end
+
+      it "responds successfully" do
+        delete user_registration_path
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home-page" do
+        delete user_registration_path
+        expect(response).to redirect_to root_path
+      end
+
+      it "destroy user" do
+        expect {
+          delete user_registration_path
+        }.to change(User, :count).by(-1)
+      end
+    end
+
+    context "when user does not signed in" do
+      it "responds successfully" do
+        delete user_registration_path
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to login page" do
+        delete user_registration_path
+        expect(response).to redirect_to new_user_session_path
+      end
+
+      it "does not destroy user" do
+        expect {
+          delete user_registration_path
+        }.to_not change(User, :count)
+      end
+    end
+  end
 end
