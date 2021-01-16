@@ -7,7 +7,8 @@ RSpec.feature "Update Users", type: :feature do
     before do
       sign_in user
       visit root_path
-      click_link "プロフィール編集"
+      click_link "プロフィール"
+      click_link "edit your profile"
     end
 
     it "has right title" do
