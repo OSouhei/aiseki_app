@@ -3,8 +3,37 @@ require 'rails_helper'
 RSpec.describe "Rooms", type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:other_user) { FactoryBot.create(:user) }
+  let(:room) { FactoryBot.create(:room, user: user) }
   let(:room_params) do
     FactoryBot.attributes_for(:room).merge!({ "date(1i)": 2021, "date(2i)": 12, "date(3i)": 11, "date(4i)": 15, "date(5i)": 45 })
+  end
+
+  describe "GET /rooms" do
+    before do
+      get rooms_path
+    end
+
+    it "responds successfully" do
+      expect(response).to have_http_status 200
+    end
+
+    it "render template rooms/index" do
+      expect(response).to render_template :index
+    end
+  end
+
+  describe "GET /users/:id/rooms/:id" do
+    before do
+      get user_room_path(user, room)
+    end
+
+    it "responds successfully" do
+      expect(response).to have_http_status 200
+    end
+
+    it "render template rooms/show" do
+      expect(response).to render_template :show
+    end
   end
 
   describe "GET /users/:user_id/rooms/new" do

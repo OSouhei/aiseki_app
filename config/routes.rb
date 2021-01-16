@@ -4,7 +4,8 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
   resources :users, only: [:index, :show] do
-    resources :rooms
+    resources :rooms, except: :index
   end
+  resources :rooms, only: :index
   root "home#index"
 end

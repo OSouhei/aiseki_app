@@ -4,6 +4,14 @@ class RoomsController < ApplicationController
   before_action :correct_user?, only: [:new, :create]
   before_action :parse_params, only: [:create]
 
+  def index
+    @rooms = Room.all
+  end
+
+  def show
+    @room = Room.find(params[:id])
+  end
+
   def new
     @room = @user.rooms.build
   end
