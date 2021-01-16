@@ -9,3 +9,5 @@
 <p><%= @room.people_limit %></p>
 <h2>posted by</h2>
 <p><%= @room.user.name %></p>
+
+<%= link_to "edit your this room", edit_user_room_path(current_user, @room) if current_user? @user %>
