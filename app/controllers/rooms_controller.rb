@@ -4,6 +4,8 @@ class RoomsController < ApplicationController
 
   def new
     redirect_to root_path and return unless current_user? @user
+
+    @room = @user.rooms.build
   end
 
   private

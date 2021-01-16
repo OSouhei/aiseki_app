@@ -1,1 +1,21 @@
 <h1>Room#new</h1>
+
+<%= form_with(model: @room, url: user_rooms_path) do |f| %>
+  <div class="form-group">
+    <%= f.label :conditions, class: "form-label" %>
+    <%= f.text_area :conditions, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :date, class: "form-label" %>
+    <%= f.datetime_select :date, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :people_limit, class: "form-label" %>
+    <%= f.select :people_limit, ["no-limit"] + (1..10).to_a, class: "form-control" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create Room", class: "btn btn-primary" %></div>
+<% end %>
