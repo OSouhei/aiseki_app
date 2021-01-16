@@ -145,4 +145,50 @@ RSpec.describe "Rooms", type: :request do
       end
     end
   end
+
+  describe "GET users/:user_id/rooms/:id/edit" do
+    context "when authenticated user" do
+      before do
+        sign_in user
+        get edit_user_room_path(user, room)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 200
+      end
+
+      it "render template rooms/edit" do
+        expect(response).to render_template :edit
+      end
+    end
+
+    context "when unauthenticated user" do
+      before do
+        sign_in other_user
+        get edit_user_room_path(user, room)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home page" do
+        expect(response).to redirect_to root_path
+      end
+    end
+
+    context "when guest" do
+      before do
+        get edit_user_room_path(user, room)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to login page" do
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 end

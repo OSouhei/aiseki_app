@@ -1,6 +1,7 @@
 class RoomsController < ApplicationController
-  before_action :set_user, only: [:new, :create]
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :set_user, only: [:show, :new, :create]
+  before_action :set_room, only: [:show, :edit]
+  before_action :authenticate_user!, only: [:new, :create, :edit]
   before_action :correct_user?, only: [:new, :create]
   before_action :parse_params, only: [:create]
 
@@ -9,7 +10,6 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
   end
 
   def new
@@ -30,10 +30,18 @@ class RoomsController < ApplicationController
     end
   end
 
+  def edit
+    redirect_to root_path and return unless @room.user == current_user
+  end
+
   private
 
   def set_user
     @user = User.find(params[:user_id])
+  end
+
+  def set_room
+    @room = Room.find(params[:id])
   end
 
   def correct_user?
