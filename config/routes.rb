@@ -3,5 +3,8 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
+  resources :users, only: [:index, :show] do
+    resources :rooms
+  end
   root "home#index"
 end
