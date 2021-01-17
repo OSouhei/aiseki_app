@@ -4,7 +4,6 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :correct_user?, only: [:new, :create]
   before_action :room_owner?, only: [:edit, :update]
-  before_action :parse_params, only: [:create]
 
   def index
     @rooms = Room.all
@@ -18,7 +17,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = @user.rooms.build(conditions: @conditions, date: @date, people_limit: @people_limit)
+    @room = @user.rooms.build(room_params)
     if @room.save
       redirect_to root_path, notice: "room was successfully created."
     else
@@ -57,19 +56,5 @@ class RoomsController < ApplicationController
 
   def room_owner?
     redirect_to root_path and return unless @room.user == current_user
-  end
-
-  def parse_params
-    room_params = params[:room]
-    @conditions = room_params[:conditions]
-    @people_limit = room_params[:people_limit]
-    @date = room_params[:date]
-    @date = Time.zone.local(
-      room_params["date(1i)"],
-      room_params["date(2i)"],
-      room_params["date(3i)"],
-      room_params["date(4i)"],
-      room_params["date(5i)"]
-    )
   end
 end
