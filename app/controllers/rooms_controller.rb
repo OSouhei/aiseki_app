@@ -1,8 +1,9 @@
 class RoomsController < ApplicationController
   before_action :set_user, only: [:show, :new, :create]
-  before_action :set_room, only: [:show, :edit]
-  before_action :authenticate_user!, only: [:new, :create, :edit]
+  before_action :set_room, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
   before_action :correct_user?, only: [:new, :create]
+  before_action :room_owner?, only: [:edit, :update]
   before_action :parse_params, only: [:create]
 
   def index
@@ -17,24 +18,30 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = @user.rooms.build(
-      conditions: @conditions,
-      date: @date,
-      people_limit: @people_limit
-    )
+    @room = @user.rooms.build(conditions: @conditions, date: @date, people_limit: @people_limit)
     if @room.save
-      flash[:notice] = "room was successfully created."
-      redirect_to root_path
+      redirect_to root_path, notice: "room was successfully created."
     else
       render :new
     end
   end
 
   def edit
-    redirect_to root_path and return unless @room.user == current_user
+  end
+
+  def update
+    if @room.update(room_params)
+      redirect_to user_room_path(@room.user, @room), notice: "room was updated."
+    else
+      render :edit
+    end
   end
 
   private
+
+  def room_params
+    params.require(:room).permit(:conditions, :date, :people_limit)
+  end
 
   def set_user
     @user = User.find(params[:user_id])
@@ -45,7 +52,11 @@ class RoomsController < ApplicationController
   end
 
   def correct_user?
-    redirect_to root_path and return unless current_user? @user
+    redirect_to(root_path, warning: "you can't access this page.") and return unless current_user? @user
+  end
+
+  def room_owner?
+    redirect_to root_path and return unless @room.user == current_user
   end
 
   def parse_params
