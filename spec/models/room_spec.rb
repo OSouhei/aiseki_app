@@ -9,11 +9,19 @@ RSpec.describe Room, type: :model do
 
   it "is invalid without associated user" do
     room.user = nil
-    expect(room).to be_invalid
+    room.valid?
+    expect(room.errors[:user]).to include("must exist")
   end
 
   it "is invalid without date" do
     room.date = nil
-    expect(room).to be_invalid
+    room.valid?
+    expect(room.errors[:date]).to include("can't be blank")
+  end
+
+  it "is invalid without shop_name" do
+    room.shop_name = "   "
+    room.valid?
+    expect(room.errors[:shop_name]).to include("can't be blank")
   end
 end
