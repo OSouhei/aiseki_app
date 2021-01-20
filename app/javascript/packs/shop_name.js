@@ -1,4 +1,5 @@
 $(document).on('turbolinks:load', function(){
+  // 検索結果を表示
   $(document).on('keyup', '#room_shop_name', function(e){
     e.preventDefault();
     var input = $.trim($(this).val());
@@ -13,13 +14,14 @@ $(document).on('turbolinks:load', function(){
     .done(function(data){
       $('#result').find('li').remove();
       $(data).each(function(i, shop){
-        $('#result').append('<li>' + shop + '</li>');
+        $('#result').append('<li class="shop_name">' + shop + '</li>');
       });
     })
   });
-  $(".shop-suggest").on("click", function(e){
+  // 検索結果をフィールドにセット
+  $(document).on('click', '.shop_name', function(e){
     e.preventDefault();
-    console.log("foobar!!!")
-    // $("#room_shop_name").value = $(this).text
+    shop = $(this).text();
+    $("#room_shop_name").val(shop);
   });
 });
