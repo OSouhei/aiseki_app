@@ -7,5 +7,6 @@ Rails.application.routes.draw do
     resources :rooms, except: [:index]
   end
   resources :rooms, only: :index
+  get "/rooms/search_shop", to: "rooms#search_shop", as: "search_shop"
   root "home#index"
 end

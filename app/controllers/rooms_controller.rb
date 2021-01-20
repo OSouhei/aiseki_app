@@ -36,6 +36,15 @@ class RoomsController < ApplicationController
     end
   end
 
+  def search_shop
+    term = params[:keyword]
+    data = search_shops(term)
+    @shops = parse_json(data)
+    respond_to do |format|
+      format.json { render "index", json: @shops }
+    end
+  end
+
   private
 
   def room_params
