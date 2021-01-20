@@ -2,6 +2,12 @@
 
 <%= form_with(model: @room, url: user_rooms_path) do |f| %>
   <div class="form-group">
+    <%= f.label :shop_name, class: "form-label" %>
+    <%= f.text_field :shop_name, class: "form-control" %>
+    <ul id="result"></ul>
+  </div>
+
+  <div class="form-group">
     <%= f.label :conditions, class: "form-label" %>
     <%= f.text_area :conditions, class: "form-control" %>
   </div>
