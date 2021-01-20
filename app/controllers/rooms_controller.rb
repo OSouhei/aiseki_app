@@ -48,7 +48,7 @@ class RoomsController < ApplicationController
   private
 
   def room_params
-    params.require(:room).permit(:conditions, :date, :people_limit)
+    params.require(:room).permit(:conditions, :date, :people_limit, :shop_name)
   end
 
   def set_user
