@@ -95,7 +95,7 @@ RSpec.describe "Rooms", type: :request do
 
       it "redirect to home page" do
         post user_rooms_path(user), params: { room: room_params }
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to user_room_path(user, Room.last)
       end
 
       it "create room" do

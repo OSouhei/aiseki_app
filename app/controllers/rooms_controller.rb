@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
   def create
     @room = @user.rooms.build(room_params)
     if @room.save
-      redirect_to root_path, notice: "room was successfully created."
+      redirect_to user_room_path(current_user, @room), notice: "room was successfully created."
     else
       render :new
     end
