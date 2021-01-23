@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "DestroyUsers", type: :feature do
+RSpec.feature "DestroyUsers", type: :system do
   let(:user) { FactoryBot.create(:user) }
 
   scenario "user destroy his account" do

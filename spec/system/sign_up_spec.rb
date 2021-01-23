@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Sign Up", type: :feature do
+RSpec.feature "Sign Up", type: :system do
   let(:user) { FactoryBot.build(:user) }
 
   scenario "sign up page have right title" do

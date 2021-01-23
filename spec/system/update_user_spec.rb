@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Update Users", type: :feature do
+RSpec.feature "Update Users", type: :system do
   let(:user) { FactoryBot.create(:user) }
 
   context "when user logged in" do

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "UsersShows", type: :feature do
+RSpec.feature "UsersShows", type: :system do
   let(:user) { FactoryBot.create(:user) }
   let(:other_user) { FactoryBot.create(:user) }
 

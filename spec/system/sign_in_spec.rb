@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.feature "Sign In", type: :feature do
+RSpec.feature "Sign In", type: :system do
   let(:user) { FactoryBot.create(:user) }
 
   scenario "sign in page have right title" do
