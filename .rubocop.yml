@@ -32,6 +32,7 @@ RSpec/ExampleLength:
 RSpec/MultipleExpectations:
   Exclude:
     - "spec/features/*"
+    - "spec/system/*"
     - "spec/helpers/application_helper_spec.rb"
 
 RSpec/NotToNot:
