@@ -2,3 +2,4 @@
 <h2><%= room.conditions %></h2>
 <h2><%= room.date %></h2>
 <h2><%= room.people_limit %></h2>
+<p><%= link_to "go this room", room_path(room), id: "room#{room.id}" %></p>

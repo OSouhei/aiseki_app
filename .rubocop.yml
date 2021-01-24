@@ -35,6 +35,9 @@ RSpec/MultipleExpectations:
     - "spec/system/*"
     - "spec/helpers/application_helper_spec.rb"
 
+RSpec/InstanceVariable:
+  Enabled: false
+
 RSpec/NotToNot:
   Enabled: false
 
