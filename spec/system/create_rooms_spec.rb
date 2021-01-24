@@ -33,7 +33,7 @@ RSpec.describe "CreateRooms", type: :system do
       end
       click_button "Create Room"
     }.to change(Room, :count).by(1)
-    expect(page).to have_current_path(user_room_path(user, Room.last))
+    expect(page).to have_current_path(room_path(Room.last))
     # flash
     expect(page).to have_content "room was successfully created."
   end

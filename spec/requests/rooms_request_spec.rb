@@ -22,9 +22,9 @@ RSpec.describe "Rooms", type: :request do
     end
   end
 
-  describe "GET /users/:id/rooms/:id" do
+  describe "GET /rooms/:id" do
     before do
-      get user_room_path(user, room)
+      get room_path(room)
     end
 
     it "responds successfully" do
@@ -95,7 +95,7 @@ RSpec.describe "Rooms", type: :request do
 
       it "redirect to home page" do
         post user_rooms_path(user), params: { room: room_params }
-        expect(response).to redirect_to user_room_path(user, Room.last)
+        expect(response).to redirect_to room_path(Room.last)
       end
 
       it "create room" do
@@ -146,11 +146,11 @@ RSpec.describe "Rooms", type: :request do
     end
   end
 
-  describe "GET users/:user_id/rooms/:id/edit" do
+  describe "GET /rooms/:id/edit" do
     context "when authenticated user" do
       before do
         sign_in user
-        get edit_user_room_path(user, room)
+        get edit_room_path(room)
       end
 
       it "responds successfully" do
@@ -165,7 +165,7 @@ RSpec.describe "Rooms", type: :request do
     context "when unauthenticated user" do
       before do
         sign_in other_user
-        get edit_user_room_path(user, room)
+        get edit_room_path(room)
       end
 
       it "responds successfully" do
@@ -179,7 +179,7 @@ RSpec.describe "Rooms", type: :request do
 
     context "when guest" do
       before do
-        get edit_user_room_path(user, room)
+        get edit_room_path(room)
       end
 
       it "responds successfully" do
@@ -192,11 +192,11 @@ RSpec.describe "Rooms", type: :request do
     end
   end
 
-  describe "PATCH /users/:user_id/rooms/:id" do
+  describe "PATCH /rooms/:id" do
     context "when authenticated user" do
       before do
         sign_in user
-        patch user_room_path(user, room), params: { room: { conditions: "new conditions!" } }
+        patch room_path(room), params: { room: { conditions: "new conditions!" } }
       end
 
       it "responds successfully" do
@@ -204,7 +204,7 @@ RSpec.describe "Rooms", type: :request do
       end
 
       it "redirect to rooms/show" do
-        expect(response).to redirect_to user_room_path(user, room)
+        expect(response).to redirect_to room_path(room)
       end
 
       it "update room attributes" do
@@ -216,7 +216,7 @@ RSpec.describe "Rooms", type: :request do
     context "when unauthenticated user" do
       before do
         sign_in other_user
-        patch user_room_path(user, room), params: { room: { conditions: "new conditions!" } }
+        patch room_path(room), params: { room: { conditions: "new conditions!" } }
       end
 
       it "responds successfully" do
@@ -235,7 +235,7 @@ RSpec.describe "Rooms", type: :request do
 
     context "when guest" do
       before do
-        patch user_room_path(user, room), params: { room: { conditions: "new conditions!" } }
+        patch room_path(room), params: { room: { conditions: "new conditions!" } }
       end
 
       it "responds successfully" do

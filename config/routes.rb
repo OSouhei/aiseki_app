@@ -3,8 +3,8 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
-  resources :users, only: [:index, :show] do
-    resources :rooms, except: [:index]
+  resources :users do
+    resources :rooms, shallow: true
   end
   resources :rooms, only: :index
   get "/rooms/search_shop", to: "rooms#search_shop", as: "search_shop"
