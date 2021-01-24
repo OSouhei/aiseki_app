@@ -5,4 +5,10 @@
 <h2><%= @user.name %></h2>
 <h2><%= @user.email %></h2>
 
+<% if @rooms %>
+  <h2>your rooms</h2>
+  <%= render @rooms %>
+<% end %>
+
 <%= link_to "edit your profile", edit_user_registration_path if current_user?(@user) %>
+<%= link_to "your rooms", rooms_path %>

@@ -5,8 +5,7 @@ class RoomsController < ApplicationController
   before_action :correct_user?, only: [:new, :create]
   before_action :room_owner?, only: [:edit, :update, :destroy]
 
-  # GET /users/:user_id/rooms
-  # GET    /rooms
+  # GET /rooms
   def index
     @rooms = Room.all
   end
@@ -70,14 +69,14 @@ class RoomsController < ApplicationController
   end
 
   def set_room
-    @room = Room.find(params[:id])
+    @room = Room.find_by(id: params[:id]) || redirect_to(root_path, alert: "room was not found.") and return
   end
 
   def correct_user?
-    redirect_to(root_path, warning: "you can't access this page.") and return unless current_user? @user
+    redirect_to(root_path, alert: "you can't access this page.") and return unless current_user? @user
   end
 
   def room_owner?
-    redirect_to(root_path, warning: "you can't access this page.") and return unless current_user? @room.user
+    redirect_to(root_path, alert: "you can't access this page.") and return unless current_user? @room.user
   end
 end

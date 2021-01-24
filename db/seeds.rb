@@ -1,4 +1,4 @@
-user = User.create(
+user = User.create!(
   name: "foo",
   email: "foo@bar.com",
   password: "password"
@@ -9,7 +9,8 @@ user = User.create(
 end
 
 10.times do |n|
-  user.rooms.create(
+  user.rooms.create!(
+    shop_name: "orion",
     conditions: "engineer only!",
     date: Time.zone.local(2021, 12, 11, 15, 45),
     people_limit: n
