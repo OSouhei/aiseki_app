@@ -1,9 +1,9 @@
 class RoomsController < ApplicationController
   before_action :set_user, only: [:new, :create]
-  before_action :set_room, only: [:show, :edit, :update]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :set_room, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :correct_user?, only: [:new, :create]
-  before_action :room_owner?, only: [:edit, :update]
+  before_action :room_owner?, only: [:edit, :update, :destroy]
 
   # GET /users/:user_id/rooms
   # GET    /rooms
@@ -45,6 +45,8 @@ class RoomsController < ApplicationController
 
   # DELETE /rooms/:id
   def destroy
+    @room.destroy
+    redirect_to root_path, notice: "room was successfully destroyed."
   end
 
   # GET /rooms/search_shop
@@ -76,6 +78,6 @@ class RoomsController < ApplicationController
   end
 
   def room_owner?
-    redirect_to root_path and return unless @room.user == current_user
+    redirect_to(root_path, warning: "you can't access this page.") and return unless current_user? @room.user
   end
 end

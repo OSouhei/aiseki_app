@@ -252,4 +252,71 @@ RSpec.describe "Rooms", type: :request do
       end
     end
   end
+
+  describe "DELETE /rooms/:id" do
+    context "when authenticated user" do
+      before do
+        sign_in user
+      end
+
+      it "responds successfully" do
+        delete room_path(room)
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home page" do
+        delete room_path(room)
+        expect(response).to redirect_to root_path
+      end
+
+      it "destroy room" do
+        room
+        expect {
+          delete room_path(room)
+        }.to change(Room, :count).by(-1)
+      end
+    end
+
+    context "when unauthenticated user" do
+      before do
+        sign_in other_user
+      end
+
+      it "responds successfully" do
+        delete room_path(room)
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home page" do
+        delete room_path(room)
+        expect(response).to redirect_to root_path
+      end
+
+      it "does not destroy room" do
+        room
+        expect {
+          delete room_path(room)
+        }.to_not change(Room, :count)
+      end
+    end
+
+    context "when guest" do
+      it "responds successfully" do
+        delete room_path(room)
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to login page" do
+        delete room_path(room)
+        expect(response).to redirect_to new_user_session_path
+      end
+
+      it "does not destroy room" do
+        room
+        expect {
+          delete room_path(room)
+        }.to_not change(Room, :count)
+      end
+    end
+  end
 end
