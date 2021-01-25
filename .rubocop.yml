@@ -23,6 +23,12 @@ Rails/FilePath:
     - 'spec/rails_helper.rb'
     - 'config/environments/development.rb'
 
+Rails/InverseOf:
+  Enabled: false
+
+Rails/RedundantForeignKey:
+  Enabled: false
+
 RSpec/Capybara/FeatureMethods:
   Enabled: false
 

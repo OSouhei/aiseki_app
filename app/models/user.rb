@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :rooms, dependent: :destroy
+  has_many :joining, class_name: "Member", foreign_key: "user_id", dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
