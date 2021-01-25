@@ -4,8 +4,12 @@ user = User.create!(
   password: "password"
 )
 
-30.times do
-  FactoryBot.create(:user, :faker_name)
+30.times do |n|
+  User.create!(
+    name: Faker::Name.name,
+    email: "sampleuser-#{n}@example.com",
+    password: "password"
+  )
 end
 
 10.times do |n|
