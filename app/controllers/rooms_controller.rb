@@ -61,7 +61,7 @@ class RoomsController < ApplicationController
   # GET /rooms/:room_id/join
   def join
     message = {}
-    current_user.join(@room) ? message[:notice] = "you joined the room." : message[:warning] = "you can not join the room because you are the room owner."
+    current_user.join(@room) ? message[:notice] = "you joined the room." : message[:alert] = "you can not join the room because you are the room owner."
     redirect_to root_path, message
   end
 
