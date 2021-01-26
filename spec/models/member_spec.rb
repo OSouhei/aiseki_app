@@ -25,4 +25,14 @@ RSpec.describe Member, type: :model do
     member = FactoryBot.build(:member, room: room, user: user)
     expect(member).to be_invalid
   end
+
+  it "does not allow duplicated record" do
+    user = FactoryBot.create(:user)
+    room = FactoryBot.create(:room)
+    FactoryBot.create(:member, user: user, room: room)
+    member.room_id = room.id
+    member.user_id = user.id
+    member.valid?
+    expect(member).to be_invalid
+  end
 end

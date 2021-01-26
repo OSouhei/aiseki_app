@@ -3,7 +3,7 @@ class Member < ApplicationRecord
   belongs_to :room
 
   validates :room_id, presence: true
-  validates :user_id, presence: true
+  validates :user_id, presence: true, uniqueness: { scope: :room_id }
   validate :owner_is_not_member
 
   def owner_is_not_member
