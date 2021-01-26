@@ -4,14 +4,6 @@ user = User.create!(
   password: "password"
 )
 
-30.times do |n|
-  User.create!(
-    name: Faker::Name.name,
-    email: "sampleuser-#{n}@example.com",
-    password: "password"
-  )
-end
-
 10.times do |n|
   user.rooms.create!(
     shop_name: "orion",
@@ -20,3 +12,14 @@ end
     people_limit: n
   )
 end
+
+room = Room.first
+30.times do |n|
+  user = User.create!(
+    name: Faker::Name.name,
+    email: "sampleuser-#{n}@example.com",
+    password: "password"
+  )
+  user.join room
+end
+
