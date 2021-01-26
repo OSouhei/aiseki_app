@@ -18,4 +18,11 @@ RSpec.describe Member, type: :model do
     member.valid?
     expect(member.errors[:room_id]).to include("can't be blank")
   end
+
+  it "is invalid when room owner is included in members" do
+    user = FactoryBot.create(:user)
+    room = FactoryBot.create(:room, user: user)
+    member = FactoryBot.build(:member, room: room, user: user)
+    expect(member).to be_invalid
+  end
 end
