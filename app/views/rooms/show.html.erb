@@ -15,3 +15,6 @@
   <%= link_to "edit this room", edit_room_path(@room) %><br />
   <%= link_to "destroy this room", room_path(@room), method: :delete %>
 <% end %>
+
+<h2>Room Members</h2>
+<%= render @members %>

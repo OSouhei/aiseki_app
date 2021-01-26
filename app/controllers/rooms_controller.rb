@@ -12,6 +12,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/:id
   def show
+    @members = @room.members
   end
 
   # GET /users/:user_id/rooms/new
