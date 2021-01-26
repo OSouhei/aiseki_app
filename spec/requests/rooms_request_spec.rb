@@ -23,16 +23,26 @@ RSpec.describe "Rooms", type: :request do
   end
 
   describe "GET /rooms/:id" do
-    before do
-      get room_path(room)
-    end
-
     it "responds successfully" do
+      get room_path(room)
       expect(response).to have_http_status 200
     end
 
     it "render template rooms/show" do
+      get room_path(room)
       expect(response).to render_template :show
+    end
+
+    context "when user is not found" do
+      it "responds successfully" do
+        get room_path(1000)
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home page" do
+        get room_path(1000)
+        expect(response).to redirect_to root_path
+      end
     end
   end
 
@@ -78,6 +88,21 @@ RSpec.describe "Rooms", type: :request do
 
       it "redirect to login page" do
         expect(response).to redirect_to new_user_session_path
+      end
+    end
+
+    context "when user is not found" do
+      before do
+        sign_in user
+        get new_user_room_path(user.id + 1000)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home page" do
+        expect(response).to redirect_to root_path
       end
     end
   end
@@ -144,6 +169,21 @@ RSpec.describe "Rooms", type: :request do
         }.to_not change(Room, :count)
       end
     end
+
+    context "when user is not found" do
+      before do
+        sign_in user
+        post user_rooms_path(user.id + 1000), params: { room: room_params }
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home page" do
+        expect(response).to redirect_to root_path
+      end
+    end
   end
 
   describe "GET /rooms/:id/edit" do
@@ -188,6 +228,21 @@ RSpec.describe "Rooms", type: :request do
 
       it "redirect to login page" do
         expect(response).to redirect_to new_user_session_path
+      end
+    end
+
+    context "when room is not found" do
+      before do
+        sign_in user
+        get edit_room_path(room.id + 1000)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home page" do
+        expect(response).to redirect_to root_path
       end
     end
   end
@@ -249,6 +304,21 @@ RSpec.describe "Rooms", type: :request do
       it "does not update room attributes" do
         room.reload
         expect(room.conditions).to eq "engineer only!"
+      end
+    end
+
+    context "when room is not found" do
+      before do
+        sign_in user
+        patch room_path(room.id + 1000), params: { room: { conditions: "new conditions!" } }
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home page" do
+        expect(response).to redirect_to root_path
       end
     end
   end
@@ -316,6 +386,21 @@ RSpec.describe "Rooms", type: :request do
         expect {
           delete room_path(room)
         }.to_not change(Room, :count)
+      end
+    end
+
+    context "when room is not found" do
+      before do
+        sign_in user
+        delete room_path(room.id + 1000)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home page" do
+        expect(response).to redirect_to root_path
       end
     end
   end
@@ -400,6 +485,21 @@ RSpec.describe "Rooms", type: :request do
         expect {
           get room_join_path(room)
         }.to_not change(Member, :count)
+      end
+    end
+
+    context "when room is not found" do
+      before do
+        sign_in user
+        get room_join_path(room.id + 1000)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home page" do
+        expect(response).to redirect_to root_path
       end
     end
   end

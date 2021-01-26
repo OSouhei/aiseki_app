@@ -72,7 +72,7 @@ class RoomsController < ApplicationController
   end
 
   def set_user
-    @user = User.find_by(id: params[:user_id])
+    @user = User.find_by(id: params[:user_id]) || redirect_to(root_path, alert: "user is not found.") and return
   end
 
   def set_room
