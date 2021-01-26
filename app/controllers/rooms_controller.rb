@@ -1,7 +1,7 @@
 class RoomsController < ApplicationController
   before_action :set_user, only: [:new, :create]
-  before_action :set_room, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :set_room, only: [:show, :edit, :update, :destroy, :join]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join]
   before_action :correct_user?, only: [:new, :create]
   before_action :room_owner?, only: [:edit, :update, :destroy]
 
@@ -58,6 +58,13 @@ class RoomsController < ApplicationController
     end
   end
 
+  # GET /rooms/:room_id/join
+  def join
+    message = {}
+    current_user.join(@room) ? message[:notice] = "you joined the room." : message[:warning] = "you can not join the room because you are the room owner."
+    redirect_to root_path, message
+  end
+
   private
 
   def room_params
@@ -69,7 +76,7 @@ class RoomsController < ApplicationController
   end
 
   def set_room
-    @room = Room.find_by(id: params[:id]) || redirect_to(root_path, alert: "room was not found.") and return
+    @room = Room.find_by(id: params[:id]) || Room.find_by(id: params[:room_id]) || redirect_to(root_path, alert: "room was not found.") and return
   end
 
   def correct_user?
