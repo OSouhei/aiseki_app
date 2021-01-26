@@ -41,6 +41,9 @@ RSpec/MultipleExpectations:
     - "spec/system/*"
     - "spec/helpers/application_helper_spec.rb"
 
+RSpec/MultipleMemoizedHelpers:
+  Max: 7
+
 RSpec/InstanceVariable:
   Enabled: false
 

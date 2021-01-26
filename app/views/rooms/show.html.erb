@@ -17,4 +17,8 @@
 <% end %>
 
 <h2>Room Members</h2>
-<%= render @members %>
+<% if @members.count == 0 %>
+  <p>No members.</p>
+<% else %>
+  <%= render @members %>
+<% end %>
