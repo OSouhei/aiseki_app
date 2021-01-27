@@ -31,7 +31,7 @@ RSpec.describe "CreateRooms", type: :system do
       within "#room_people_limit" do
         find("option[value='7']").select_option
       end
-      click_button "Create Room"
+      click_button "Submit"
     }.to change(Room, :count).by(1)
     expect(page).to have_current_path(room_path(Room.last))
     # flash
