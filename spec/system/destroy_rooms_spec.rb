@@ -9,7 +9,7 @@ RSpec.describe "DestroyRooms", type: :system do
     sign_in user
     visit user_path(user)
     expect(page).to have_current_path user_path(user)
-    find("#room#{room.id}").click
+    click_link "go this room", href: room_path(room)
     expect(page).to have_current_path room_path(room)
     expect(page).to have_content room.conditions
     expect(page).to have_content room.date
@@ -24,7 +24,7 @@ RSpec.describe "DestroyRooms", type: :system do
   scenario "unauthenticated user can not destroy his room" do
     sign_in other_user
     visit user_path(user)
-    find("#room#{room.id}").click
+    click_link "go this room", href: room_path(room)
     expect(page).to have_current_path room_path(room)
     expect(page).to_not have_link "edit this room"
     expect(page).to_not have_link "destroy this room"

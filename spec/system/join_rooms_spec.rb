@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "JoinRooms", type: :system do
   let(:user) { FactoryBot.create(:user) }
-
-  before do
-    @room = FactoryBot.create(:room)
-  end
+  let!(:room) { FactoryBot.create(:room) }
 
   scenario "user join room" do
     sign_in user
@@ -13,13 +10,13 @@ RSpec.describe "JoinRooms", type: :system do
     click_link "rooms"
     expect(page).to have_current_path(rooms_path)
     # rooms/showリンクをクリック
-    find("#room#{@room.id}").click
-    expect(page).to have_current_path(room_path(@room))
+    click_link "go this room", href: room_path(room)
+    expect(page).to have_current_path(room_path(room))
     expect {
       click_link "join this room!"
     }.to change(Member, :count).by(1)
-    expect(user.joining).to include @room
-    expect(@room.members).to include user
+    expect(user.joining).to include room
+    expect(room.members).to include user
     # flash
     expect(page).to have_content "you joined the room."
   end
@@ -27,8 +24,8 @@ RSpec.describe "JoinRooms", type: :system do
   scenario "unauthenticated user does not join room" do
     visit root_path
     click_link "rooms"
-    find("#room#{@room.id}").click
-    expect(page).to have_current_path(room_path(@room))
+    click_link "go this room", href: room_path(room)
+    expect(page).to have_current_path(room_path(room))
     expect {
       click_link "join this room!"
     }.to_not change(Member, :count)
@@ -44,9 +41,9 @@ RSpec.describe "JoinRooms", type: :system do
   end
 
   scenario "room owner does not join his room" do
-    owner = @room.user
+    owner = room.user
     sign_in owner
-    visit room_path(@room)
+    visit room_path(room)
     expect {
       click_link "join this room!"
     }.to_not change(Member, :count)
