@@ -1,4 +1,6 @@
-<%= form_with(model: @room, remote: true) do |f| %>
+<%= form_with(model: room, remote: true) do |f| %>
+  <%= render 'rooms/shared/error_messages', room: room %>
+
   <div class="form-group">
     <%= f.label :shop_name, class: "form-label" %>
     <%= f.text_field :shop_name, class: "form-control", id: "room_shop_name" %>
@@ -21,5 +23,6 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "Submit", class: "btn btn-primary" %></div>
+    <%= f.submit "Submit", class: "btn btn-primary" %>
+  </div>
 <% end %>
