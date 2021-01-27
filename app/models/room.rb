@@ -11,4 +11,8 @@ class Room < ApplicationRecord
 
     Room.where("conditions LIKE ?", "%#{term}%")
   end
+
+  def owner?(user)
+    self.user == user
+  end
 end
