@@ -30,7 +30,7 @@
         </li>
       <% end %>
       <li class="nav-item">
-        <%= form_tag(rooms_search_path, method: :get, class: "d-flex") do %>
+        <%= form_tag(search_rooms_path, method: :get, class: "d-flex") do %>
           <%= text_field_tag :keyword, nil, class: "form-control me-2", id: "search_rooms" %>
           <%= submit_tag :search, class: "btn btn-outline-success" %>
         <% end %>

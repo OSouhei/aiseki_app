@@ -16,7 +16,7 @@ RSpec.describe "SearchRooms", type: :system do
     visit root_path
     find("#search_rooms").fill_in with: "engineer"
     click_button "search"
-    expect(page).to have_current_path(rooms_search_path, ignore_query: true)
+    expect(page).to have_current_path(search_rooms_path, ignore_query: true)
     expect(page).to have_link href: room_path(room1)
     expect(page).to have_link href: room_path(room2)
     expect(page).to_not have_link href: room_path(room3)

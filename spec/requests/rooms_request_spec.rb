@@ -448,7 +448,7 @@ RSpec.describe "Rooms", type: :request do
   # Rooms#search
   describe "GET /rooms/search" do
     before do
-      get rooms_search_path, params: { keyword: "engineer" }
+      get search_rooms_path, params: { keyword: "engineer" }
     end
 
     it "responds successfully" do
