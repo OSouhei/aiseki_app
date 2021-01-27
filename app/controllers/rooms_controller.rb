@@ -72,10 +72,7 @@ class RoomsController < ApplicationController
     params.require(:room).permit(:conditions, :date, :people_limit, :shop_name)
   end
 
-  def set_user
-    @user = User.find_by(id: params[:user_id]) || redirect_to(root_path, alert: "user is not found.") and return
-  end
-
+  # params に :id, :room_id 両方があるときは使わない
   def set_room
     @room = Room.find_by(id: params[:id]) || Room.find_by(id: params[:room_id]) || redirect_to(root_path, alert: "room was not found.") and return
   end

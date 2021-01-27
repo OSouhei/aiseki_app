@@ -18,16 +18,26 @@ RSpec.describe "Users", type: :request do
   end
 
   describe "GET /users/:id" do
-    before do
-      get user_path(user)
-    end
-
     it "responds successfully" do
+      get user_path(user)
       expect(response).to have_http_status 200
     end
 
     it "render template users/show" do
+      get user_path(user)
       expect(response).to render_template :show
+    end
+
+    context "when user is not found" do
+      it "responds successfully" do
+        get user_path(user.id + 1000)
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to home page" do
+        get user_path(user.id + 1000)
+        expect(response).to redirect_to root_path
+      end
     end
   end
 end
