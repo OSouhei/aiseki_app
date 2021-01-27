@@ -3,12 +3,12 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
+  get "/rooms/search_shop", to: "rooms#search_shop", as: "search_shop"
   resources :users do
     resources :rooms, shallow: true, except: :index
   end
   resources :rooms, only: :index do
     get "join", to: "rooms#join"
   end
-  get "/rooms/search_shop", to: "rooms#search_shop", as: "search_shop"
   root "home#index"
 end
