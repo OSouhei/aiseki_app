@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show]
   def index
     @users = User.all
   end
 
   def show
+    @user = User.find_by(id: params[:id]) || redirect_to(root_path, alert: "user is not found.") && return
     @rooms = @user.rooms
   end
 end

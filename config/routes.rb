@@ -3,13 +3,15 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
+  # 後で整理
   get "/rooms/search_shop", to: "rooms#search_shop", as: "search_shop"
   get "/rooms/search", to: "rooms#search"
-  resources :users do
-    resources :rooms, shallow: true, except: :index
-  end
-  resources :rooms, only: :index do
-    get "join", to: "rooms#join"
+  resources :users
+  resources :rooms do
+    member do
+      get "join"
+    end
+    # get "join", to: "rooms#join"
   end
   root "home#index"
 end
