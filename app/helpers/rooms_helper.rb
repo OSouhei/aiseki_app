@@ -5,7 +5,7 @@ require "uri"
 module RoomsHelper
   def search_shops(term)
     data = {
-      key: "a4510e393d79acc0",
+      key: ENV["HOTPEPPER_API_KEY"],
       keyword: term
     }
     query = data.to_query
