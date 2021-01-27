@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
   get "/rooms/search_shop", to: "rooms#search_shop", as: "search_shop"
+  get "/rooms/search", to: "rooms#search"
   resources :users do
     resources :rooms, shallow: true, except: :index
   end

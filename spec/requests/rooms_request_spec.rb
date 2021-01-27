@@ -503,4 +503,19 @@ RSpec.describe "Rooms", type: :request do
       end
     end
   end
+
+  # Rooms#search
+  describe "GET /rooms/search" do
+    before do
+      get rooms_search_path, params: { keyword: "engineer" }
+    end
+
+    it "responds successfully" do
+      expect(response).to have_http_status 200
+    end
+
+    it "render template :search" do
+      expect(response).to render_template :search
+    end
+  end
 end

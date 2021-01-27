@@ -5,4 +5,10 @@ class Room < ApplicationRecord
 
   validates :date, presence: true
   validates :shop_name, presence: true
+
+  def self.search(term = "")
+    return Room.all if term.blank?
+
+    Room.where("conditions LIKE ?", "%#{term}%")
+  end
 end

@@ -66,6 +66,12 @@ class RoomsController < ApplicationController
     redirect_to root_path, message
   end
 
+  # GET /rooms/search
+  def search
+    term = params[:keyword]
+    @rooms = Room.search(term)
+  end
+
   private
 
   def room_params
