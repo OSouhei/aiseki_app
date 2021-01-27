@@ -44,4 +44,11 @@ RSpec.feature "UsersShows", type: :system do
       expect(page).to_not have_content room.conditions
     end
   end
+
+  scenario "user is not found" do
+    sign_in user
+    visit user_path(user.id + 1000)
+    expect(page).to have_current_path(root_path)
+    expect(page).to have_content "user is not found."
+  end
 end
