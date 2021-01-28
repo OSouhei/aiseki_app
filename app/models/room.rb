@@ -17,6 +17,10 @@ class Room < ApplicationRecord
     user == usr
   end
 
+  def member?(user)
+    members.include?(user)
+  end
+
   def limited?
     people_limit <= members.count
   end
