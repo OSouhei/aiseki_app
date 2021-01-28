@@ -12,7 +12,15 @@ class Room < ApplicationRecord
     Room.where("conditions LIKE ?", "%#{term}%")
   end
 
-  def owner?(user)
-    self.user == user
+  def owner?(usr)
+    user == usr
+  end
+
+  def limited?
+    people_limit <= members.count
+  end
+
+  def over?
+    people_limit < members.count
   end
 end
