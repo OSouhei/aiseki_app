@@ -5,6 +5,7 @@ class Room < ApplicationRecord
 
   validates :date, presence: true
   validates :shop_name, presence: true
+  validate :limited_validation
 
   def self.search(term = "")
     return Room.all if term.blank?
@@ -22,5 +23,9 @@ class Room < ApplicationRecord
 
   def over?
     people_limit < members.count
+  end
+
+  def limited_validation
+    errors.add(:people_limit, "is too many") if over?
   end
 end
