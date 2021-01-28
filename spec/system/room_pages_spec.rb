@@ -35,4 +35,11 @@ RSpec.describe "RoomPages", type: :system do
     expect(page).to have_current_path root_path
     expect(page).to have_content "room was not found."
   end
+
+  scenario "room page does not have join link when room's owner is current_user" do
+    sign_in user
+    visit room_path(room)
+    expect(page).to have_current_path(room_path(room))
+    expect(page).to_not have_link "join this room!", href: join_room_path(room)
+  end
 end

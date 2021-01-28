@@ -44,8 +44,9 @@ RSpec.describe "JoinRooms", type: :system do
     owner = room.user
     sign_in owner
     visit room_path(room)
+    expect(page).to_not have_link "join this room!", href: join_room_path(room)
     expect {
-      click_link "join this room!"
+      visit join_room_path(room)
     }.to_not change(Member, :count)
     expect(page).to have_content "you can not join the room because you are the room owner."
     expect(page).to have_current_path(root_path)

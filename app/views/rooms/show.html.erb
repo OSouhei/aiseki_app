@@ -10,10 +10,11 @@
 <h2>posted by</h2>
 <p><%= @room.user.name %></p>
 
-<p><%= link_to "join this room!", join_room_path(@room) %></p>
-<% if current_user? @room.user %>
+<% if @room.owner?(current_user) %>
   <%= link_to "edit this room", edit_room_path(@room) %><br />
   <%= link_to "destroy this room", room_path(@room), method: :delete %>
+<% else %>
+  <%= link_to "join this room!", join_room_path(@room) %>
 <% end %>
 
 <h2>Room Members</h2>
