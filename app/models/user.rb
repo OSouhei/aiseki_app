@@ -13,6 +13,8 @@ class User < ApplicationRecord
   validates :email, format: { with: VALID_EMAIL_REGEX }
 
   def join(room)
+    return false if room.nil? || room.limited?
+
     joining << room
   rescue ActiveRecord::RecordInvalid # 部屋の作成者と参加者が同じ場合
     false

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "JoinRooms", type: :system do
   let(:user) { FactoryBot.create(:user) }
   let!(:room) { FactoryBot.create(:room) }
+  let(:full_room) { FactoryBot.create(:room, people_limit: 1) }
 
   scenario "user join room" do
     sign_in user
@@ -50,5 +51,17 @@ RSpec.describe "JoinRooms", type: :system do
     }.to_not change(Member, :count)
     expect(page).to have_content "you can not join the room because you are the room owner."
     expect(page).to have_current_path(root_path)
+  end
+
+  scenario "join a packed room" do
+    # full_roomを満員に
+    FactoryBot.create(:user).join full_room
+    sign_in user
+    visit room_path(full_room)
+    expect {
+      click_link "join this room!", href: join_room_path(full_room)
+    }.to_not change(Member, :count)
+    expect(page).to have_current_path(root_path)
+    expect(page).to have_content "this room is full."
   end
 end

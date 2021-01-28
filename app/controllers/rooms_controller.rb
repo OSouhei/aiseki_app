@@ -52,6 +52,8 @@ class RoomsController < ApplicationController
 
   # GET /rooms/:id/join
   def join
+    redirect_to(root_path, alert: "this room is full.") && return if @room.limited?
+
     message = {}
     current_user.join(@room) ? message[:notice] = "you joined the room." : message[:alert] = "you can not join the room because you are the room owner."
     redirect_to root_path, message
