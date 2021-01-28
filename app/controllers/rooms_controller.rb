@@ -17,27 +17,18 @@ class RoomsController < ApplicationController
 
   def create
     @room = current_user.rooms.build(room_params)
-    if @room.save
-      redirect_to room_path(@room), notice: "room was successfully created."
-    else
-      render :new
-    end
+    @room.save ? redirect_to(room_path(@room), notice: "room was successfully created.") : render(:new)
   end
 
   def edit
   end
 
   def update
-    if @room.update(room_params)
-      redirect_to room_path(@room), notice: "room was updated."
-    else
-      render :edit
-    end
+    @room.update(room_params) ? redirect_to(room_path(@room), notice: "room was updated.") : render(:edit)
   end
 
   def destroy
-    @room.destroy
-    redirect_to root_path, notice: "room was successfully destroyed."
+    @room.destroy ? redirect_to(root_path, notice: "room was successfully destroyed.") : redirect_to(root_path, alert: "something went wrong.")
   end
 
   # GET /rooms/search_shop
