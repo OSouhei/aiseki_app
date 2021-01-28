@@ -11,14 +11,7 @@
       <li class="nav-item">
         <%= link_to "rooms", rooms_path, class: "nav-link" %>
       </li>
-      <% unless user_signed_in? %>
-        <li class="navbar-nav">
-          <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link" %>
-        </li>
-        <li class="navbar-nav">
-          <%= link_to "ログイン", new_user_session_path, class: "nav-link" unless user_signed_in? %>
-        </li>
-      <% else %>
+      <% if user_signed_in? %>
         <li class="navbar-nav">
           <%= link_to "プロフィール", user_path(current_user), class: "nav-link" %>
         </li>
@@ -30,6 +23,13 @@
         </li>
         <li class="navbar-nav">
           <%= link_to "退会", user_registration_path, method: :delete, data: { confirm: "Are you sure?" }, class: "nav-link" %>
+        </li>
+      <% else %>
+        <li class="navbar-nav">
+          <%= link_to "ユーザー登録", new_user_registration_path, class: "nav-link" %>
+        </li>
+        <li class="navbar-nav">
+          <%= link_to "ログイン", new_user_session_path, class: "nav-link" unless user_signed_in? %>
         </li>
       <% end %>
       <li class="nav-item">
