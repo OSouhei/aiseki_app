@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join]
-  before_action :set_room, only: [:show, :edit, :update, :destroy, :join]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :exit]
+  before_action :set_room, only: [:show, :edit, :update, :destroy, :join, :exit]
   before_action :room_owner?, only: [:edit, :update, :destroy]
 
   def index
@@ -54,6 +54,11 @@ class RoomsController < ApplicationController
   def search
     term = params[:keyword]
     @rooms = Room.search(term)
+  end
+
+  # GET /rooms/:id/exit
+  def exit
+    current_user.exit(@room) ? redirect_to(room_path(@room), notice: "you exited the room.") : redirect_to(room_path(@room), alert: "you has already exited the room.")
   end
 
   private

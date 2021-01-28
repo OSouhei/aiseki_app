@@ -15,6 +15,7 @@
   <%= link_to "destroy this room", room_path(@room), method: :delete %>
 <% else %>
   <%= link_to "join this room!", join_room_path(@room) %>
+  <%= link_to "exit this room!", exit_room_path(@room) if @room.member?(current_user) %>
 <% end %>
 
 <h2>Room Members</h2>

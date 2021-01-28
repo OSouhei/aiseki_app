@@ -19,4 +19,8 @@ class User < ApplicationRecord
   rescue ActiveRecord::RecordInvalid # 部屋の作成者と参加者が同じ場合
     false
   end
+
+  def exit(room)
+    room.member?(self) ? joining.delete(room) : false
+  end
 end

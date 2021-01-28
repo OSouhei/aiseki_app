@@ -459,4 +459,48 @@ RSpec.describe "Rooms", type: :request do
       expect(response).to render_template :search
     end
   end
+
+  # Rooms#exit
+  describe "GET /rooms/:id/exit" do
+    context "when authenticated user" do
+      before do
+        sign_in other_user
+      end
+
+      it "responds successfully" do
+        get exit_room_path(room)
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to room page" do
+        get exit_room_path(room)
+        expect(response).to redirect_to room_path(room)
+      end
+
+      it "exit the room" do
+        other_user.join room
+        expect {
+          get exit_room_path(room)
+        }.to change(Member, :count).by(-1)
+      end
+    end
+
+    context "when guest" do
+      it "responds successfully" do
+        get exit_room_path(room)
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect to login page" do
+        get exit_room_path(room)
+        expect(response).to redirect_to new_user_session_path
+      end
+
+      it "does not exit the room" do
+        expect {
+          get exit_room_path(room)
+        }.to_not change(Member, :count)
+      end
+    end
+  end
 end
