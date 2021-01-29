@@ -6,15 +6,16 @@ user = User.create!(
 
 10.times do |n|
   user.rooms.create!(
+    title: "Sample Room",
+    content: "This is sample room.",
     shop_name: "orion",
-    conditions: "engineer only!",
-    date: Time.zone.local(2021, 12, 11, 15, 45),
-    people_limit: 50
+    limit: 5
   )
 end
 
 room = Room.first
-30.times do |n|
+
+4.times do |n|
   user = User.create!(
     name: Faker::Name.name,
     email: "sampleuser-#{n}@example.com",
@@ -22,4 +23,3 @@ room = Room.first
   )
   user.join room
 end
-
