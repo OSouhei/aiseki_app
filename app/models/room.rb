@@ -3,9 +3,9 @@ class Room < ApplicationRecord
   has_many :members, through: :memberships, source: :user
   belongs_to :user
 
-  validates :date, presence: true
-  validates :shop_name, presence: true
-  validate :limited_validation
+  validates :title, presence: true, length: { maximum: 30 }
+  validates :content, length: { maximum: 200 }
+  validates :limit, presence: true, numericality: { only_integer: true }
 
   def self.search(term = "")
     return Room.all if term.blank?
