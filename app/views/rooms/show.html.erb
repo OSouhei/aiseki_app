@@ -1,7 +1,12 @@
 <% provide(:title, "rooms#show") %>
 
 <h1>Rooms#show</h1>
-<%= render "room", room: @room %>
+
+<p><%= @room.title %></p>
+<p><%= @room.content %></p>
+<p><%= @room.shop_name %></p>
+<p><%= @room.limit %></p>
+
 <% if @room.owner?(current_user) %>
   <%= link_to "edit this room", edit_room_path(@room) %><br />
   <%= link_to "destroy this room", room_path(@room), method: :delete %>
