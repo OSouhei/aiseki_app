@@ -9,9 +9,7 @@ class Room < ApplicationRecord
   validate :member_limit
 
   def self.search(term = "")
-    return Room.all if term.blank?
-
-    Room.where("content LIKE ?", "%#{term}%")
+    term.blank? ? Room.all : Room.where("content LIKE ?", "%#{term}%")
   end
 
   def owner?(usr)
