@@ -28,6 +28,11 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
   </div>
 
+  <div class="form-group">
+    <%= f.label :profile_image, class: "form-label" %>
+    <%= f.file_field :profile_image, class: "form-control" %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up", class: "btn btn-primary" %>
   </div>
