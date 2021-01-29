@@ -47,4 +47,18 @@ RSpec.describe Room, type: :model do
     room.valid?
     expect(room.errors[:limit]).to include "must be an integer"
   end
+
+  it "is invalid when room's member is more than limit" do
+    room.limit = 1
+    room.save
+    room.members << [FactoryBot.create(:user), FactoryBot.create(:user)]
+    room.valid?
+    expect(room).to be_invalid
+  end
+
+  it "is invalid without associated user" do
+    room.user = nil
+    room.valid?
+    expect(room.errors[:user]).to include "must exist"
+  end
 end

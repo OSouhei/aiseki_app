@@ -6,6 +6,7 @@ class Room < ApplicationRecord
   validates :title, presence: true, length: { maximum: 30 }
   validates :content, length: { maximum: 200 }
   validates :limit, presence: true, numericality: { only_integer: true }
+  validate :member_limit
 
   def self.search(term = "")
     return Room.all if term.blank?
@@ -25,7 +26,7 @@ class Room < ApplicationRecord
     limit <= members.count
   end
 
-  def limited_validation
-    errors.add(:people_limit, "is too many") if over?
+  def member_limit
+    errors.add(:limit, "must be more than members count") if limit && members.count > limit
   end
 end
