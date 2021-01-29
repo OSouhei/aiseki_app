@@ -10,7 +10,7 @@ class Room < ApplicationRecord
   def self.search(term = "")
     return Room.all if term.blank?
 
-    Room.where("conditions LIKE ?", "%#{term}%")
+    Room.where("content LIKE ?", "%#{term}%")
   end
 
   def owner?(usr)
@@ -22,11 +22,7 @@ class Room < ApplicationRecord
   end
 
   def limited?
-    people_limit <= members.count
-  end
-
-  def over?
-    people_limit < members.count
+    limit <= members.count
   end
 
   def limited_validation

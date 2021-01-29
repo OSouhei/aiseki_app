@@ -4,9 +4,7 @@ RSpec.describe "Rooms", type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:other_user) { FactoryBot.create(:user) }
   let(:room) { FactoryBot.create(:room, user: user) }
-  let(:room_params) do
-    FactoryBot.attributes_for(:room).merge!({ "date(1i)": 2021, "date(2i)": 12, "date(3i)": 11, "date(4i)": 15, "date(5i)": 45 })
-  end
+  let(:room_params) { FactoryBot.attributes_for(:room) }
 
   # Rooms#index
   describe "GET /rooms" do
@@ -190,7 +188,7 @@ RSpec.describe "Rooms", type: :request do
     context "when authenticated user" do
       before do
         sign_in user
-        patch room_path(room), params: { room: { conditions: "new conditions!" } }
+        patch room_path(room), params: { room: { content: "new content!" } }
       end
 
       it "responds successfully" do
@@ -203,14 +201,14 @@ RSpec.describe "Rooms", type: :request do
 
       it "update room attributes" do
         room.reload
-        expect(room.conditions).to eq "new conditions!"
+        expect(room.content).to eq "new content!"
       end
     end
 
     context "when unauthenticated user" do
       before do
         sign_in other_user
-        patch room_path(room), params: { room: { conditions: "new conditions!" } }
+        patch room_path(room), params: { room: { content: "new content!" } }
       end
 
       it "responds successfully" do
@@ -223,13 +221,13 @@ RSpec.describe "Rooms", type: :request do
 
       it "does not update room attributes" do
         room.reload
-        expect(room.conditions).to eq "engineer only!"
+        expect(room.content).to eq "This is test room."
       end
     end
 
     context "when guest" do
       before do
-        patch room_path(room), params: { room: { conditions: "new conditions!" } }
+        patch room_path(room), params: { room: { content: "new content!" } }
       end
 
       it "responds successfully" do
@@ -242,14 +240,14 @@ RSpec.describe "Rooms", type: :request do
 
       it "does not update room attributes" do
         room.reload
-        expect(room.conditions).to eq "engineer only!"
+        expect(room.content).to eq "This is test room."
       end
     end
 
     context "when room is not found" do
       before do
         sign_in user
-        patch room_path(room.id + 1000), params: { room: { conditions: "new conditions!" } }
+        patch room_path(room.id + 1000), params: { room: { content: "new content!" } }
       end
 
       it "responds successfully" do
