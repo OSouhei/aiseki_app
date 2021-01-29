@@ -60,6 +60,9 @@ Layout/SpaceInsideArrayLiteralBrackets:
   Exclude:
     - 'config/environments/production.rb'
 
+Lint/AssignmentInCondition:
+  Enabled: false
+
 Metrics/AbcSize:
   Max: 18
 
