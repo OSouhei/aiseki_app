@@ -1,15 +1,7 @@
 <% provide(:title, "rooms#show") %>
 
 <h1>Rooms#show</h1>
-<h2>Conditions</h2>
-<p><%= @room.conditions %></p>
-<h2>Date</h2>
-<p><%= @room.date %></p>
-<h2>people_limit</h2>
-<p><%= @room.people_limit %></p>
-<h2>posted by</h2>
-<p><%= @room.user.name %></p>
-
+<%= render "room", room: @room %>
 <% if @room.owner?(current_user) %>
   <%= link_to "edit this room", edit_room_path(@room) %><br />
   <%= link_to "destroy this room", room_path(@room), method: :delete %>

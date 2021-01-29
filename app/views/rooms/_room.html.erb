@@ -1,5 +1,6 @@
 <p>---------------------------</p>
-<h2><%= room.conditions %></h2>
-<h2><%= room.date %></h2>
-<h2><%= room.people_limit %></h2>
+<h2><%= room.title %></h2>
+<h2><%= room.content %></h2>
+<h2><%= room.limit %></h2>
+<h2>created by<%= link_to room.user.name, user_path(room.user) %></h2>
 <p><%= link_to "go this room", room_path(room), id: "room#{room.id}" %></p>
