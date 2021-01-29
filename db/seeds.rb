@@ -1,11 +1,11 @@
-user = User.create!(
+foo = User.create!(
   name: "foo",
   email: "foo@bar.com",
   password: "password"
 )
 
 
-user.rooms.create!(
+foo.rooms.create!(
   title: "Sample Room",
   content: "Engineer only.",
   shop_name: "orion",
@@ -13,7 +13,7 @@ user.rooms.create!(
 )
 
 10.times do
-  user.rooms.create!(
+  foo.rooms.create!(
     title: Faker::Lorem.word,
     content: Faker::Lorem.paragraph(sentence_count: 3),
     shop_name: Faker::Restaurant.name,
@@ -38,10 +38,11 @@ end
     email: "example-#{n}@example.com",
     password: "password"
   )
-  user.rooms.create!(
+  room = user.rooms.create!(
     title: Faker::Lorem.word,
     content: Faker::Lorem.paragraph(sentence_count: 3),
     shop_name: Faker::Restaurant.name,
     limit: Faker::Number.non_zero_digit
   )
+  foo.join(room)
 end

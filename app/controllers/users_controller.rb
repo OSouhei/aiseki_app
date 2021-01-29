@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :joining]
 
   def index
-    @users = User.all
+    @users = User.page(params[:page]).per(10)
   end
 
   def show
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   # GET /users/:id/joining
   def joining
     redirect_to(root_path, alert: "you can not access this page.") unless current_user?(@user)
-    @rooms = @user.joining
+    @rooms = @user.joining.page(params[:page]).per(10)
   end
 
   private
