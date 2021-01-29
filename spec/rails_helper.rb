@@ -64,6 +64,11 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
+  config.after(:all) do
+    # Get rid of the linked images
+    FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/test/"]) if Rails.env.test?
+  end
+
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system
 end

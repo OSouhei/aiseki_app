@@ -99,8 +99,8 @@ RSpec.describe "Users::Registrations", type: :request do
         expect(response).to have_http_status 302
       end
 
-      it "redirect to home-page" do
-        expect(response).to redirect_to root_path
+      it "redirect to user page" do
+        expect(response).to redirect_to user_path(user)
       end
 
       it "update user" do

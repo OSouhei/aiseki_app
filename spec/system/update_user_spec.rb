@@ -17,15 +17,19 @@ RSpec.feature "Update Users", type: :system do
 
     it "user edit profile" do
       expect(page).to have_current_path(edit_user_registration_path)
+      expect(user.profile_image.url).to be_nil
       fill_in "Name", with: "New User"
       fill_in "Email", with: "new@example.com"
       fill_in "Current password", with: user.password
+      attach_file "Profile image", Rails.root.join("spec/files/test_image.jpg")
       click_button "Update"
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path(user_path(user))
       # プロフィールが更新されているか
       user.reload
       expect(user.name).to eq "New User"
       expect(user.email).to eq "new@example.com"
+      expect(user.profile_image.url).to eq "/uploads/test/user/profile_image/#{user.id}/test_image.jpg"
+      expect(page).to have_css "img[src='/uploads/test/user/profile_image/#{user.id}/test_image.jpg']"
     end
   end
 
