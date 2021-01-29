@@ -11,9 +11,9 @@ RSpec.describe "DestroyRooms", type: :system do
     expect(page).to have_current_path user_path(user)
     click_link "go this room", href: room_path(room)
     expect(page).to have_current_path room_path(room)
-    expect(page).to have_content room.conditions
-    expect(page).to have_content room.date
-    expect(page).to have_content room.people_limit
+    expect(page).to have_content room.title
+    expect(page).to have_content room.content
+    expect(page).to have_content room.limit
     expect(page).to have_link "edit this room"
     expect(page).to have_link "destroy this room"
     expect {

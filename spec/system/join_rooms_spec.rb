@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "JoinRooms", type: :system do
   let(:user) { FactoryBot.create(:user) }
   let!(:room) { FactoryBot.create(:room) }
-  let(:full_room) { FactoryBot.create(:room, people_limit: 1) }
+  let(:full_room) { FactoryBot.create(:room, limit: 1) }
 
   scenario "user join room" do
     sign_in user

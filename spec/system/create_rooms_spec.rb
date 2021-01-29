@@ -9,27 +9,12 @@ RSpec.describe "CreateRooms", type: :system do
     click_link "Create your Room"
     expect(page).to have_current_path(new_room_path)
     expect {
+      fill_in "Title", with: "Test Room"
+      fill_in "Content", with: "This is test room."
       fill_in "Shop name", with: "orion"
-      fill_in "Conditions", with: "engineer only!"
-      # 期日を指定
-      within "#room_date_1i" do
-        find("option[value='2021']").select_option
-      end
-      within "#room_date_2i" do
-        find("option[value='12']").select_option
-      end
-      within "#room_date_3i" do
-        find("option[value='31']").select_option
-      end
-      within "#room_date_4i" do
-        find("option[value='23']").select_option
-      end
-      within "#room_date_5i" do
-        find("option[value='30']").select_option
-      end
       # 人数を指定
-      within "#room_people_limit" do
-        find("option[value='7']").select_option
+      within "#room_limit" do
+        find("option[value='3']").select_option
       end
       click_button "Submit"
     }.to change(Room, :count).by(1)

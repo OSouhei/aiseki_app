@@ -29,19 +29,19 @@ RSpec.feature "UsersShows", type: :system do
 
   scenario "has user's rooms content" do
     10.times do |n|
-      FactoryBot.create(:room, conditions: "this is user's room#{n}", user: user)
-      FactoryBot.create(:room, conditions: "this is other_user's room#{n}", user: other_user)
+      FactoryBot.create(:room, content: "this is user's room#{n}", user: user)
+      FactoryBot.create(:room, content: "this is other_user's room#{n}", user: other_user)
     end
     sign_in user
     visit root_path
     click_link "プロフィール"
     # ユーザーの部屋の情報を持っている
     user.rooms.each do |room|
-      expect(page).to have_content room.conditions
+      expect(page).to have_content room.content
     end
     # 他ユーザーの部屋の情報は持たない
     other_user.rooms.each do |room|
-      expect(page).to_not have_content room.conditions
+      expect(page).to_not have_content room.content
     end
   end
 

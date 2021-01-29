@@ -14,10 +14,10 @@ RSpec.describe "UpdateRooms", type: :system do
     expect(page).to have_current_path(edit_room_path(room))
     # フォームには元の値が入力されている
     expect(page).to have_css("input#room_shop_name[value=#{room.shop_name}]")
-    fill_in "Conditions", with: "Anyone!"
+    fill_in "Content", with: "Anyone!"
     click_button "Submit"
     expect(page).to have_current_path(room_path(room))
     expect(page).to have_content "Anyone!"
-    expect(room.reload.conditions).to eq "Anyone!"
+    expect(room.reload.content).to eq "Anyone!"
   end
 end
