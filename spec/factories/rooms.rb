@@ -4,6 +4,6 @@ FactoryBot.define do
     content { "This is test room." }
     shop_name { "Orion" }
     limit { 3 }
-    association :user
+    association :owner
   end
 end

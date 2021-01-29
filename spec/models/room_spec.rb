@@ -57,8 +57,8 @@ RSpec.describe Room, type: :model do
   end
 
   it "is invalid without associated user" do
-    room.user = nil
+    room.owner = nil
     room.valid?
-    expect(room.errors[:user]).to include "must exist"
+    expect(room.errors[:owner]).to include "must exist"
   end
 end

@@ -5,7 +5,7 @@ RSpec.describe "RoomPages", type: :system do
   let(:user1) { FactoryBot.create(:user) }
   let(:user2) { FactoryBot.create(:user) }
   let!(:user3) { FactoryBot.create(:user) }
-  let!(:room) { FactoryBot.create(:room, user: user) }
+  let!(:room) { FactoryBot.create(:room, owner: user) }
   let(:other_room) { FactoryBot.create(:room) }
 
   before do

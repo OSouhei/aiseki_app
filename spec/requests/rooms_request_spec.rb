@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Rooms", type: :request do
   let(:user) { FactoryBot.create(:user) }
   let(:other_user) { FactoryBot.create(:user) }
-  let(:room) { FactoryBot.create(:room, user: user) }
+  let(:room) { FactoryBot.create(:room, owner: user) }
   let(:room_params) { FactoryBot.attributes_for(:room) }
 
   # Rooms#index

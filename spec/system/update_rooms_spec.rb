@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "UpdateRooms", type: :system do
   let(:user) { FactoryBot.create(:user) }
-  let!(:room) { FactoryBot.create(:room, user: user) }
+  let!(:room) { FactoryBot.create(:room, owner: user) }
 
   it "update room" do
     sign_in user

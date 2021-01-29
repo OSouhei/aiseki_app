@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "DestroyRooms", type: :system do
   let(:user) { FactoryBot.create(:user) }
   let(:other_user) { FactoryBot.create(:user) }
-  let!(:room) { FactoryBot.create(:room, user: user) }
+  let!(:room) { FactoryBot.create(:room, owner: user) }
 
   scenario "user destroy his room" do
     sign_in user

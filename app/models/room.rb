@@ -1,7 +1,7 @@
 class Room < ApplicationRecord
   has_many :memberships, class_name: "Member", foreign_key: "room_id", dependent: :destroy
   has_many :members, through: :memberships, source: :user
-  belongs_to :user
+  belongs_to :owner, class_name: "User", foreign_key: :user_id
 
   validates :title, presence: true, length: { maximum: 30 }
   validates :content, length: { maximum: 200 }
@@ -13,7 +13,7 @@ class Room < ApplicationRecord
   end
 
   def owner?(usr)
-    user == usr
+    owner == usr
   end
 
   def member?(user)

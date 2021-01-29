@@ -29,8 +29,8 @@ RSpec.feature "UsersShows", type: :system do
 
   scenario "has user's rooms content" do
     10.times do |n|
-      FactoryBot.create(:room, content: "this is user's room#{n}", user: user)
-      FactoryBot.create(:room, content: "this is other_user's room#{n}", user: other_user)
+      FactoryBot.create(:room, content: "this is user's room#{n}", owner: user)
+      FactoryBot.create(:room, content: "this is other_user's room#{n}", owner: other_user)
     end
     sign_in user
     visit root_path

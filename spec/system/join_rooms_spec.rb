@@ -42,7 +42,7 @@ RSpec.describe "JoinRooms", type: :system do
   end
 
   scenario "room owner does not join his room" do
-    owner = room.user
+    owner = room.owner
     sign_in owner
     visit room_path(room)
     expect(page).to_not have_link "join this room!", href: join_room_path(room)

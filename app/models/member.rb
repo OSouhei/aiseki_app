@@ -9,6 +9,6 @@ class Member < ApplicationRecord
   def owner_is_not_member
     return if room.nil?
 
-    errors.add(:user_id, "user_id can not be equal to member_id") if user_id == room.user.id
+    errors.add(:user_id, " can not be equal to member_id") if user_id == room.owner.id
   end
 end
