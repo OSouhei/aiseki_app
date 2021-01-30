@@ -22,7 +22,7 @@ class User < ApplicationRecord
     return false if room.nil? || room.limited?
 
     joining << room
-    active_notifications.create(to: room.owner.id) # 通知を作成
+    active_notifications.create(to: room.owner.id, room_id: room.id) # 通知を作成
   rescue ActiveRecord::RecordInvalid # 部屋の作成者と参加者が同じ場合
     false
   end

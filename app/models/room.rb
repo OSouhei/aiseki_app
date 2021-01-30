@@ -1,6 +1,7 @@
 class Room < ApplicationRecord
   has_many :memberships, class_name: "Member", foreign_key: "room_id", dependent: :destroy
   has_many :members, through: :memberships, source: :user
+  has_many :notifications, dependent: :destroy
   belongs_to :owner, class_name: "User", foreign_key: :user_id
 
   validates :title, presence: true, length: { maximum: 30 }
