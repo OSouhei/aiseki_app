@@ -113,7 +113,7 @@ workflows:
   build_rubocop_rspec:
     jobs:
       - build
-      - rubocop
+      - rubocop:
           requires:
             - build
       - rspec:
