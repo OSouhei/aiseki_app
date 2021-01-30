@@ -65,6 +65,35 @@ jobs:
       - run:
           name: Rspec
           command: bundle exec rspec
+  deploy:
+    docker:
+      - image: circleci/ruby:2.6.6-node-browsers-legacy
+        environment:
+          RAILS_ENV: development
+          POSTGRES_HOST: 127.0.0.1
+      - image: circleci/postgres:13.1-postgis-ram
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: myapp_development
+          POSTGRES_PASSWORD: password
+    working_directory: ~repo
+    steps:
+      - checkout- restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: bundle install --jobs=4 --retry=3 --path vendor/bundle
+      - run: yarn install
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+      - run: bundle exec rake db:create
+      - run: bundle exec rake db:schema:load
+      # deploy
+      - run: git push https://heroku$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git $CIRCLE_BRANCH:master
+
 
 workflows:
   version: 2
@@ -76,7 +105,5 @@ workflows:
             - rubocop
       - deploy:
           name: HEROKU deploy
-          command: |
-            git push https://heroku$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git $CIRCLE_BRANCH:master
           requires:
             - rspec
