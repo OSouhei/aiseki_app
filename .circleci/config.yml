@@ -3,7 +3,20 @@
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
 version: 2
+orbs:
+  ruby: circleci/ruby@1.0
+  node: circleci/node@2
+
 jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.6.6-node-browsers-legacy
+    steps:
+      - checkout
+      - ruby/install-deps
+      - node/install-packages:
+        pkg-manager: yarn
+        cache-key: "yarn.lock"
   rubocop:
     docker:
       - image: circleci/ruby:2.6.6-node-browsers-legacy
@@ -97,9 +110,12 @@ jobs:
 
 workflows:
   version: 2
-  rubocop_rspec:
+  build_rubocop_rspec:
     jobs:
+      - build
       - rubocop
+          requires:
+            - build
       - rspec:
           requires:
             - rubocop
