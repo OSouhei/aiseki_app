@@ -1,6 +1,7 @@
 class Notification < ApplicationRecord
   belongs_to :notify_to, class_name: "User", foreign_key: :to
   belongs_to :notifyed_by, class_name: "User", foreign_key: :by
+  belongs_to :room
 
   validates :to, presence: true, numericality: { only_integer: true }
   validates :by, presence: true, numericality: { only_integer: true }
