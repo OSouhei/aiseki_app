@@ -2,6 +2,10 @@ class User < ApplicationRecord
   has_many :rooms, dependent: :destroy
   has_many :joining_rooms, class_name: "Member", foreign_key: "user_id", dependent: :destroy
   has_many :joining, through: :joining_rooms, source: :room
+  has_many :passive_notifications, class_name: "Notification", foreign_key: :to, dependent: :destroy
+  has_many :active_notifications, class_name: "Notification", foreign_key: :by, dependent: :destroy
+  # passive_notifications と同じ
+  has_many :notifications, foreign_key: :to, dependent: :destroy
 
   mount_uploader :profile_image, ProfileImageUploader
 
@@ -18,6 +22,7 @@ class User < ApplicationRecord
     return false if room.nil? || room.limited?
 
     joining << room
+    active_notifications.create(to: room.owner.id) # 通知を作成
   rescue ActiveRecord::RecordInvalid # 部屋の作成者と参加者が同じ場合
     false
   end
