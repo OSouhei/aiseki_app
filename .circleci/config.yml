@@ -65,10 +65,6 @@ jobs:
       - run:
           name: Rspec
           command: bundle exec rspec
-  deploy:
-    name: Heroku deploy
-    commad: |
-      git push https://heroku$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git $CIRCLE_BRANCH:master
 
 workflows:
   version: 2
@@ -79,5 +75,8 @@ workflows:
           requires:
             - rubocop
       - deploy:
+          name: HEROKU deploy
+          command: |
+            git push https://heroku$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git $CIRCLE_BRANCH:master
           requires:
             - rspec
