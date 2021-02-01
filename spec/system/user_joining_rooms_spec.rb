@@ -16,11 +16,11 @@ RSpec.describe "UserJoiningRooms", type: :system do
     expect(page).to have_title "joining rooms - 相席app"
   end
 
-  scenario "page has rooms information the user is joining" do
+  xscenario "page has rooms information the user is joining" do
     sign_in user
     user.join(room1)
     visit root_path
-    click_link "joining rooms"
+    click_link "ルーム一覧"
     expect(page).to have_current_path(joining_user_path(user))
     # 参加した部屋のリンクのみをもつ
     expect(page).to have_link href: room_path(room1)

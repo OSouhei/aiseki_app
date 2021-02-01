@@ -14,9 +14,9 @@ RSpec.describe "RoomPages", type: :system do
 
   scenario "room page has information" do
     visit root_path
-    click_link "rooms"
+    click_link "ルーム一覧"
     expect(page).to have_current_path(rooms_path)
-    click_link "go this room", href: room_path(room)
+    click_link "見る", href: room_path(room)
     expect(page).to have_current_path(room_path(room))
     expect(page).to have_link href: user_path(user1)
     expect(page).to have_link href: user_path(user2)

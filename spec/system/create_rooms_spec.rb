@@ -5,8 +5,7 @@ RSpec.describe "CreateRooms", type: :system do
 
   scenario "user create rooms" do
     sign_in user
-    visit root_path
-    click_link "Create your Room"
+    visit new_room_path
     expect(page).to have_current_path(new_room_path)
     expect {
       fill_in "Title", with: "Test Room"

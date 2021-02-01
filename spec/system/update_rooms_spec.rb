@@ -8,7 +8,7 @@ RSpec.describe "UpdateRooms", type: :system do
     sign_in user
     visit root_path
     click_link "プロフィール"
-    click_link "go this room", href: room_path(room)
+    click_link "見る", href: room_path(room)
     expect(page).to have_current_path(room_path(room))
     click_link "edit this room"
     expect(page).to have_current_path(edit_room_path(room))

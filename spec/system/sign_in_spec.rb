@@ -8,9 +8,9 @@ RSpec.feature "Sign In", type: :system do
     expect(page).to have_title "Login - 相席app"
   end
 
-  scenario "user sign in and sign out successfully" do
+  xscenario "user sign in and sign out successfully" do
     visit root_path
-    click_link "ログイン"
+    click_link "サインイン"
     expect(page).to have_current_path(new_user_session_path)
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password

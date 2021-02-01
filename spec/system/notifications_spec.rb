@@ -13,8 +13,7 @@ RSpec.describe "Notifications", type: :system do
   scenario "the page has notifications" do
     user1.join room
     sign_in user
-    visit root_path
-    click_link "Notifications"
+    visit notifications_path
     expect(page).to have_current_path notifications_path
     expect(page).to have_link(user1.name, href: user_path(user1))
     expect(page).to_not have_link href: user_path(user2)
