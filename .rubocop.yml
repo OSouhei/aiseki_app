@@ -32,6 +32,9 @@ Rails/RedundantForeignKey:
 RSpec/Capybara/FeatureMethods:
   Enabled: false
 
+RSpec/ContextWording:
+  Enabled: false
+
 RSpec/ExampleLength:
   Enabled: false
 

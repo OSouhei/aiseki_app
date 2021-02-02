@@ -1,53 +1,80 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  let(:user) { FactoryBot.build(:user) }
+  describe "has_many" do
+    let(:user) { create(:user) }
+    let(:user_room) { create(:room, owner: user) }
 
-  it "has valid factory" do
-    expect(user).to be_valid
-  end
+    context "rooms" do
+      let(:other_room) { create(:room) }
 
-  it "is invalid without name" do
-    user.name = "   "
-    user.valid?
-    expect(user.errors[:name]).to include("can't be blank")
-  end
+      it { should have_many(:rooms) }
 
-  it "is invalid with more than 50 chars name" do
-    user.name = "a" * 51
-    user.valid?
-    expect(user.errors[:name]).to include("is too long (maximum is 50 characters)")
-  end
+      it "includes user's rooms" do
+        expect(user.rooms).to include user_room
+      end
 
-  it "is invalid without email" do
-    user.email = "   "
-    user.valid?
-    expect(user.errors[:email]).to include("can't be blank")
-  end
+      it "does not includes other user's rooms" do
+        expect(user.rooms).to_not include other_room
+      end
 
-  it "is invalid with more than 255 chars email" do
-    user.email = "a" * 244 + "@example.com"
-  end
+      it { should have_many(:joining_rooms) }
 
-  it "is invalid with invalid adress" do
-    invalid_addresses = %w[user@example,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar+baz.com]
-    invalid_addresses.each do |invalid_address|
-      user.email = invalid_address
-      user.valid?
-      expect(user).to be_invalid
+      it { should have_many(:joining).class_name("Room") }
+
+      it "includes joining rooms" do
+        user.join(other_room)
+        expect(user.joining).to include other_room
+      end
+
+      it "does not include non-joining rooms" do
+        expect(user.joining).to_not include other_room
+      end
+    end
+
+    context "notifications" do
+      let(:other_user) { create(:user) }
+
+      it { should have_many(:notifications).class_name("Notification") }
+
+      it "has user notifications" do
+        expect {
+          other_user.join(user_room) # ユーザーが部屋に参加すると通知が作成される
+        }.to change(Notification, :count).by(1)
+      end
+    end
+
+    context "Bookmark" do
+      it { should have_many(:bookmarks) }
+      it { should have_many(:booked_rooms).class_name("Room") }
     end
   end
 
-  it "is invalid with dulicate email" do
-    user = FactoryBot.create(:user)
-    duplicate_user = FactoryBot.build(:user, email: user.email)
-    duplicate_user.valid?
-    expect(duplicate_user.errors[:email]).to include("has already been taken")
-  end
+  describe "validation" do
+    let(:user) { build(:user) }
 
-  it "is invalid without password" do
-    user.password = "   "
-    user.valid?
-    expect(user.errors[:password]).to include("can't be blank")
+    context "name" do
+      it { should validate_presence_of(:name) }
+      it { should validate_length_of(:name).is_at_most(50) }
+    end
+
+    context "email" do
+      it { should validate_presence_of(:email) }
+      it { should validate_length_of(:email).is_at_most(255) }
+      it { should validate_uniqueness_of(:email).case_insensitive }
+
+      it "is invalid with invalid adress" do
+        invalid_addresses = %w[user@example,com user_at_foo.org user.name@example. foo@bar_baz.com foo@bar+baz.com]
+        invalid_addresses.each do |invalid_address|
+          user.email = invalid_address
+          user.valid?
+          expect(user).to be_invalid
+        end
+      end
+    end
+
+    context "password" do
+      it { should validate_presence_of(:password) }
+    end
   end
 end

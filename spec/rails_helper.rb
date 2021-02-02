@@ -71,6 +71,8 @@ RSpec.configure do |config|
     FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/test/"]) if Rails.env.test?
   end
 
+  config.include FactoryBot::Syntax::Methods
+
   config.include Devise::Test::IntegrationHelpers, type: :request
   config.include Devise::Test::IntegrationHelpers, type: :system
 end
