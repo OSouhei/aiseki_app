@@ -4,9 +4,16 @@ $main-color: rgba(139,3, 4, 1);
 $second-color: #e3a44e;
 
 /* universal */
+body {
+  background-color: $second-color;
+}
 p,
 a {
   font-weight: bold;
+}
+
+.wrapper {
+  height: 55vh;
 }
 
 /* shared
@@ -26,6 +33,22 @@ a {
 .btn-outline-warning {
   color: $main-color;
   border-color: $main-color;
+}
+
+.btn-outline-warning:hover {
+  color: #fff;
+  background-color: $main-color;
+}
+
+.flex-direction-column {
+  flex-direction: column;
+}
+
+.flash {
+  margin: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
 }
 
 /* _room */
@@ -73,6 +96,7 @@ a {
 
 /* footer */
 footer.footer {
+  height: 45vh;
   width: 100%;
   background-color: $main-color;
   .container {
@@ -113,4 +137,55 @@ header.masthead {
 
 .top-page-rooms h1 {
   margin-top: 60px;
+}
+
+/* users/show
+-------------------------------------------------*/
+.card {
+  width: 400px;
+  border: none;
+  border-radius: 10px;
+  background-color: #fff
+}
+
+.profile-edit-link {
+  margin-top: 10px;
+}
+
+.user-info-box {
+  margin-left: 30px;
+}
+
+.articles {
+  font-size: 10px;
+  color: #a1aab9
+}
+
+.number1 {
+  font-weight: 500
+}
+
+.followers {
+  font-size: 10px;
+  color: #a1aab9
+}
+
+.number2 {
+  font-weight: 500
+}
+
+.rating {
+  font-size: 10px;
+  color: #a1aab9
+}
+
+.number3 {
+  font-weight: 500
+}
+
+.rooms-wrapper {
+  margin-top: -100px;
+  h2 {
+    margin-bottom: -60px;
+  }
 }

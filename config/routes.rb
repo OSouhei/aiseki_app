@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     sessions: "users/sessions"
   }
-  resources :users do
+  resources :users, only: [:index, :show] do
     get "joining", on: :member
   end
   resources :rooms do
