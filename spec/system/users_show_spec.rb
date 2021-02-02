@@ -18,13 +18,13 @@ RSpec.feature "UsersShows", type: :system do
     expect(page).to have_current_path(user_path(user))
     expect(page).to have_content user.name
     expect(page).to have_content user.email
-    expect(page).to have_link "edit your profile"
+    expect(page).to have_link "編集"
   end
 
   scenario "does not have link to edit user page" do
     sign_in other_user
     visit user_path(user)
-    expect(page).to_not have_link "edit your profile"
+    expect(page).to_not have_link "編集"
   end
 
   scenario "has user's rooms content" do
