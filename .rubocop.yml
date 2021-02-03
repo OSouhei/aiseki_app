@@ -35,17 +35,20 @@ RSpec/Capybara/FeatureMethods:
 RSpec/ContextWording:
   Enabled: false
 
+RSpec/ContextMethod:
+  Enabled: false
+
 RSpec/ExampleLength:
   Enabled: false
 
 RSpec/MultipleExpectations:
-  Exclude:
-    - "spec/features/*"
-    - "spec/system/*"
-    - "spec/helpers/application_helper_spec.rb"
+  Enabled: false
 
 RSpec/MultipleMemoizedHelpers:
   Max: 7
+
+RSpec/NestedGroups:
+  Max: 4
 
 RSpec/ImplicitExpect:
   Enabled: false

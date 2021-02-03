@@ -68,7 +68,10 @@ RSpec.configure do |config|
 
   config.after(:all) do
     # Get rid of the linked images
-    FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/test/"]) if Rails.env.test?
+    if Rails.env.test?
+      FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/test/"])
+      FileUtils.rm_rf(Dir["#{Rails.root}/tmp/uploads/#{Rails.env}/users/profile_images/"])
+    end
   end
 
   config.include FactoryBot::Syntax::Methods
