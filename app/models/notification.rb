@@ -12,7 +12,7 @@ class Notification < ApplicationRecord
   end
 
   def room_owner_and_notify_to_are_the_same
-    return unless room = Room.find_by(id: room_id)
+    return unless room_id || Room.find_by(id: room_id)
 
     room.owner.id == to ? return : errors.add(:room_id, "must be the id of the room owned by the user who received the notification")
   end

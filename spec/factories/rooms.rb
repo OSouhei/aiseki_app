@@ -5,5 +5,9 @@ FactoryBot.define do
     shop_name { "Orion" }
     limit { 3 }
     association :owner
+
+    trait :limited do
+      limit { 0 }
+    end
   end
 end

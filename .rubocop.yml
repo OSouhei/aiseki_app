@@ -32,19 +32,31 @@ Rails/RedundantForeignKey:
 RSpec/Capybara/FeatureMethods:
   Enabled: false
 
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/ContextMethod:
+  Enabled: false
+
 RSpec/ExampleLength:
   Enabled: false
 
 RSpec/MultipleExpectations:
-  Exclude:
-    - "spec/features/*"
-    - "spec/system/*"
-    - "spec/helpers/application_helper_spec.rb"
+  Enabled: false
 
 RSpec/MultipleMemoizedHelpers:
   Max: 7
 
+RSpec/NestedGroups:
+  Max: 4
+
+RSpec/ImplicitExpect:
+  Enabled: false
+
 RSpec/InstanceVariable:
+  Enabled: false
+
+RSpec/LetSetup:
   Enabled: false
 
 RSpec/NotToNot:

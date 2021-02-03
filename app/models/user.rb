@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: "Notification", foreign_key: :by, dependent: :destroy
   # passive_notifications と同じ
   has_many :notifications, foreign_key: :to, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :booked_rooms, through: :bookmarks, source: :room
 
   mount_uploader :profile_image, ProfileImageUploader
 
@@ -16,7 +18,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, format: { with: VALID_EMAIL_REGEX }
+  validates :email, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
 
   def join(room)
     return false if room.nil? || room.limited?
