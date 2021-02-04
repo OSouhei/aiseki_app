@@ -30,4 +30,8 @@ class Room < ApplicationRecord
   def member_limit
     errors.add(:limit, "must be more than members count") if limit && members.count > limit
   end
+
+  def booked_by?(user)
+    booked_by.include?(user)
+  end
 end
