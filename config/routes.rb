@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     member do
       get "join"
       get "exit"
+      post "bookmark", to: "bookmarks#create"
     end
     collection do
       get "search_shop", as: "search_shop"
