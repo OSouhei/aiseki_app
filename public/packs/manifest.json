@@ -1,13 +1,13 @@
 {
-  "application.js": "/packs/js/application-b8c568ce160d988cdc53.js",
-  "application.js.map": "/packs/js/application-b8c568ce160d988cdc53.js.map",
+  "application.js": "/packs/js/application-3107f84a5861af8efe43.js",
+  "application.js.map": "/packs/js/application-3107f84a5861af8efe43.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-b8c568ce160d988cdc53.js"
+        "/packs/js/application-3107f84a5861af8efe43.js"
       ],
       "js.map": [
-        "/packs/js/application-b8c568ce160d988cdc53.js.map"
+        "/packs/js/application-3107f84a5861af8efe43.js.map"
       ]
     },
     "shop_name": {

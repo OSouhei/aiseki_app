@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get "join"
       get "exit"
       post "bookmark", to: "bookmarks#create"
+      delete "bookmark", to: "bookmarks#destroy"
     end
     collection do
       get "search_shop", as: "search_shop"

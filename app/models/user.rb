@@ -32,4 +32,12 @@ class User < ApplicationRecord
   def exit(room)
     room.member?(self) ? joining.delete(room) : false
   end
+
+  def book(room)
+    booked_rooms << room
+  end
+
+  def unbook(room)
+    booked_rooms.delete room
+  end
 end

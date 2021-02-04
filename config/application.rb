@@ -19,6 +19,8 @@ module Myapp
     config.time_zone = "Tokyo"
     # config.eager_load_paths << Rails.root.join("extras")
 
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+
     config.generators do |g|
       g.test_framework :rspec, view_specs: false, routing_specs: false, helper_specs: false
     end
