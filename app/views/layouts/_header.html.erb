@@ -20,7 +20,7 @@
         <%= link_to "プロフィール", user_path(current_user) %>
       </li>
       <li class="sidebar-nav-item">
-        <%= link_to "ログアウト", destroy_user_session_path %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
       </li>
     <% else %>
       <li class="sidebar-nav-item">

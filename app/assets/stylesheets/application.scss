@@ -61,6 +61,15 @@ a {
   z-index: 1;
 }
 
+.form {
+  width: 60%;
+}
+
+.form-group {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
 /* _room */
 .rooms {
   width: 90%;
@@ -200,6 +209,16 @@ header.masthead {
   h2 {
     margin-bottom: -60px;
   }
+}
+
+/* users/registrations/new
+-------------------------------------------------*/
+.profile-image-input {
+  display: none;
+}
+
+.filename {
+  margin-left: 10px;
 }
 
 /* rooms/index

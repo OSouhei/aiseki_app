@@ -1,36 +1,30 @@
 <% provide(:title, "sign up") %>
 
-<h2>Sign up</h2>
+<h2>ユーザー登録</h2>
 
-<%= form_with(model: @user, url: user_registration_path) do |f| %>
+<%= form_with(model: @user, url: user_registration_path, class: "form mx-auto") do |f| %>
   <%= render "users/shared/error_messages", user: @user %>
 
   <div class="form-group">
-    <%= f.label :name, class: "form-label" %>
-    <%= f.text_field :name, class: "form-control" %>
+    <%= f.text_field :name, class: "form-control", placeholder: "お名前" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :email, class: "form-label" %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "メールアドレス" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :password, class: "form-label" %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "パスワード（６文字以上）" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :password_confirmation, class: "form-label" %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "パスワード（確認）" %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :profile_image, class: "form-label" %>
-    <%= f.file_field :profile_image, class: "form-control" %>
+  <div class="form-group d-flex flex-start align-items-center">
+    <%= f.file_field :profile_image, class: "profile-image-input form-control" %>
+    <%= f.label :profile_image, class: "profile-image-label form-label btn btn-primary" %>
+    <span class="filename"></span>
   </div>
 
   <div class="actions">
