@@ -21,6 +21,10 @@ module Myapp
 
     config.action_view.embed_authenticity_token_in_remote_forms = true
 
+    config.http_authenticatable_on_xhr = false
+
+    config.navigational_formats = [:"*/*", "*/*", :html, :js]
+
     config.generators do |g|
       g.test_framework :rspec, view_specs: false, routing_specs: false, helper_specs: false
     end

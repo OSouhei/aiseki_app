@@ -33,10 +33,12 @@ class User < ApplicationRecord
     room.member?(self) ? joining.delete(room) : false
   end
 
+  # roomをブックマークする
   def book(room)
     booked_rooms << room
   end
 
+  # roomをブックマークから削除
   def unbook(room)
     booked_rooms.delete room
   end
