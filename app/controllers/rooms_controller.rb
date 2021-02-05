@@ -4,7 +4,7 @@ class RoomsController < ApplicationController
   before_action :room_owner?, only: [:edit, :update, :destroy]
 
   def index
-    @rooms = Room.all.page(params[:page]).per(10)
+    @rooms = Room.all.page(params[:page]).per(9)
   end
 
   def show

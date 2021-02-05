@@ -56,6 +56,7 @@ a {
   width: 90%;
   margin: 100px auto;
   display: grid;
+  align-items: center;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 70px;
 }
@@ -188,4 +189,15 @@ header.masthead {
   h2 {
     margin-bottom: -60px;
   }
+}
+
+/* rooms/index
+-------------------------------------------------*/
+.paginate-wrapper nav {
+  display: flex;
+  justify-content: center;
+}
+
+.paginate-wrapper {
+  margin-bottom: 100px;
 }
