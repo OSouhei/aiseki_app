@@ -15,13 +15,14 @@
   </head>
 
   <body class="text-center">
-      <%= render 'layouts/header' %>
       <%= render 'layouts/flash' %>
+      <%= render 'layouts/header' %>
       <%= yield %>
       <%= render 'layouts/footer' %>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <%= javascript_pack_tag 'stylish-portfolio' %>
+    <%= javascript_pack_tag 'flash' %>
     <%= javascript_pack_tag 'shop_name' %>
   </body>
 </html>
