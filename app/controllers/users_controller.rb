@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :joining]
 
   def index
-    @users = User.page(params[:page]).per(10)
+    @users = User.page(params[:page]).per(9)
   end
 
   def show

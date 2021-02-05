@@ -1,5 +1,13 @@
 <% provide(:title, "users") %>
 
-<h1>Users#index</h1>
-<%= render @users %>
-<%= paginate @users %>
+<div class="wrapper">
+  <h1>All Users</h1>
+  <div class="users-wrapper">
+    <div class="grid">
+      <%= render @users %>
+    </div>
+    <div class="paginate-wrapper">
+      <%= paginate @users %>
+    </div>
+  </div>
+</div>
