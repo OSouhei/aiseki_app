@@ -8,6 +8,7 @@ body {
   background-color: $second-color;
   min-height: 100vh;
 }
+
 p,
 a {
   font-weight: bold;
@@ -102,7 +103,6 @@ a {
 
 /* footer */
 footer.footer {
-  height: 45vh;
   width: 100%;
   background-color: $main-color;
   .container {
