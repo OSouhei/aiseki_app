@@ -1,14 +1,16 @@
 <% provide(:title, @user.name) %>
 
-<div class="container mt-5 d-flex justify-content-center">
-  <%= render @user %>
-</div>
-
-<% unless @rooms.blank? %>
-  <div class="rooms-wrapper text-center">
-    <h2>Your Rooms</h2>
-    <div class="rooms text-center grid">
-      <%= render @rooms %>
-    </div>
+<div class="wrapper">
+  <div class="container mt-5 d-flex justify-content-center">
+    <%= render @user %>
   </div>
-<% end %>
+
+  <% unless @rooms.blank? %>
+    <div class="rooms-wrapper text-center">
+      <h2>Your Rooms</h2>
+      <div class="rooms text-center grid">
+        <%= render @rooms %>
+      </div>
+    </div>
+  <% end %>
+</div>
