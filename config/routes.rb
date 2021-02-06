@@ -10,8 +10,7 @@ Rails.application.routes.draw do
     member do
       get "join"
       get "exit"
-      post "bookmark", to: "bookmarks#create"
-      delete "bookmark", to: "bookmarks#destroy"
+      resources :bookmarks, only: [:create, :destroy]
     end
     collection do
       get "search_shop", as: "search_shop"

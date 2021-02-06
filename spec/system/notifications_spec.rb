@@ -17,7 +17,6 @@ RSpec.describe "Notifications", type: :system do
     expect(page).to have_current_path notifications_path
     expect(page).to have_link(user1.name, href: user_path(user1))
     expect(page).to_not have_link href: user_path(user2)
-    expect(page).to have_link("your room - #{room.title}", href: room_path(room))
   end
 
   scenario "guest access notificatons page" do
