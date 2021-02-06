@@ -1,13 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe "Rooms", type: :request do
-  let(:user) { FactoryBot.create(:user) }
-  let(:other_user) { FactoryBot.create(:user) }
-  let(:room) { FactoryBot.create(:room, owner: user) }
-  let(:room_params) { FactoryBot.attributes_for(:room) }
+  let(:user) { create(:user) }
+  let(:room) { create(:room, owner: user) }
 
   # Rooms#index
   describe "GET /rooms" do
+    let!(:room1) { create(:room) }
+    let!(:room2) { create(:room) }
+
     before do
       get rooms_path
     end
@@ -19,10 +20,29 @@ RSpec.describe "Rooms", type: :request do
     it "render template rooms/index" do
       expect(response).to render_template :index
     end
+
+    it "define @rooms" do
+      aggregate_failures do
+        variable = controller.instance_variable_get("@rooms")
+        expect(variable).to include room1
+        expect(variable).to include room2
+      end
+    end
+
+    it "@rooms length is at most 9" do
+      create_list(:room, 10)
+      get rooms_path
+      variable = controller.instance_variable_get("@rooms")
+      expect(variable.length).to eq 9
+    end
   end
 
   # Rooms#show
   describe "GET /rooms/:id" do
+    let(:user1) { create(:user) }
+    let(:user2) { create(:user) }
+    let(:room) { create(:room) }
+
     it "responds successfully" do
       get room_path(room)
       expect(response).to have_http_status 200
@@ -33,15 +53,43 @@ RSpec.describe "Rooms", type: :request do
       expect(response).to render_template :show
     end
 
-    context "when user is not found" do
-      it "responds successfully" do
+    it "define @room" do
+      get room_path(room)
+      variable = controller.instance_variable_get("@room")
+      expect(variable).to eq room
+    end
+
+    it "define @members" do
+      user1.join room
+      user2
+      get room_path(room)
+      variable = controller.instance_variable_get("@members")
+      aggregate_failures do
+        expect(variable).to include user1
+        expect(variable).to_not include user2
+      end
+    end
+
+    context "when room is not found" do
+      before do
         get room_path(1000)
+      end
+
+      it "responds successfully" do
         expect(response).to have_http_status 302
       end
 
       it "redirect to home page" do
-        get room_path(1000)
         expect(response).to redirect_to root_path
+      end
+
+      it "define @room as nil" do
+        variable = controller.instance_variable_get("@room")
+        expect(variable).to be_nil
+      end
+
+      it "define flash" do
+        expect(flash[:alert]).to eq "room was not found."
       end
     end
   end
@@ -80,25 +128,71 @@ RSpec.describe "Rooms", type: :request do
 
   # Rooms#create
   describe "POST /rooms" do
+    let(:room_params) { attributes_for(:room) }
+    let(:invalid_room_params) { attributes_for(:room, title: "   ") }
+
     context "when authenticated user" do
       before do
         sign_in user
       end
 
-      it "responds successfully" do
-        post rooms_path, params: { room: room_params }
-        expect(response).to have_http_status 302
+      context "with valid room_params" do
+        it "responds successfully" do
+          post rooms_path, params: { room: room_params }
+          expect(response).to have_http_status 302
+        end
+
+        it "redirect to home page" do
+          post rooms_path, params: { room: room_params }
+          expect(response).to redirect_to room_path(Room.last)
+        end
+
+        it "create room" do
+          expect {
+            post rooms_path, params: { room: room_params }
+          }.to change(Room, :count).by(1)
+        end
+
+        it "define @room" do
+          post rooms_path, params: { room: room_params }
+          variable = controller.instance_variable_get("@room")
+          expect(variable).to be_present
+        end
+
+        it "define flash" do
+          post rooms_path, params: { room: room_params }
+          expect(flash[:notice]).to eq "room was successfully created."
+        end
       end
 
-      it "redirect to home page" do
-        post rooms_path(user), params: { room: room_params }
-        expect(response).to redirect_to room_path(Room.last)
-      end
+      context "with invalid room_params" do
+        it "responds successfully" do
+          post rooms_path, params: { room: invalid_room_params }
+          expect(response).to have_http_status 200
+        end
 
-      it "create room" do
-        expect {
-          post rooms_path(user), params: { room: room_params }
-        }.to change(Room, :count).by(1)
+        it "render template :new" do
+          post rooms_path, params: { room: invalid_room_params }
+          expect(response).to render_template :new
+        end
+
+        it "render partial users/shared/error_messages" do
+          post rooms_path, params: { room: invalid_room_params }
+          expect(response).to render_template partial: "rooms/shared/_error_messages"
+        end
+
+        it "does not create room" do
+          expect {
+            post rooms_path, params: { room: invalid_room_params }
+          }.to_not change(Room, :count)
+        end
+
+        it "define @room" do
+          post rooms_path, params: { room: invalid_room_params }
+          variable = controller.instance_variable_get("@room")
+          variable.valid?
+          expect(variable.errors[:title]).to include "can't be blank"
+        end
       end
     end
 
@@ -136,9 +230,16 @@ RSpec.describe "Rooms", type: :request do
       it "render template rooms/edit" do
         expect(response).to render_template :edit
       end
+
+      it "define @room" do
+        variable = controller.instance_variable_get("@room")
+        expect(variable).to eq room
+      end
     end
 
     context "when unauthenticated user" do
+      let(:other_user) { create(:user) }
+
       before do
         sign_in other_user
         get edit_room_path(room)
@@ -150,6 +251,10 @@ RSpec.describe "Rooms", type: :request do
 
       it "redirect to home page" do
         expect(response).to redirect_to root_path
+      end
+
+      it "define flash" do
+        expect(flash[:alert]).to eq "you can't access this page."
       end
     end
 
@@ -170,7 +275,7 @@ RSpec.describe "Rooms", type: :request do
     context "when room is not found" do
       before do
         sign_in user
-        get edit_room_path(room.id + 1000)
+        get edit_room_path(1000)
       end
 
       it "responds successfully" do
@@ -179,6 +284,15 @@ RSpec.describe "Rooms", type: :request do
 
       it "redirect to home page" do
         expect(response).to redirect_to root_path
+      end
+
+      it "define @room as nil" do
+        variable = controller.instance_variable_get("@room")
+        expect(variable).to be_nil
+      end
+
+      it "define flash" do
+        expect(flash[:alert]).to eq "room was not found."
       end
     end
   end
@@ -203,9 +317,20 @@ RSpec.describe "Rooms", type: :request do
         room.reload
         expect(room.content).to eq "new content!"
       end
+
+      it "define @room" do
+        variable = controller.instance_variable_get("@room")
+        expect(variable).to eq room
+      end
+
+      it "define flash" do
+        expect(flash[:notice]).to eq "room was updated."
+      end
     end
 
     context "when unauthenticated user" do
+      let(:other_user) { create(:user) }
+
       before do
         sign_in other_user
         patch room_path(room), params: { room: { content: "new content!" } }
@@ -222,6 +347,10 @@ RSpec.describe "Rooms", type: :request do
       it "does not update room attributes" do
         room.reload
         expect(room.content).to eq "This is test room."
+      end
+
+      it "difine flash" do
+        expect(flash[:alert]).to eq "you can't access this page."
       end
     end
 
@@ -247,7 +376,7 @@ RSpec.describe "Rooms", type: :request do
     context "when room is not found" do
       before do
         sign_in user
-        patch room_path(room.id + 1000), params: { room: { content: "new content!" } }
+        patch room_path(1000), params: { room: { content: "new content!" } }
       end
 
       it "responds successfully" do
@@ -256,6 +385,11 @@ RSpec.describe "Rooms", type: :request do
 
       it "redirect to home page" do
         expect(response).to redirect_to root_path
+      end
+
+      it "define @room as nil" do
+        variable = controller.instance_variable_get("@room")
+        expect(variable).to be_nil
       end
     end
   end
@@ -283,9 +417,22 @@ RSpec.describe "Rooms", type: :request do
           delete room_path(room)
         }.to change(Room, :count).by(-1)
       end
+
+      it "define @room" do
+        delete room_path(room)
+        variable = controller.instance_variable_get("@room")
+        expect(variable).to eq room
+      end
+
+      it "define flash" do
+        delete room_path(room)
+        expect(flash[:notice]).to eq "room was successfully destroyed."
+      end
     end
 
     context "when unauthenticated user" do
+      let(:other_user) { create(:user) }
+
       before do
         sign_in other_user
       end
@@ -305,6 +452,11 @@ RSpec.describe "Rooms", type: :request do
         expect {
           delete room_path(room)
         }.to_not change(Room, :count)
+      end
+
+      it "define flash" do
+        delete room_path(room)
+        expect(flash[:alert]).to eq "you can't access this page."
       end
     end
 
@@ -330,7 +482,7 @@ RSpec.describe "Rooms", type: :request do
     context "when room is not found" do
       before do
         sign_in user
-        delete room_path(room.id + 1000)
+        delete room_path(1000)
       end
 
       it "responds successfully" do
@@ -340,12 +492,23 @@ RSpec.describe "Rooms", type: :request do
       it "redirect to home page" do
         expect(response).to redirect_to root_path
       end
+
+      it "define room as nil" do
+        variable = controller.instance_variable_get("@room")
+        expect(variable).to be_nil
+      end
+
+      it "define flash" do
+        expect(flash[:alert]).to eq "room was not found."
+      end
     end
   end
 
   # Rooms#join
   describe "GET /rooms/:room_id/join" do
     context "when authenticated user" do
+      let(:other_user) { create(:user) }
+
       before do
         sign_in other_user
       end
@@ -374,6 +537,17 @@ RSpec.describe "Rooms", type: :request do
       it "user join the room" do
         get join_room_path(room)
         expect(other_user.joining).to include room
+      end
+
+      it "define @room" do
+        get join_room_path(room)
+        variable = controller.instance_variable_get("@room")
+        expect(variable).to eq room
+      end
+
+      it "define flash" do
+        get join_room_path(room)
+        expect(flash[:notice]).to eq "you joined the room."
       end
     end
 
@@ -406,6 +580,11 @@ RSpec.describe "Rooms", type: :request do
       it "user does not join the room" do
         get join_room_path(room)
         expect(user.joining).to_not include room
+      end
+
+      it "define flash" do
+        get join_room_path(room)
+        expect(flash[:alert]).to eq "you can not join the room because you are the room owner."
       end
     end
 
@@ -445,6 +624,9 @@ RSpec.describe "Rooms", type: :request do
 
   # Rooms#search
   describe "GET /rooms/search" do
+    let!(:room1) { create(:room, content: "engineer only!") }
+    let!(:room2) { create(:room, content: "this is test room.") }
+
     before do
       get search_rooms_path, params: { keyword: "engineer" }
     end
@@ -456,30 +638,71 @@ RSpec.describe "Rooms", type: :request do
     it "render template :search" do
       expect(response).to render_template :search
     end
+
+    it "define @rooms" do
+      variable = controller.instance_variable_get("@rooms")
+      expect(variable).to include room1
+    end
+
+    it "@rooms does not include rooms that do not match term" do
+      variable = controller.instance_variable_get("@rooms")
+      expect(variable).to_not include room2
+    end
   end
 
   # Rooms#exit
   describe "GET /rooms/:id/exit" do
     context "when authenticated user" do
+      let(:other_user) { create(:user) }
+
       before do
         sign_in other_user
       end
 
-      it "responds successfully" do
-        get exit_room_path(room)
-        expect(response).to have_http_status 302
-      end
+      context "when user is a member" do
+        before do
+          other_user.join room
+        end
 
-      it "redirect to room page" do
-        get exit_room_path(room)
-        expect(response).to redirect_to room_path(room)
-      end
-
-      it "exit the room" do
-        other_user.join room
-        expect {
+        it "responds successfully" do
           get exit_room_path(room)
-        }.to change(Member, :count).by(-1)
+          expect(response).to have_http_status 302
+        end
+
+        it "redirect to room page" do
+          get exit_room_path(room)
+          expect(response).to redirect_to room_path(room)
+        end
+
+        it "exit the room" do
+          expect {
+            get exit_room_path(room)
+          }.to change(Member, :count).by(-1)
+        end
+
+        it "define @room" do
+          get exit_room_path(room)
+          variable = controller.instance_variable_get("@room")
+          expect(variable).to eq room
+        end
+
+        it "define flash" do
+          get exit_room_path(room)
+          expect(flash[:notice]).to eq "you exited the room."
+        end
+      end
+
+      context "when user is not a member" do
+        it "does not exit room" do
+          expect {
+            get exit_room_path(room)
+          }.to_not change(Member, :count)
+        end
+
+        it "define flash" do
+          get exit_room_path(room)
+          expect(flash[:alert]).to eq "you are not member of this room."
+        end
       end
     end
 

@@ -58,7 +58,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/:id/exit
   def exit
-    current_user.exit(@room) ? redirect_to(room_path(@room), notice: "you exited the room.") : redirect_to(room_path(@room), alert: "you has already exited the room.")
+    current_user.exit(@room) ? redirect_to(room_path(@room), notice: "you exited the room.") : redirect_to(room_path(@room), alert: "you are not member of this room.")
   end
 
   private
