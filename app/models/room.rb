@@ -12,11 +12,12 @@ class Room < ApplicationRecord
   validate :member_limit
 
   def self.search(term = "")
-    term.blank? ? Room.all : Room.where("content LIKE ?", "%#{term}%")
+    term.downcase!
+    term.blank? ? Room.all : Room.where("lower(content) LIKE ?", "%#{term}%")
   end
 
-  def owner?(usr)
-    owner == usr
+  def owner?(user)
+    owner == user
   end
 
   def member?(user)
