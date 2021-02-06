@@ -1,4 +1,10 @@
 <% provide(:title, "notifications") %>
 
-<h1>Notifications#index</h1>
-<%= render @notifications %>
+<div class="wrapper">
+  <h1>Notifications</h1>
+  <div class="notifications card d-flex align-items-center mx-auto">
+    <ul class="list-group list-group-flush">
+      <%= render @notifications %>
+    </ul>
+  </div>
+</div>

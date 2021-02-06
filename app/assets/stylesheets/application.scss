@@ -254,3 +254,18 @@ header.masthead {
   margin-top: 50px;
   margin-bottom: 100px;
 }
+
+/* notifications/index
+-------------------------------------------------*/
+.notifications {
+  margin-top: 60px;
+  .list-group-item {
+    text-align: start;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+.action-icon {
+  float: left;
+  margin-right: 15px;
+}

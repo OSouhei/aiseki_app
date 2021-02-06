@@ -1,1 +1,6 @@
-<p><%= link_to notification.notifyed_by.name, user_path(notification.notifyed_by) %> joined <%= link_to "your room - #{notification.room.title}", room_path(notification.room) %></p>
+<li class="list-group-item">
+  <%= render 'notifications/action_icon', action: notification.action %> <!-- 通知アイコン -->
+  <%= notification_message(notification)[:user] %> <!-- ユーザーページリンク -->
+  <%= notification_message(notification)[:action] %> <!-- 通知の種類（アクション）-->
+  <%= notification_message(notification)[:room] %> <!-- 対象のルーム -->
+</li>
