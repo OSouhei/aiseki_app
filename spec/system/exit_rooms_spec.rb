@@ -32,6 +32,6 @@ RSpec.describe "ExitRooms", type: :system do
       visit exit_room_path(room)
     }.to_not change(Member, :count)
     expect(page).to_not have_content "you exited the room."
-    expect(page).to have_content "you has already exited the room."
+    expect(page).to have_content "you are not member of this room."
   end
 end
