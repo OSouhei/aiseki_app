@@ -4,5 +4,6 @@ FactoryBot.define do
     by { FactoryBot.create(:user).id }
     room_id { nil }
     checked { false }
+    action { "join" }
   end
 end
