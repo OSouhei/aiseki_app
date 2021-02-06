@@ -1,5 +1,5 @@
 class BookmarksController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: [:create, :destroy]
 
   # POST /rooms/:id/bookmark
   def create
@@ -12,9 +12,16 @@ class BookmarksController < ApplicationController
     end
   end
 
+  # DELETE /bookmarks/:id
+  # :id は room_id であることに注意!
   def destroy
     @room = Room.find_by(id: params[:id])
-    @room ? current_user.booked_rooms.delete(@room) : flash[:alert] = "Room is not found."
+    if @room
+      current_user.booked_rooms.delete(@room)
+    else
+      flash[:alert] = "Room is not found."
+      redirect_back
+    end
   end
 
   private
