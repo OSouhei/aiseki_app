@@ -1,5 +1,10 @@
 class BookmarksController < ApplicationController
-  before_action :authenticate_user!, only: [:create, :destroy]
+  before_action :authenticate_user!, only: [:index, :create, :destroy]
+
+  # GET /bookmarks
+  def index
+    @bookmarks = current_user.booked_rooms
+  end
 
   # POST /rooms/:id/bookmark
   def create

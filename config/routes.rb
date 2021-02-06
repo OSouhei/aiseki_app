@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     member do
       get "join"
       get "exit"
-      resources :bookmarks, only: [:create]
+      post "bookmark", to: "bookmarks#create"
     end
     collection do
       get "search_shop", as: "search_shop"
@@ -18,6 +18,6 @@ Rails.application.routes.draw do
     end
   end
   resources :notifications, only: :index
-  resources :bookmarks, only: [:destroy]
+  resources :bookmarks, only: [:index, :destroy]
   root "home#index"
 end
