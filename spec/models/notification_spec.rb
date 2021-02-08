@@ -9,7 +9,7 @@ RSpec.describe Notification, type: :model do
   end
 
   describe "validation" do
-    context ":to" do
+    context "to" do
       it { should validate_presence_of(:to) }
       it { should validate_numericality_of(:to).only_integer }
 
@@ -20,7 +20,7 @@ RSpec.describe Notification, type: :model do
       end
     end
 
-    context ":by" do
+    context "by" do
       it { should validate_presence_of(:by) }
       it { should validate_numericality_of(:by).only_integer }
 
@@ -29,16 +29,9 @@ RSpec.describe Notification, type: :model do
         notification.valid?
         expect(notification.errors[:notifyed_by]).to include "must exist"
       end
-
-      it ":to and room owner must be the same" do
-        other_room = FactoryBot.create(:room)
-        notification.room_id = other_room.id
-        notification.valid?
-        expect(notification.errors[:room_id]).to include "must be the id of the room owned by the user who received the notification"
-      end
     end
 
-    context ":action" do
+    context "action" do
       it { should validate_presence_of(:action) }
 
       it "accept valid value :join" do
@@ -55,6 +48,22 @@ RSpec.describe Notification, type: :model do
         notification.action = "joining"
         notification.valid?
         expect(notification.errors[:action]).to include "must be one of the value (join bookmark)"
+      end
+    end
+  end
+
+  describe "method" do
+    context "#room" do
+      let(:room) { create(:room) }
+      let(:notification) { create(:notification, room_id: room.id) }
+
+      it "returns room" do
+        expect(notification.room).to eq room
+      end
+
+      it "returns nil when room is not found" do
+        notification.room_id = 1000
+        expect(notification.room).to be_nil
       end
     end
   end
