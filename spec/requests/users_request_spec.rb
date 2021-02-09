@@ -105,4 +105,82 @@ RSpec.describe "Users", type: :request do
       end
     end
   end
+
+  # Users#follow
+  context "GET /users/:id/follow" do
+    context "when authenticated user" do
+      before do
+        sign_in user
+        get follow_user_path(other_user)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect_to user page" do
+        expect(response).to redirect_to user_path(other_user)
+      end
+
+      context "when user is not found" do
+        before do
+          get follow_user_path(1000)
+        end
+
+        it "redirect root_path" do
+          expect(response).to redirect_to root_path
+        end
+
+        it "define flash" do
+          expect(flash[:alert]).to eq "user is not found."
+        end
+      end
+    end
+
+    context "when guest" do
+      before do
+        get follow_user_path(other_user)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect_to login page" do
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
+
+  # Users#unfollow
+  context "GET /users/:id/unfollow" do
+    context "when authenticated user" do
+      before do
+        sign_in user
+        get unfollow_user_path(other_user)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect_to user page" do
+        expect(response).to redirect_to user_path(other_user)
+      end
+    end
+
+    context "when guest" do
+      before do
+        get unfollow_user_path(other_user)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect_to login page" do
+        expect(response).to redirect_to new_user_session_path
+      end
+    end
+  end
 end

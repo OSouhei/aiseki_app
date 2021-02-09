@@ -4,7 +4,11 @@ Rails.application.routes.draw do
     sessions: "users/sessions"
   }
   resources :users, only: [:index, :show] do
-    get "joining", on: :member
+    member do
+      get "joining"
+      get "follow"
+      get "unfollow"
+    end
   end
   resources :rooms do
     member do
