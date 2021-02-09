@@ -206,5 +206,65 @@ RSpec.describe User, type: :model do
         end
       end
     end
+
+    context "#book" do
+      it "create bookmark" do
+        expect {
+          user.book room
+        }.to change(Bookmark, :count).by(1)
+      end
+
+      it "bookmark a room" do
+        user.book room
+        expect(user.booked_rooms).to include room
+      end
+    end
+
+    context "#unbook" do
+      it "destroy bookmark" do
+        user.book room
+        expect {
+          user.unbook room
+        }.to change(Bookmark, :count).by(-1)
+      end
+
+      it "unbook a room" do
+        user.book room
+        user.unbook room
+        expect(user.booked_rooms).to_not include room
+      end
+    end
+
+    context "#follow" do
+      let(:other_user) { create(:user) }
+
+      it "create relationship" do
+        expect {
+          user.follow other_user
+        }.to change(Relationship, :count).by(1)
+      end
+
+      it "follow a user" do
+        user.follow other_user
+        expect(user.following).to include other_user
+      end
+    end
+
+    context "#unfollow" do
+      let(:other_user) { create(:user) }
+
+      it "destroy relationship" do
+        user.follow other_user
+        expect {
+          user.unfollow other_user
+        }.to change(Relationship, :count).by(-1)
+      end
+
+      it "unfollow a user" do
+        user.follow other_user
+        user.unfollow other_user
+        expect(user.following).to_not include other_user
+      end
+    end
   end
 end

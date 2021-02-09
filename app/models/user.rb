@@ -46,4 +46,12 @@ class User < ApplicationRecord
   def unbook(room)
     booked_rooms.delete room
   end
+
+  def follow(user)
+    following << user
+  end
+
+  def unfollow(user)
+    following.delete user
+  end
 end
