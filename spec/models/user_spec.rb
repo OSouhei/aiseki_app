@@ -86,6 +86,36 @@ RSpec.describe User, type: :model do
         expect(user.booked_rooms).to include room
       end
     end
+
+    context "active_relationships" do
+      it { should have_many :active_relationships }
+    end
+
+    context "passive_relationships" do
+      it { should have_many :passive_relationships }
+    end
+
+    context "follower" do
+      let(:other_user) { create(:user) }
+      let!(:relationship) { create(:relationship, follower_id: other_user.id, followed_id: user.id) }
+
+      it { should have_many :follower }
+
+      it "has many follower" do
+        expect(user.follower).to include other_user
+      end
+    end
+
+    context "followed" do
+      let(:other_user) { create(:user) }
+      let!(:relationship) { create(:relationship, follower_id: user.id, followed_id: other_user.id) }
+
+      it { should have_many :following }
+
+      it "has many following" do
+        expect(user.following).to include other_user
+      end
+    end
   end
 
   describe "validation" do
