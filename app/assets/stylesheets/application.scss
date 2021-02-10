@@ -82,6 +82,13 @@ li {
   margin-bottom: 30px;
 }
 
+/* _user */
+.following:hover {
+  background-color: #fff;
+  color: $main-color !important;
+  border-color: $main-color;
+}
+
 /* _room */
 .rooms {
   width: 90%;
