@@ -97,37 +97,22 @@ li {
 
 .room {
   background-color: #fff8cf;
-  height: 360px;
+  height: 210px;
 }
 
 .room-header {
   align-items: center;
-  margin-bottom: 30px;
   padding: 0 15px;
-}
-
-.room-header .profile-image {
-  float: left;
-}
-
-.room-explanation {
-  padding: 0 20px;
-  .card-text {
-    text-align: left;
+  .profile-image {
+    float: left;
   }
 }
 
-.shop-name {
-  position: absolute;
-  bottom: 30px;
-  left: 30px;
-}
-
-.room-links {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-}
+// .room-links {
+//   position: absolute;
+//   bottom: 30px;
+//   right: 30px;
+// }
 
 /* navbar */
 .navbar {

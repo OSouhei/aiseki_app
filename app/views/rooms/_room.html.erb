@@ -6,11 +6,8 @@
       <% end %>
       <h3 class="room-title mx-auto"><%= room.title %></h3>
     </div>
-    <div class="room-explanation">
-      <p class="card-text"><%= room.content %></p>
-    </div>
-    <div class="shop-name">
-      <p class="card-text"><%= link_to "お店", "#" %></p>
+    <div class="room-content">
+      <p><%= room.shop_name %></p>
     </div>
     <div class="room-links">
       <%= link_to "見る", room_path(room), class: "card-link text-bright" %>

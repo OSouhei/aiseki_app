@@ -1,64 +1,80 @@
-<header class="masthead d-flex">
-  <div class="container text-center my-auto">
-    <h1 class="mb-1 text-bright">相席アプリ</h1>
-    <h3 class="mb-5">
-      <em class="text-bright">aiseki app</em>
-    </h3>
-    <div class="header-buttons d-flex justify-content-around mx-auto">
-      <%= link_to "サインアップ", new_user_registration_path, class: "btn btn-primary btn-xl" %>
-      <%= link_to "サインイン", new_user_session_path, class: "btn btn-primary btn-xl" %>
+<% if user_signed_in? %>
+  <div class="wrapper">
+    <div class="container mt-5 d-flex justify-content-center">
+      <%= render current_user %>
     </div>
+    <% unless @rooms.blank? %>
+      <div class="rooms-wrapper text-center">
+        <h2>Your Rooms</h2>
+        <div class="rooms text-center grid">
+          <%= render @rooms %>
+        </div>
+      </div>
+    <% end %>
   </div>
-  <div class="overlay"></div>
-</header>
-<!-- 相席アプリとは？ -->
-<section class="content-section bg-main text-bright text-center" id="services">
-  <div class="container">
-    <div class="content-section-heading">
-      <h2 class="text-secondary">相席アプリとは？</h2>
-      <h2 class="mb-5">誰とでも一緒に相席できるアプリです。</h2>
-    </div>
-    <div class="row">
-      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-        <span class="service-icon rounded-circle mx-auto mb-3">
-          <i class="icon-screen-smartphone"></i>
-        </span>
-        <h4>
-          <strong>ユーザー登録</strong>
-        </h4>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-        <span class="service-icon rounded-circle mx-auto mb-3">
-          <i class="icon-pencil"></i>
-        </span>
-        <h4>
-          <strong>ルーム作成</strong>
-        </h4>
-      </div>
-      <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-        <span class="service-icon rounded-circle mx-auto mb-3">
-          <i class="icon-like"></i>
-        </span>
-        <h4>
-          <strong>ルームの詳細を記入</strong>
-        </h4>
-      </div>
-      <div class="col-lg-3 col-md-6">
-        <span class="service-icon rounded-circle mx-auto mb-3">
-          <i class="icon-mustache"></i>
-        </span>
-        <h4>
-          <strong>あとは待つだけ！</strong>
-        </h4>
+<% else %>
+  <header class="masthead d-flex">
+    <div class="container text-center my-auto">
+      <h1 class="mb-1 text-bright">相席アプリ</h1>
+      <h3 class="mb-5">
+        <em class="text-bright">aiseki app</em>
+      </h3>
+      <div class="header-buttons d-flex justify-content-around mx-auto">
+        <%= link_to "サインアップ", new_user_registration_path, class: "btn btn-primary btn-xl" %>
+        <%= link_to "サインイン", new_user_session_path, class: "btn btn-primary btn-xl" %>
       </div>
     </div>
-  </div>
-</section>
-<!-- こんなルームがあります -->
-<section class="top-page-rooms text-center">
-  <h1 class="text-main">こんなルームがあります。</h1>
-  <div class="rooms grid">
-    <%= render @rooms %>
-  </div>
-  <%= link_to "部屋一覧を見る", rooms_path, class: "btn btn-lg btn-outline-warning bg-white" %>
-</section>
+    <div class="overlay"></div>
+  </header>
+  <!-- 相席アプリとは？ -->
+  <section class="content-section bg-main text-bright text-center" id="services">
+    <div class="container">
+      <div class="content-section-heading">
+        <h2 class="text-secondary">相席アプリとは？</h2>
+        <h2 class="mb-5">誰とでも一緒に相席できるアプリです。</h2>
+      </div>
+      <div class="row">
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-screen-smartphone"></i>
+          </span>
+          <h4>
+            <strong>ユーザー登録</strong>
+          </h4>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-pencil"></i>
+          </span>
+          <h4>
+            <strong>ルーム作成</strong>
+          </h4>
+        </div>
+        <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-like"></i>
+          </span>
+          <h4>
+            <strong>ルームの詳細を記入</strong>
+          </h4>
+        </div>
+        <div class="col-lg-3 col-md-6">
+          <span class="service-icon rounded-circle mx-auto mb-3">
+            <i class="icon-mustache"></i>
+          </span>
+          <h4>
+            <strong>あとは待つだけ！</strong>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- こんなルームがあります -->
+  <section class="top-page-rooms text-center">
+    <h1 class="text-main">こんなルームがあります。</h1>
+    <div class="rooms grid">
+      <%= render @rooms %>
+    </div>
+    <%= link_to "部屋一覧を見る", rooms_path, class: "btn btn-lg btn-outline-warning bg-white" %>
+  </section>
+<% end %>
