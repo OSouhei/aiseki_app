@@ -56,4 +56,8 @@ class User < ApplicationRecord
   def unfollow(user)
     following.delete user
   end
+
+  def following?(user)
+    following.include? user
+  end
 end

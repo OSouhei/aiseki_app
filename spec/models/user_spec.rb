@@ -266,5 +266,19 @@ RSpec.describe User, type: :model do
         expect(user.following).to_not include other_user
       end
     end
+
+    context "#following?" do
+      let(:other_user) { create(:user) }
+
+      it "returns true when user is following other_user" do
+        user.follow other_user
+        expect(user).to be_following other_user
+      end
+
+      it "returns false when user is not following other_user" do
+        user.unfollow other_user
+        expect(user).to_not be_following other_user
+      end
+    end
   end
 end
