@@ -33,6 +33,6 @@ class BookmarksController < ApplicationController
 
   # xhrリクエストの時、フィルターできなかったので、オーバーライド
   def authenticate_user!
-    redirect_to new_user_session_path unless current_user
+    redirect_to(new_user_session_path, alert: "you need to sign in or sign up before continuing.") unless current_user
   end
 end
