@@ -111,20 +111,25 @@ RSpec.describe "Users", type: :request do
     context "when authenticated user" do
       before do
         sign_in user
-        get follow_user_path(other_user)
+        get follow_user_path(other_user), xhr: true
       end
 
       it "responds successfully" do
-        expect(response).to have_http_status 302
+        expect(response).to have_http_status 200
       end
 
-      it "redirect_to user page" do
-        expect(response).to redirect_to user_path(other_user)
+      it "render template follow.js.erb" do
+        expect(response).to render_template "users/follow"
+      end
+
+      it "define @user" do
+        variable = controller.instance_variable_get "@user"
+        expect(variable).to eq other_user
       end
 
       context "when user is not found" do
         before do
-          get follow_user_path(1000)
+          get follow_user_path(1000), xhr: true
         end
 
         it "redirect root_path" do
@@ -141,7 +146,7 @@ RSpec.describe "Users", type: :request do
       before do
         user.follow other_user
         sign_in user
-        get follow_user_path(other_user)
+        get follow_user_path(other_user), xhr: true
       end
 
       it "responds successfully" do
@@ -159,7 +164,7 @@ RSpec.describe "Users", type: :request do
 
     context "when guest" do
       before do
-        get follow_user_path(other_user)
+        get follow_user_path(other_user), xhr: true
       end
 
       it "responds successfully" do
@@ -177,21 +182,26 @@ RSpec.describe "Users", type: :request do
     context "when authenticated user" do
       before do
         sign_in user
-        get unfollow_user_path(other_user)
+        get unfollow_user_path(other_user), xhr: true
       end
 
       it "responds successfully" do
-        expect(response).to have_http_status 302
+        expect(response).to have_http_status 200
       end
 
-      it "redirect_to user page" do
-        expect(response).to redirect_to user_path(other_user)
+      it "render template follow.js.erb" do
+        expect(response).to render_template "users/follow"
+      end
+
+      it "define @user" do
+        variable = controller.instance_variable_get "@user"
+        expect(variable).to eq other_user
       end
     end
 
     context "when guest" do
       before do
-        get unfollow_user_path(other_user)
+        get unfollow_user_path(other_user), xhr: true
       end
 
       it "responds successfully" do

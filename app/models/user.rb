@@ -48,6 +48,8 @@ class User < ApplicationRecord
   end
 
   def follow(user)
+    return false if id == user.id
+
     following << user
   rescue ActiveRecord::RecordInvalid # レコードが重複する場合
     false

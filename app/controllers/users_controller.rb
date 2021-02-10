@@ -18,18 +18,22 @@ class UsersController < ApplicationController
 
   # GET /users/:id/follow
   def follow
-    current_user.follow(@user) ? redirect_to(@user) : redirect_to(@user, alert: "you have already followed the user.")
+    current_user.follow @user
   end
 
   # GET /users/:id/unfollow
   def unfollow
     current_user.unfollow @user
-    redirect_to @user
+    render "users/follow"
   end
 
   private
 
   def set_user
     @user = User.find_by(id: params[:id]) || redirect_to(root_path, alert: "user is not found.") && return
+  end
+
+  def authenticate_user!
+    redirect_to(new_user_session_path, alert: "you need to sign in or sign up before continuing.") unless current_user
   end
 end
