@@ -150,15 +150,11 @@ RSpec.describe "Users", type: :request do
       end
 
       it "responds successfully" do
-        expect(response).to have_http_status 302
+        expect(response).to have_http_status 200
       end
 
-      it "redirect user page" do
-        expect(response).to redirect_to user_path(other_user)
-      end
-
-      it "define flash" do
-        expect(flash[:alert]).to eq "you have already followed the user."
+      it "render users/follow.js.erb" do
+        expect(response).to render_template "users/follow"
       end
     end
 
