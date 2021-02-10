@@ -18,14 +18,13 @@ class UsersController < ApplicationController
 
   # GET /users/:id/follow
   def follow
-    current_user.follow @user
-    redirect_to user_path(@user)
+    current_user.follow(@user) ? redirect_to(@user) : redirect_to(@user, alert: "you have already followed the user.")
   end
 
   # GET /users/:id/unfollow
   def unfollow
     current_user.unfollow @user
-    redirect_to user_path(@user)
+    redirect_to @user
   end
 
   private

@@ -10,6 +10,7 @@ RSpec.describe Relationship, type: :model do
     context "follower_id" do
       it { should validate_presence_of :follower_id }
       it { should validate_numericality_of(:follower_id).only_integer }
+      it { should validate_uniqueness_of(:follower_id).scoped_to(:followed_id) }
     end
 
     context "followed_id" do

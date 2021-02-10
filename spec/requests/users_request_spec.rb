@@ -137,6 +137,26 @@ RSpec.describe "Users", type: :request do
       end
     end
 
+    context "when user have already followed other_user" do
+      before do
+        user.follow other_user
+        sign_in user
+        get follow_user_path(other_user)
+      end
+
+      it "responds successfully" do
+        expect(response).to have_http_status 302
+      end
+
+      it "redirect user page" do
+        expect(response).to redirect_to user_path(other_user)
+      end
+
+      it "define flash" do
+        expect(flash[:alert]).to eq "you have already followed the user."
+      end
+    end
+
     context "when guest" do
       before do
         get follow_user_path(other_user)
