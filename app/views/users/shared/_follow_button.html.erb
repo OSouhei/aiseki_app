@@ -1,0 +1,9 @@
+<% if current_user.following? user %>
+  <div class="button mt-2 d-flex flex-row align-items-center">
+    <%= link_to "following", unfollow_user_path(user), class: "btn btn-sm w-100 ml-2 bg-main text-white" %>
+  </div>
+<% else %>
+  <div class="button mt-2 d-flex flex-row align-items-center">
+    <%= link_to "follow", follow_user_path(user), class: "btn btn-sm btn-outline-warning w-100 ml-2" %>
+  </div>
+<% end %>
