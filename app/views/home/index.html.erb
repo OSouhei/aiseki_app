@@ -1,80 +1,70 @@
-<% if user_signed_in? %>
-  <div class="wrapper">
-    <div class="container mt-5 d-flex justify-content-center">
-      <%= render current_user %>
+<header class="masthead d-flex">
+  <div class="container text-center my-auto">
+    <h1 class="mb-1 text-main">相席アプリ</h1>
+    <h3 class="mb-5">
+      <em class="text-main">aiseki app</em>
+    </h3>
+    <div class="header-buttons d-flex justify-content-around mx-auto">
+      <%= link_to "ルームを探す", rooms_path, class: "rooms-btn btn btn-xl" %>
     </div>
-    <% unless @rooms.blank? %>
-      <div class="rooms-wrapper text-center">
-        <h2>Your Rooms</h2>
-        <div class="rooms text-center grid">
-          <%= render @rooms %>
-        </div>
-      </div>
-    <% end %>
   </div>
-<% else %>
-  <header class="masthead d-flex">
-    <div class="container text-center my-auto">
-      <h1 class="mb-1 text-bright">相席アプリ</h1>
-      <h3 class="mb-5">
-        <em class="text-bright">aiseki app</em>
-      </h3>
-      <div class="header-buttons d-flex justify-content-around mx-auto">
-        <%= link_to "サインアップ", new_user_registration_path, class: "btn btn-primary btn-xl" %>
-        <%= link_to "サインイン", new_user_session_path, class: "btn btn-primary btn-xl" %>
+  <div class="overlay"></div>
+</header>
+<!-- 相席アプリとは？ -->
+<section class="content-section bg-main text-bright text-center" id="services">
+  <div class="container">
+    <div class="content-section-heading">
+      <h2 class="text-second">相席アプリとは？</h2>
+      <h2>誰とでも一緒に相席できるアプリです。</h2>
+    </div>
+    <div class="row">
+      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+        <div class="about-img-box rounded-circle mx-auto mb-3">
+          <%= image_tag "registration.png", class: "about-img" %>
+        </div>
+        <h4>
+          <strong>ユーザー登録</strong>
+        </h4>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
+        <div class="about-img-box rounded-circle mx-auto mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="about-img bi bi-door-open" viewBox="0 0 16 16">
+            <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+            <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z"/>
+          </svg>
+        </div>
+        <h4>
+          <strong>ルーム作成</strong>
+        </h4>
+      </div>
+      <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
+        <div class="about-img-box rounded-circle mx-auto mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="about-img bi bi-pencil-fill" viewBox="0 0 16 16">
+            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+          </svg>
+        </div>
+        <h4>
+          <strong>ルームの詳細を記入</strong>
+        </h4>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="about-img-box rounded-circle mx-auto mb-3">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="about-img bi bi-clock-fill" viewBox="0 0 16 16">
+            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+          </svg>
+        </div>
+        <h4>
+          <strong>あとは待つだけ！</strong>
+        </h4>
       </div>
     </div>
-    <div class="overlay"></div>
-  </header>
-  <!-- 相席アプリとは？ -->
-  <section class="content-section bg-main text-bright text-center" id="services">
-    <div class="container">
-      <div class="content-section-heading">
-        <h2 class="text-secondary">相席アプリとは？</h2>
-        <h2 class="mb-5">誰とでも一緒に相席できるアプリです。</h2>
-      </div>
-      <div class="row">
-        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-          <span class="service-icon rounded-circle mx-auto mb-3">
-            <i class="icon-screen-smartphone"></i>
-          </span>
-          <h4>
-            <strong>ユーザー登録</strong>
-          </h4>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-5 mb-lg-0">
-          <span class="service-icon rounded-circle mx-auto mb-3">
-            <i class="icon-pencil"></i>
-          </span>
-          <h4>
-            <strong>ルーム作成</strong>
-          </h4>
-        </div>
-        <div class="col-lg-3 col-md-6 mb-5 mb-md-0">
-          <span class="service-icon rounded-circle mx-auto mb-3">
-            <i class="icon-like"></i>
-          </span>
-          <h4>
-            <strong>ルームの詳細を記入</strong>
-          </h4>
-        </div>
-        <div class="col-lg-3 col-md-6">
-          <span class="service-icon rounded-circle mx-auto mb-3">
-            <i class="icon-mustache"></i>
-          </span>
-          <h4>
-            <strong>あとは待つだけ！</strong>
-          </h4>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- こんなルームがあります -->
-  <section class="top-page-rooms text-center">
-    <h1 class="text-main">こんなルームがあります。</h1>
-    <div class="rooms grid">
-      <%= render @rooms %>
-    </div>
-    <%= link_to "部屋一覧を見る", rooms_path, class: "btn btn-lg btn-outline-warning bg-white" %>
-  </section>
-<% end %>
+  </div>
+</section>
+<!-- こんなルームがあります -->
+<section class="top-page-rooms text-center">
+  <h1 class="text-main">こんなルームがあります。</h1>
+  <div class="rooms grid">
+    <%= render @rooms %>
+  </div>
+  <%= link_to "部屋一覧を見る", rooms_path, class: "btn btn-lg btn-outline-warning bg-white" %>
+</section>

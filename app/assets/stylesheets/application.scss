@@ -1,11 +1,10 @@
 @import "bootstrap";
 
-$main-color: rgba(139,3, 4, 1);
-$second-color: #e3a44e;
+$main-color: #ff9933;
+$second-color: #fff8cf;
 
 /* universal */
 body {
-  background-color: $second-color;
   min-height: 100vh;
 }
 
@@ -48,7 +47,7 @@ li {
   color: $main-color;
 }
 
-.text-bright {
+.text-second {
   color: $second-color;
 }
 
@@ -116,8 +115,21 @@ li {
 
 /* navbar */
 .navbar {
+  width: 100%;
+  height: 90px;
   padding-left: 30px;
   padding-right: 30px;
+  position: fixed;
+  top: 0;
+  z-index: 5;
+  .navbar-brand {
+    font-size: 2.5rem;
+  }
+  a {
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 1.3rem;
+  }
 }
 
 .notification-icon {
@@ -148,6 +160,31 @@ footer.footer {
   }
 }
 
+.footer-list {
+  width: 70px;
+  height: 70px;
+}
+
+.footer-list:nth-child(2) {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.footer-link {
+  color: #000;
+  width: 100%;
+  height: 100%;
+}
+
+.footer-link:hover {
+  color: #000;
+}
+
+.footer-sns-icon {
+  height: 100%;
+  width: 100%;
+}
+
 .profile-image {
   width: 100px;
   height: 100px;
@@ -157,11 +194,21 @@ footer.footer {
 /* home/index
 -------------------------------------------------*/
 header.masthead {
-  background-image: url("izakaya.png");
+  background-image: url("top-bg.jpg");
 }
 
 .header-buttons {
   width: 500px;
+}
+
+.about-img-box {
+  width: 9rem;
+  height: 9rem;
+}
+
+.about-img {
+  height: 100%;
+  width: 100%;
 }
 
 .top-page-rooms {
@@ -176,6 +223,21 @@ header.masthead {
   .btn:hover {
     background-color: $main-color !important;
   }
+}
+
+.content-section-heading {
+  margin-bottom: 90px;
+}
+
+.rooms-btn {
+  background-color: #8b0304;
+  color: #fff;
+}
+
+.rooms-btn:hover {
+  background-color: #fff;
+  border-color: #8b0304;
+  color: #8b0304;
 }
 
 /* users/index
