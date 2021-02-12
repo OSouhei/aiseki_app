@@ -11,6 +11,7 @@ body {
 p,
 a {
   font-weight: bold;
+  margin: 0;
 }
 
 ul {
@@ -88,6 +89,13 @@ li {
   border-color: $main-color;
 }
 
+.profile-image {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+
 /* _room */
 .rooms {
   width: 90%;
@@ -97,6 +105,7 @@ li {
 .room {
   background-color: #fff8cf;
   height: 210px;
+  border: 1px solid $main-color !important;
 }
 
 .room-header {
@@ -107,11 +116,28 @@ li {
   }
 }
 
-// .room-links {
-//   position: absolute;
-//   bottom: 30px;
-//   right: 30px;
-// }
+.room-content {
+  padding-top: 10px;
+}
+
+.room-links {
+  width: 100%;
+  justify-content: space-between;
+  padding-top: 25px;
+}
+
+.room-link-left {
+  padding-left: 15px;
+}
+
+.room-link-right {
+  padding-right: 15px;
+}
+
+.member-count {
+  float: left;
+  margin-right: 30px;
+}
 
 /* navbar */
 .navbar {
@@ -203,12 +229,6 @@ footer.footer {
 .footer-sns-icon {
   height: 100%;
   width: 100%;
-}
-
-.profile-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
 }
 
 /* home/index
