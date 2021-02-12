@@ -471,10 +471,12 @@ header.masthead {
   left: 0;
 }
 
-.join-room-icon {
-  height: 100px;
-  width: 100px;
+.join-room-icon,
+.destroy-room-icon {
+  height: 80px;
+  width: 80px;
 }
+
 
 /* notifications/index
 -------------------------------------------------*/

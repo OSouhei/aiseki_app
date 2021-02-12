@@ -1,32 +1,24 @@
 require 'rails_helper'
 
 RSpec.describe "DestroyRooms", type: :system do
-  let(:user) { FactoryBot.create(:user) }
-  let(:other_user) { FactoryBot.create(:user) }
-  let!(:room) { FactoryBot.create(:room, owner: user) }
+  let(:user) { create(:user) }
+  let(:user_room) { create(:room, owner: user) }
 
   scenario "user destroy his room" do
     sign_in user
-    visit user_path(user)
-    expect(page).to have_current_path user_path(user)
-    click_link "見る", href: room_path(room)
-    expect(page).to have_current_path room_path(room)
-    expect(page).to have_content room.title
-    expect(page).to have_content room.content
-    expect(page).to have_content room.limit
-    expect(page).to have_link "edit this room"
-    expect(page).to have_link "destroy this room"
+    visit room_path(user_room)
+    expect(page).to have_current_path room_path(user_room)
+    expect(page).to have_link href: room_path(user_room)
     expect {
-      click_link "destroy this room"
+      click_link href: room_path(user_room)
     }.to change(Room, :count).by(-1)
   end
 
-  scenario "unauthenticated user can not destroy his room" do
-    sign_in other_user
-    visit user_path(user)
-    click_link "見る", href: room_path(room)
-    expect(page).to have_current_path room_path(room)
-    expect(page).to_not have_link "edit this room"
-    expect(page).to_not have_link "destroy this room"
+  scenario "user destroy other user's room" do
+    sign_in user
+    room = create(:room)
+    visit room_path(room)
+    # 削除リンクを持っていない
+    expect(page).to_not have_link room_path(room)
   end
 end
