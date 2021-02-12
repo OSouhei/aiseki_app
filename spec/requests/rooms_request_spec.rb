@@ -636,7 +636,7 @@ RSpec.describe "Rooms", type: :request do
     end
 
     it "render template :search" do
-      expect(response).to render_template :search
+      expect(response).to render_template :index
     end
 
     it "define @rooms" do
