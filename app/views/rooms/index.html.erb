@@ -1,8 +1,15 @@
 <% provide(:title, "All Rooms") %>
 
-<div class="rooms text-center grid">
-  <%= render @rooms %>
-</div>
-<div class="paginate-wrapper">
-  <%= paginate @rooms %>
+<div class="content">
+  <%= form_tag(search_rooms_path, method: :get, class: "rooms-search") do %>
+    <%= text_field_tag :keyword, nil, class: "form-control", placeholder: "ルーム検索" %>
+    <%= submit_tag "検索", class: "btn btn-primary" %>
+  <% end %>
+
+  <div class="rooms text-center grid">
+    <%= render @rooms %>
+  </div>
+  <div class="paginate-wrapper">
+    <%= paginate @rooms %>
+  </div>
 </div>

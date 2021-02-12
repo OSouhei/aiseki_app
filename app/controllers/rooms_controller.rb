@@ -53,7 +53,8 @@ class RoomsController < ApplicationController
   # GET /rooms/search
   def search
     term = params[:keyword]
-    @rooms = Room.search(term)
+    @rooms = Room.search(term).page(params[:page]).per 6
+    render :index
   end
 
   # GET /rooms/:id/exit
