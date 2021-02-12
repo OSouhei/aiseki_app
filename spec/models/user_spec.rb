@@ -214,6 +214,12 @@ RSpec.describe User, type: :model do
         }.to change(Bookmark, :count).by(1)
       end
 
+      it "create notification" do
+        expect {
+          user.book room
+        }.to change(Notification, :count).by(1)
+      end
+
       it "bookmark a room" do
         user.book room
         expect(user.booked_rooms).to include room
@@ -242,6 +248,12 @@ RSpec.describe User, type: :model do
         expect {
           user.follow other_user
         }.to change(Relationship, :count).by(1)
+      end
+
+      it "create notification" do
+        expect {
+          user.follow other_user
+        }.to change(Notification, :count).by(1)
       end
 
       it "follow a user" do

@@ -7,6 +7,8 @@ module NotificationsHelper
       "#{user.name}があなたの部屋に参加しました。"
     when "bookmark"
       "#{user.name}があなたのルームをブックマークしました。"
+    when "follow"
+      "#{user.name}にフォローされました。"
     end
   end
 end

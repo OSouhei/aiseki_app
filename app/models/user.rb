@@ -40,6 +40,7 @@ class User < ApplicationRecord
   # roomをブックマークする
   def book(room)
     booked_rooms << room
+    active_notifications.create(to: room.owner.id, room_id: room.id, action: "bookmark") # 通知を作成
   end
 
   # roomをブックマークから削除
@@ -51,6 +52,7 @@ class User < ApplicationRecord
     return false if id == user.id
 
     following << user
+    active_notifications.create(to: user.id, action: "follow") # 通知を作成
   rescue ActiveRecord::RecordInvalid # レコードが重複する場合
     false
   end
