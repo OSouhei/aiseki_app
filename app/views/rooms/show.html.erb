@@ -1,23 +1,69 @@
-<% provide(:title, "rooms#show") %>
+<% provide(:title, @room.title) %>
 
-<h1>Rooms#show</h1>
-
-<p><%= @room.title %></p>
-<p><%= @room.content %></p>
-<p><%= @room.shop_name %></p>
-<p><%= @room.limit %></p>
-
-<% if @room.owner?(current_user) %>
-  <%= link_to "edit this room", edit_room_path(@room) %><br />
-  <%= link_to "destroy this room", room_path(@room), method: :delete %>
-<% else %>
-  <%= link_to "join this room!", join_room_path(@room) %>
-  <%= link_to "exit this room!", exit_room_path(@room) if @room.member?(current_user) %>
-<% end %>
-
-<h2>Room Members</h2>
-<% if @members.count == 0 %>
-  <p>No members.</p>
-<% else %>
-  <%= render @members %>
-<% end %>
+<div class="content">
+  <div class="rooms-show-main-content d-flex mx-auto">
+    <div class="user-card card">
+      <%= image_tag profile_image_url(@room.owner), class: "profile-image" %>
+      <h2><%= @room.owner.name %></h2>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <%= link_to "Rooms: ", rooms_path(@room.owner) %>
+          <%= @room.owner.rooms.count %>
+        </li>
+        <li class="list-group-item">
+          <%= link_to "Following: ", "#" %>
+          <%= @room.owner.following.count %>
+        </li>
+        <li class="list-group-item">
+          <%= link_to "Booked: ", bookmarks_path %>
+          <%= @room.owner.bookmarks.count %>
+        </li>
+      </ul>
+      <% if current_user && !current_user?(@room.owner) %>
+        <div id="follow-button-<%= @room.owner.id %>">
+          <%= render 'users/shared/follow_button', user: @room.owner %>
+        </div>
+      <% end %>
+    </div>
+    <div class="room-card card">
+      <h1><%= @room.title %></h1>
+      <p><%= @room.content %></p>
+      <div class="room-card-footer d-flex justify-content-around">
+        <ul class="room-info list-group">
+          <li class="list-group-item"><strong>お店: </strong><%= @room.shop_name %></li>
+          <li class="list-group-item"><strong>人数: </strong><%= @room.members.count %> / <%= @room.limit %> 人</li>
+        </ul>
+        <div class="join-room-link " data-toggle="tooltip" data-placement="top" title="部屋に参加する">
+          <%= link_to join_room_path do %>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="join-room-icon bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0v-2z"/>
+              <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+            </svg>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="user-page-content">
+    <div class="collapse-links">
+      <a class="collapse-link selected" data-toggle="collapse" href="#rooms" role="button" aria-expanded="false" aria-controls="rooms" onclick="$('#following').collapse('hide')">メンバー</a>
+      <a class="collapse-link" data-toggle="collapse" href="#following" role="button" aria-expanded="false" aria-controls="following" onclick="$('#rooms').collapse('hide')">ブックマーク</a>
+    </div>
+    <div class="collapse show" id="rooms">
+      <div class="rooms grid">
+        <%= render @room.members %>
+      </div>
+    </div>
+    <div class="collapse" id="following">
+      <div class="rooms grid">
+        <%= render @room.booked_by %></div>
+    </div>
+  </div>
+</div>
+<script>
+  var collapseLink = $('.collapse-link');
+  collapseLink.on('click', function() {
+    collapseLink.removeClass('selected');
+    $(this).addClass('selected');
+  })
+</script>

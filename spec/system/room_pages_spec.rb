@@ -1,45 +1,31 @@
 require 'rails_helper'
 
 RSpec.describe "RoomPages", type: :system do
-  let(:user) { FactoryBot.create(:user) }
-  let(:user1) { FactoryBot.create(:user) }
-  let(:user2) { FactoryBot.create(:user) }
-  let!(:user3) { FactoryBot.create(:user) }
-  let!(:room) { FactoryBot.create(:room, owner: user) }
-  let(:other_room) { FactoryBot.create(:room) }
+  let(:room) { create(:room) }
 
-  before do
-    room.members << [user1, user2]
-  end
-
-  scenario "room page has information" do
-    visit root_path
-    click_link "ルーム一覧"
-    expect(page).to have_current_path(rooms_path)
-    click_link "見る", href: room_path(room)
-    expect(page).to have_current_path(room_path(room))
-    expect(page).to have_link href: user_path(user1)
-    expect(page).to have_link href: user_path(user2)
-    expect(page).to_not have_link href: user_path(user3)
-    expect(page).to_not have_content "No members."
-  end
-
-  scenario "room has no members" do
-    visit room_path(other_room)
-    expect(page).to have_content "No members."
-  end
-
-  scenario "room is not found by parameters" do
-    # 存在しない部屋にアクセス
-    visit room_path(room.id + 1000)
-    expect(page).to have_current_path root_path
-    expect(page).to have_content "room was not found."
-  end
-
-  scenario "room page does not have join link when room's owner is current_user" do
-    sign_in user
+  scenario "page has title" do
     visit room_path(room)
-    expect(page).to have_current_path(room_path(room))
-    expect(page).to_not have_link "join this room!", href: join_room_path(room)
+    expect(page).to have_current_path room_path(room)
+    expect(page).to have_title "#{room.title} - 相席app"
+  end
+
+  scenario "page has UI", js: true do
+    3.times { create(:user).join room }
+    3.times { create(:user).book room }
+    visit room_path(room)
+    expect(page).to have_content room.title
+    expect(page).to have_content room.content
+    expect(page).to have_content room.limit
+    expect(page).to have_content room.shop_name
+    expect(page).to have_link href: join_room_path(room)
+    room.members.each do |member|
+      expect(page).to have_link href: user_path(member)
+      expect(page).to have_content member.name
+    end
+    click_link "ブックマーク"
+    room.booked_by.each do |user|
+      expect(page).to have_link href: user_path(user)
+      expect(page).to have_content user.name
+    end
   end
 end
