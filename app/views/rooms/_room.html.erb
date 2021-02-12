@@ -12,8 +12,9 @@
     </div>
     <div class="room-links d-flex">
       <div class="room-link-left">
-        <%= link_to "見る", room_path(room), class: "card-link text-bright" %>
-        <%= link_to "入室", join_room_path(room), class: "card-link text-bright" %>
+        <%= link_to "見る", room_path(room), class: "card-link" %>
+        <%= link_to "入室", join_room_path(room), class: "card-link" %>
+        <%= link_to "編集", edit_room_path(room), class: "card-link" %>
       </div>
       <div class="room-link-right">
         <div class="member-count">
