@@ -25,6 +25,8 @@ module Myapp
 
     config.navigational_formats = [:"*/*", "*/*", :html, :js]
 
+    config.i18n.default_locale = :ja
+
     config.generators do |g|
       g.test_framework :rspec, view_specs: false, routing_specs: false, helper_specs: false
     end
