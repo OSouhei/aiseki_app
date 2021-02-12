@@ -1,28 +1,25 @@
-<%= form_with(model: room, remote: true) do |f| %>
+<%= form_with(model: room, remote: true, class: "form mx-auto") do |f| %>
   <%= render 'rooms/shared/error_messages', room: room %>
 
   <div class="form-group">
-    <%= f.label :title, class: "form-label" %>
-    <%= f.text_field :title, class: "form-control" %>
+    <%= f.text_field :title, class: "form-control", placeholder: "タイトル" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :content, class: "form-label" %>
-    <%= f.text_area :content, class: "form-control" %>
+    <%= f.text_area :content, class: "form-control", placeholder: "メッセージ" %>
   </div>
 
   <div class="form-group">
-    <%= f.label :shop_name, class: "form-label" %>
-    <%= f.text_field :shop_name, class: "form-control", id: "room_shop_name" %>
-    <ul id="result"></ul>
+    <%= f.text_field :shop_name, class: "form-control", id: "room_shop_name", placeholder: "お店の名前" %>
+    <ul id="result" class="list-group"></ul>
   </div>
 
   <div class="form-group">
-    <%= f.label :limit, class: "form-label" %>
+    <%= f.label "人数上限", class: "form-label" %>
     <%= f.select :limit, ["no-limit"] + (1..10).to_a, class: "form-control" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Submit", class: "btn btn-primary" %>
+    <%= f.submit "送信", class: "btn btn-primary" %>
   </div>
 <% end %>

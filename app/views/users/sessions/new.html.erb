@@ -1,6 +1,6 @@
 <% provide(:title, "Login") %>
 
-<div class="wrapper">
+<div class="content">
   <%= form_with(model: @user, url: user_session_path, class: "form mx-auto") do |f| %>
     <div class="form-group">
       <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "メールアドレス" %>

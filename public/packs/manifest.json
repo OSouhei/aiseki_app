@@ -20,15 +20,15 @@
     },
     "shop_name": {
       "js": [
-        "/packs/js/shop_name-7e728f0470e20796bcc8.js"
+        "/packs/js/shop_name-2e0e9e5f0eabf076448e.js"
       ],
       "js.map": [
-        "/packs/js/shop_name-7e728f0470e20796bcc8.js.map"
+        "/packs/js/shop_name-2e0e9e5f0eabf076448e.js.map"
       ]
     }
   },
   "input.js": "/packs/js/input-9ef19441859314f032c3.js",
   "input.js.map": "/packs/js/input-9ef19441859314f032c3.js.map",
-  "shop_name.js": "/packs/js/shop_name-7e728f0470e20796bcc8.js",
-  "shop_name.js.map": "/packs/js/shop_name-7e728f0470e20796bcc8.js.map"
+  "shop_name.js": "/packs/js/shop_name-2e0e9e5f0eabf076448e.js",
+  "shop_name.js.map": "/packs/js/shop_name-2e0e9e5f0eabf076448e.js.map"
 }

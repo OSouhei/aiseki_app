@@ -14,7 +14,7 @@ $(document).on('turbolinks:load', function(){
     .done(function(data){
       $('#result').find('li').remove();
       $(data).each(function(i, shop){
-        $('#result').append('<li class="shop_name">' + shop + '</li>');
+        $('#result').append('<li class="shop_name list-group-item">' + shop + '</li>');
       });
     })
   });
@@ -23,5 +23,7 @@ $(document).on('turbolinks:load', function(){
     e.preventDefault();
     shop = $(this).text();
     $("#room_shop_name").val(shop);
+    // 検索結果を空に
+    $("#result").html('');
   });
 });
