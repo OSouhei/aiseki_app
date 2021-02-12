@@ -4,13 +4,27 @@
   <div class="container mt-5 d-flex justify-content-center">
     <%= render @user %>
   </div>
-
-  <% unless @rooms.blank? %>
-    <div class="rooms-wrapper text-center">
-      <h2>Your Rooms</h2>
-      <div class="rooms text-center grid">
+  <div class="user-page-content">
+    <div class="collapse-links">
+      <a class="collapse-link selected" data-toggle="collapse" href="#rooms" role="button" aria-expanded="false" aria-controls="rooms" onclick="$('#following').collapse('hide')">rooms</a>
+      <a class="collapse-link" data-toggle="collapse" href="#following" role="button" aria-expanded="false" aria-controls="following" onclick="$('#rooms').collapse('hide')">following</a>
+    </div>
+    <div class="collapse show" id="rooms">
+      <div class="rooms grid">
         <%= render @rooms %>
       </div>
     </div>
-  <% end %>
+    <div class="collapse" id="following">
+      <div class="rooms grid">
+        <%= render @users %></div>
+    </div>
+  </div>
 </div>
+
+<script>
+  const collapseLink = $('.collapse-link');
+  collapseLink.on('click', function() {
+    collapseLink.removeClass('selected');
+    $(this).addClass('selected');
+  })
+</script>

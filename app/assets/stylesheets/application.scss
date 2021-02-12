@@ -6,6 +6,7 @@ $second-color: #fff8cf;
 /* universal */
 body {
   min-height: 100vh;
+  background-color: $second-color;
 }
 
 p,
@@ -83,6 +84,9 @@ li {
 }
 
 /* _user */
+.user-box {
+  border: 1px solid $main-color !important;
+}
 .following:hover {
   background-color: #fff;
   color: $main-color !important;
@@ -282,7 +286,7 @@ header.masthead {
 
 /* users/index
 -------------------------------------------------*/
-.users-wrapper {
+.users {
   margin-top: 50px;
 }
 
@@ -335,6 +339,35 @@ header.masthead {
   h2 {
     margin-bottom: -60px;
   }
+}
+
+.user-page-content {
+  padding: 0 30px;
+}
+
+.collapse-links {
+  padding-top: 30px;
+  text-align: start;
+}
+
+.collapse-link {
+  font-size: 2rem;
+  padding: 0 20px;
+  color: gray;
+  text-decoration: none;
+}
+
+.collapse-link:nth-of-type(1) {
+  margin-left: 80px;
+}
+
+.collapse-link.selected {
+  color: $main-color;
+  text-decoration: underline;
+}
+
+.collapse.show {
+  margin-top: -60px;
 }
 
 /* users/registrations/new

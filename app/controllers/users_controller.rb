@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @users = @user.following
     @rooms = @user.rooms
   end
 

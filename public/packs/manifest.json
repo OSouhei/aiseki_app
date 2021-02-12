@@ -10,14 +10,6 @@
         "/packs/js/application-3107f84a5861af8efe43.js.map"
       ]
     },
-    "flash": {
-      "js": [
-        "/packs/js/flash-4747f59a339550819018.js"
-      ],
-      "js.map": [
-        "/packs/js/flash-4747f59a339550819018.js.map"
-      ]
-    },
     "input": {
       "js": [
         "/packs/js/input-9ef19441859314f032c3.js"
@@ -33,22 +25,10 @@
       "js.map": [
         "/packs/js/shop_name-7e728f0470e20796bcc8.js.map"
       ]
-    },
-    "stylish-portfolio": {
-      "js": [
-        "/packs/js/stylish-portfolio-4cc9be3a6e6311d7cffd.js"
-      ],
-      "js.map": [
-        "/packs/js/stylish-portfolio-4cc9be3a6e6311d7cffd.js.map"
-      ]
     }
   },
-  "flash.js": "/packs/js/flash-4747f59a339550819018.js",
-  "flash.js.map": "/packs/js/flash-4747f59a339550819018.js.map",
   "input.js": "/packs/js/input-9ef19441859314f032c3.js",
   "input.js.map": "/packs/js/input-9ef19441859314f032c3.js.map",
   "shop_name.js": "/packs/js/shop_name-7e728f0470e20796bcc8.js",
-  "shop_name.js.map": "/packs/js/shop_name-7e728f0470e20796bcc8.js.map",
-  "stylish-portfolio.js": "/packs/js/stylish-portfolio-4cc9be3a6e6311d7cffd.js",
-  "stylish-portfolio.js.map": "/packs/js/stylish-portfolio-4cc9be3a6e6311d7cffd.js.map"
+  "shop_name.js.map": "/packs/js/shop_name-7e728f0470e20796bcc8.js.map"
 }
