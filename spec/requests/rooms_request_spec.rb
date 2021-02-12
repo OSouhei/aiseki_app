@@ -89,7 +89,7 @@ RSpec.describe "Rooms", type: :request do
       end
 
       it "define flash" do
-        expect(flash[:alert]).to eq "room was not found."
+        expect(flash[:alert]).to eq "ルームを見つけることができませんでした。"
       end
     end
   end
@@ -161,7 +161,7 @@ RSpec.describe "Rooms", type: :request do
 
         it "define flash" do
           post rooms_path, params: { room: room_params }
-          expect(flash[:notice]).to eq "room was successfully created."
+          expect(flash[:notice]).to eq "ルームを作成しました。"
         end
       end
 
@@ -254,7 +254,7 @@ RSpec.describe "Rooms", type: :request do
       end
 
       it "define flash" do
-        expect(flash[:alert]).to eq "you can't access this page."
+        expect(flash[:alert]).to eq "このページにはアクセスできません。"
       end
     end
 
@@ -292,7 +292,7 @@ RSpec.describe "Rooms", type: :request do
       end
 
       it "define flash" do
-        expect(flash[:alert]).to eq "room was not found."
+        expect(flash[:alert]).to eq "ルームを見つけることができませんでした。"
       end
     end
   end
@@ -324,7 +324,7 @@ RSpec.describe "Rooms", type: :request do
       end
 
       it "define flash" do
-        expect(flash[:notice]).to eq "room was updated."
+        expect(flash[:notice]).to eq "ルームを編集しました！"
       end
     end
 
@@ -350,7 +350,7 @@ RSpec.describe "Rooms", type: :request do
       end
 
       it "difine flash" do
-        expect(flash[:alert]).to eq "you can't access this page."
+        expect(flash[:alert]).to eq "このページにはアクセスできません。"
       end
     end
 
@@ -426,7 +426,7 @@ RSpec.describe "Rooms", type: :request do
 
       it "define flash" do
         delete room_path(room)
-        expect(flash[:notice]).to eq "room was successfully destroyed."
+        expect(flash[:notice]).to eq "ルームは削除されました。"
       end
     end
 
@@ -456,7 +456,7 @@ RSpec.describe "Rooms", type: :request do
 
       it "define flash" do
         delete room_path(room)
-        expect(flash[:alert]).to eq "you can't access this page."
+        expect(flash[:alert]).to eq "このページにはアクセスできません。"
       end
     end
 
@@ -499,7 +499,7 @@ RSpec.describe "Rooms", type: :request do
       end
 
       it "define flash" do
-        expect(flash[:alert]).to eq "room was not found."
+        expect(flash[:alert]).to eq "ルームを見つけることができませんでした。"
       end
     end
   end
@@ -547,7 +547,7 @@ RSpec.describe "Rooms", type: :request do
 
       it "define flash" do
         get join_room_path(room)
-        expect(flash[:notice]).to eq "you joined the room."
+        expect(flash[:notice]).to eq "ルームに参加しました！"
       end
     end
 
@@ -584,7 +584,7 @@ RSpec.describe "Rooms", type: :request do
 
       it "define flash" do
         get join_room_path(room)
-        expect(flash[:alert]).to eq "you can not join the room because you are the room owner."
+        expect(flash[:alert]).to eq "ルームマスターは部屋に参加できません。"
       end
     end
 
@@ -688,7 +688,7 @@ RSpec.describe "Rooms", type: :request do
 
         it "define flash" do
           get exit_room_path(room)
-          expect(flash[:notice]).to eq "you exited the room."
+          expect(flash[:notice]).to eq "ルームを退出しました。"
         end
       end
 
@@ -701,7 +701,7 @@ RSpec.describe "Rooms", type: :request do
 
         it "define flash" do
           get exit_room_path(room)
-          expect(flash[:alert]).to eq "you are not member of this room."
+          expect(flash[:alert]).to eq "あなたはこのルームのメンバーではありません。"
         end
       end
     end

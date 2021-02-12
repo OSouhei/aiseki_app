@@ -17,18 +17,18 @@ class RoomsController < ApplicationController
 
   def create
     @room = current_user.rooms.build(room_params)
-    @room.save ? redirect_to(room_path(@room), notice: "room was successfully created.") : render(:new)
+    @room.save ? redirect_to(room_path(@room), notice: "ルームを作成しました。") : render(:new)
   end
 
   def edit
   end
 
   def update
-    @room.update(room_params) ? redirect_to(room_path(@room), notice: "room was updated.") : render(:edit)
+    @room.update(room_params) ? redirect_to(room_path(@room), notice: "ルームを編集しました！") : render(:edit)
   end
 
   def destroy
-    @room.destroy ? redirect_to(root_path, notice: "room was successfully destroyed.") : redirect_to(root_path, alert: "something went wrong.")
+    @room.destroy ? redirect_to(root_path, notice: "ルームは削除されました。") : redirect_to(root_path, alert: "ルームが削除できませんでした。")
   end
 
   # GET /rooms/search_shop
@@ -43,10 +43,10 @@ class RoomsController < ApplicationController
 
   # GET /rooms/:id/join
   def join
-    redirect_to(root_path, alert: "this room is full.") && return if @room.limited?
+    redirect_to(root_path, alert: "この部屋は満員です。") && return if @room.limited?
 
     message = {}
-    current_user.join(@room) ? message[:notice] = "you joined the room." : message[:alert] = "you can not join the room because you are the room owner."
+    current_user.join(@room) ? message[:notice] = "ルームに参加しました！" : message[:alert] = "ルームマスターは部屋に参加できません。"
     redirect_to root_path, message
   end
 
@@ -59,7 +59,7 @@ class RoomsController < ApplicationController
 
   # GET /rooms/:id/exit
   def exit
-    current_user.exit(@room) ? redirect_to(room_path(@room), notice: "you exited the room.") : redirect_to(room_path(@room), alert: "you are not member of this room.")
+    current_user.exit(@room) ? redirect_to(room_path(@room), notice: "ルームを退出しました。") : redirect_to(room_path(@room), alert: "あなたはこのルームのメンバーではありません。")
   end
 
   private
@@ -69,10 +69,10 @@ class RoomsController < ApplicationController
   end
 
   def set_room
-    @room = Room.find_by(id: params[:id]) || redirect_to(root_path, alert: "room was not found.") && return
+    @room = Room.find_by(id: params[:id]) || redirect_to(root_path, alert: "ルームを見つけることができませんでした。") && return
   end
 
   def room_owner?
-    redirect_to(root_path, alert: "you can't access this page.") and return unless @room.owner?(current_user)
+    redirect_to(root_path, alert: "このページにはアクセスできません。") and return unless @room.owner?(current_user)
   end
 end

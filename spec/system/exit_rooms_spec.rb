@@ -19,7 +19,7 @@ RSpec.describe "ExitRooms", type: :system do
       click_link "exit this room!", href: exit_room_path(room)
     }.to change(Member, :count).by(-1)
     expect(page).to have_current_path(room_path(room))
-    expect(page).to have_content "you exited the room."
+    expect(page).to have_content "ルームを退出しました。"
     expect(room.members).to_not include user
   end
 
@@ -31,7 +31,7 @@ RSpec.describe "ExitRooms", type: :system do
     expect {
       visit exit_room_path(room)
     }.to_not change(Member, :count)
-    expect(page).to_not have_content "you exited the room."
-    expect(page).to have_content "you are not member of this room."
+    expect(page).to_not have_content "ルームを退出しました。"
+    expect(page).to have_content "あなたはこのルームのメンバーではありません。"
   end
 end
