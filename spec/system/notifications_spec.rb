@@ -1,30 +1,21 @@
 require 'rails_helper'
 
-RSpec.describe "Notifications", type: :system do
-  let(:user) { FactoryBot.create(:user) }
-  let(:user1) { FactoryBot.create(:user) }
-  let!(:user2) { FactoryBot.create(:user) }
-  let(:room) { FactoryBot.create(:room, owner: user) }
+RSpec.describe "notifications/index", type: :system do
+  let(:user) { create(:user) }
+  let(:user_room) { create(:room, owner: user) }
 
-  before do
-    driven_by(:rack_test)
-  end
-
-  scenario "the page has notifications" do
-    user1.join room
+  scenario "has title" do
     sign_in user
     visit notifications_path
     expect(page).to have_current_path notifications_path
-    expect(page).to have_link(user1.name, href: user_path(user1))
-    expect(page).to_not have_link href: user_path(user2)
+    expect(page).to have_title "Notifications - 相席app"
   end
 
-  scenario "guest access notificatons page" do
+  scenario "has UI" do
+    notification = create(:notification, to: user.id, room_id: user_room.id)
+    sign_in user
     visit notifications_path
-    expect(page).to have_current_path(new_user_session_path)
-    fill_in "Email", with: user.email
-    fill_in "Password", with: user.password
-    click_button "Log in"
-    expect(page).to have_current_path(notifications_path)
+    expect(page).to have_content "#{notification.notifyed_by.name}があなたの部屋に参加しました。"
+    expect(notification.reload.checked).to be_truthy
   end
 end

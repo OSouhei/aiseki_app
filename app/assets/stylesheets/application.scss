@@ -483,10 +483,13 @@ header.masthead {
 -------------------------------------------------*/
 .notifications {
   margin-top: 60px;
+  .list-group {
+    width: 520px;
+  }
   .list-group-item {
     text-align: start;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 }
 .action-icon {

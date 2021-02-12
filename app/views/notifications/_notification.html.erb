@@ -1,6 +1,4 @@
-<li class="list-group-item">
-  <%= render 'notifications/action_icon', action: notification.action %> <!-- 通知アイコン -->
-  <%= notification_message(notification)[:user] %> <!-- ユーザーページリンク -->
-  <%= notification_message(notification)[:action] %> <!-- 通知の種類（アクション）-->
-  <%= notification_message(notification)[:room] %> <!-- 対象のルーム -->
+<li class="list-group-item d-flex">
+  <div class="my-auto"><%= render 'notifications/action_icon', action: notification.action %></div> <!-- 通知アイコン -->
+  <p><%= notification_message(notification) %></p>
 </li>
