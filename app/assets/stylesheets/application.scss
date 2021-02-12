@@ -26,8 +26,14 @@ li {
 /* shared
 -------------------------------------------------*/
 .wrapper {
-  padding-top: 90px;
-  padding-bottom: 90px;
+  min-height: 100vh;
+  position: relative;
+  padding-bottom: 330px;
+}
+
+.content {
+  padding-top: 150px;
+  padding-bottom: 60px;
 }
 
 .grid {
@@ -198,6 +204,8 @@ li {
 footer.footer {
   width: 100%;
   background-color: $main-color;
+  position: absolute;
+  bottom: 0;
   .container {
     width: 80%;
     margin-top: 30px;

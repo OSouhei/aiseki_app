@@ -19,10 +19,12 @@
   </head>
 
   <body class="text-center">
+    <div class="wrapper">
       <%= render 'layouts/flash' %>
       <%= render 'layouts/header' %>
       <%= yield %>
       <%= render 'layouts/footer' %>
+    </div>
 
     <%= javascript_pack_tag 'shop_name' %>
     <%= javascript_pack_tag 'input' %>

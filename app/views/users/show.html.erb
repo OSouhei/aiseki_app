@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
 
-<div class="wrapper">
+<div class="content">
   <div class="container mt-5 d-flex justify-content-center">
     <%= render @user %>
   </div>
@@ -22,8 +22,8 @@
 </div>
 
 <script>
-  const collapseLink = $('.collapse-link');
-  collapseLink.on('click', function() {
+    var collapseLink = $('.collapse-link');
+    collapseLink.on('click', function() {
     collapseLink.removeClass('selected');
     $(this).addClass('selected');
   })

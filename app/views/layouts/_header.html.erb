@@ -16,7 +16,7 @@
               </button>
               <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <li class="dropdown-item"><%= link_to "ルーム作成", new_room_path %></li>
-                <li class="dropdown-item"><%= link_to "ログアウト", destroy_user_session_path %></li>
+                <li class="dropdown-item"><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
               </ul>
             </div>
           </li>
