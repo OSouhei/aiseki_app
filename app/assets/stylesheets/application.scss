@@ -30,6 +30,7 @@ textarea {
 /* shared
 -------------------------------------------------*/
 .wrapper {
+  width: 100%;
   min-height: 100vh;
   position: relative;
   padding-bottom: 330px;
@@ -214,6 +215,20 @@ textarea {
   top: 18px;
 }
 
+@media (max-width: 991px) {
+  .navbar-collapse.show {
+    margin-top: 0px !important;
+    background-color: #fff;
+    width: 250px;
+    position: absolute;
+    top: 80px;
+    right: 40px;
+  }
+  .navbar a {
+    color: $main-color !important;
+  }
+}
+
 /* footer */
 footer.footer {
   width: 100%;
@@ -259,7 +274,7 @@ footer.footer {
 
 /* home/index
 -------------------------------------------------*/
-header.masthead {
+section.masthead {
   background-image: url("top-bg.jpg");
 }
 
@@ -304,6 +319,34 @@ header.masthead {
   background-color: #fff;
   border-color: #8b0304;
   color: #8b0304;
+}
+
+@media (max-width: 1350px) {
+  .contaier {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .rooms {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 890px) {
+  .masthead {
+    padding-top: 180px !important;
+  }
+  .rooms {
+    grid-template-columns: 1fr;
+  }
+  .header-buttons {
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    .rooms-btn {
+      margin-bottom: 30px;
+      width: 100%;
+    }
+  }
 }
 
 /* users/index
