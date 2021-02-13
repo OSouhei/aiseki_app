@@ -14,30 +14,30 @@ ja:
 
   devise:
     failure:
-      already_authenticated: 'ログイン済みです'
-      unauthenticated: 'ログインまたは登録が必要です'
-      unconfirmed: '本登録を行ってください'
-      locked: 'アカウントはロックされています'
-      invalid: 'メールアドレスまたはパスワードが違います'
-      invalid_token: '認証キーが不正です'
-      timeout: '一定時間が経過したため、再度ログインが必要です'
-      inactive: 'アカウントがまだ有効になっていません'
+      already_authenticated: 'ログイン済みです。'
+      unauthenticated: 'ログインまたは登録が必要です。'
+      unconfirmed: '本登録を行ってください。'
+      locked: 'アカウントはロックされています。'
+      invalid: 'メールアドレスまたはパスワードが違います。'
+      invalid_token: '認証キーが不正です。'
+      timeout: '一定時間が経過したため、再度ログインが必要です。'
+      inactive: 'アカウントがまだ有効になっていません。'
     sessions:
-      signed_in: 'ログインしました'
-      signed_out: 'ログアウトしました'
+      signed_in: 'ログインしました。'
+      signed_out: 'ログアウトしました。'
     passwords:
-      send_instructions: 'パスワードのリセット方法を数分以内にメールでご連絡します'
-      updated: 'パスワードを変更しました。ログイン済みです'
-      updated_not_active: 'パスワードを変更しました'
-      send_paranoid_instructions: "ご登録のメールアドレスが保存されている場合、パスワード復旧用のリンク先をメールでご連絡します"
+      send_instructions: 'パスワードのリセット方法を数分以内にメールでご連絡します。'
+      updated: 'パスワードを変更しました。ログイン済みです。'
+      updated_not_active: 'パスワードを変更しました。'
+      send_paranoid_instructions: "ご登録のメールアドレスが保存されている場合、パスワード復旧用のリンク先をメールでご連絡します。"
     confirmations:
-      send_instructions: 'アカウントの確認方法を数分以内にメールでご連絡します'
-      send_paranoid_instructions: 'ご登録のメールアドレスが保存されている場合、アカウントの確認方法をメールでご連絡します'
-      confirmed: 'アカウントが確認されました。ログインしています'
+      send_instructions: 'アカウントの確認方法を数分以内にメールでご連絡します。'
+      send_paranoid_instructions: 'ご登録のメールアドレスが保存されている場合、アカウントの確認方法をメールでご連絡します。'
+      confirmed: 'アカウントが確認されました。ログインしています。'
     registrations:
-      signed_up: 'ようこそ！ アカウントが登録されました'
+      signed_up: 'ようこそ！ アカウントが登録されました。'
       inactive_signed_up: 'アカウントが登録されましたが、ログインできませんでした。理由：%{reason}'
-      updated: 'アカウントが更新されました'
+      updated: 'アカウントが更新されました。'
       destroyed: 'アカウントが削除されました。またのご利用をお待ちしています。'
       reasons:
         inactive: 'アクティブでない'
