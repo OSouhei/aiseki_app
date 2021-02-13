@@ -35,16 +35,16 @@ RSpec.feature "Sign Up", type: :system do
       click_button "Sign up"
       expect(page).to have_current_path "/users"
       # エラーメッセージ
-      expect(page).to have_content "Email can't be blank"
-      expect(page).to have_content "Password can't be blank"
-      expect(page).to have_content "Name can't be blank"
+      expect(page).to have_content "Emailを入力してください"
+      expect(page).to have_content "Passwordを入力してください"
+      expect(page).to have_content "Nameを入力してください"
     }.to_not change(User, :count)
   end
 
   scenario "user has already signed in" do
     sign_in user
     visit new_user_registration_path
-    expect(page).to have_content "You are already signed in."
+    expect(page).to have_content "ログイン済みです。"
     expect(page).to have_current_path(root_path)
   end
 end

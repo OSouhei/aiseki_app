@@ -3,14 +3,16 @@ require 'rails_helper'
 RSpec.feature "DestroyUsers", type: :system do
   let(:user) { FactoryBot.create(:user) }
 
-  scenario "user destroy his account" do
-    pending
+  scenario "user destroy his account", js: true do
     sign_in user
-    visit root_path
+    visit edit_user_registration_path
+    expect(page).to have_link "退会する"
     expect {
-      click_link "退会"
+      page.accept_confirm do
+        click_link "退会する"
+      end
+      expect(page).to have_current_path root_path
+      expect(page).to have_content "アカウントが削除されました。またのご利用をお待ちしています。"
     }.to change(User, :count).by(-1)
-    expect(page).to have_current_path(root_path)
-    expect(page).to have_content "Bye! Your account has been successfully cancelled. We hope to see you again soon."
   end
 end

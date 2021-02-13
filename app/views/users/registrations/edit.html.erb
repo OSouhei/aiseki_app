@@ -1,51 +1,44 @@
 <% provide(:title, "Edit User") %>
 
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="content">
+  <%= form_with(model: @user, url: user_registration_path, class: "form mx-auto") do |f| %>
+    <%= render "users/shared/error_messages", user: @user %>
 
-<%= form_with(model: @user, url: user_registration_path) do |f| %>
-  <%= render "users/shared/error_messages", user: @user %>
+    <div class="form-group">
+      <%= f.text_field :name, class: "form-control", placeholder: "お名前" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :name, class: "form-label" %>
-    <%= f.text_field :name, class: "form-control" %>
-  </div>
+    <div class="form-group">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", placeholder: "メールアドレス" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :email, class: "form-label" %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= f.label :profile_image, class: "form-label" %>
-    <%= f.file_field :profile_image, class: "form-control" %>
-  </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.label :password, class: "form-label" %> <i>(leave blank if you don't want to change it)</i>
-    <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
     <% end %>
-  </div>
 
-  <div class="form-group">
-    <%= f.label :password_confirmation, class: "form-label" %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
-  </div>
+    <div class="form-group">
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control", placeholder: "新しいパスワード(6文字以上)" %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :current_password, class: "form-label" %> <i>(we need your current password to confirm your changes)</i>
-    <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
-  </div>
+    <div class="form-group">
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control", placeholder: "パスワード(確認)" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Update", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    <div class="form-group d-flex flex-start align-items-center">
+      <%= f.file_field :profile_image, class: "profile-image-input form-control" %>
+      <%= f.label :profile_image, "プロフィール画像", class: "profile-image-label form-label btn btn-primary" %>
+      <span class="filename"></span>
+    </div>
 
-<%= link_to "Back", :back %>
+    <div class="form-group">
+      <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control", placeholder: "現在のパスワード" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "更新", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+  <div class="destroy-user-link">
+    <%= link_to "退会する", user_registration_path, method: :delete, data: { confirm: "本当に退会しますか？" } %>
+  </div>
+</div>

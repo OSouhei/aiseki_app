@@ -15,12 +15,12 @@ RSpec.feature "Sign In", type: :system do
     fill_in "パスワード", with: user.password
     click_button "ログイン"
     expect(page).to have_current_path root_path
-    # サインイン後のスペックを追加…
+    expect(page).to have_content "ログインしました。"
     # ログアウト
     expect(page).to have_link "ログアウト"
     click_link "ログアウト"
     expect(page).to have_current_path root_path
-    expect(page).to have_content "Signed out successfully."
+    expect(page).to have_content "ログアウトしました。"
     expect(page).to have_link "サインアップ"
     expect(page).to have_link "サインイン"
   end
@@ -31,6 +31,13 @@ RSpec.feature "Sign In", type: :system do
     fill_in "パスワード", with: "foo"
     click_button "ログイン"
     expect(page).to have_current_path new_user_session_path
-    expect(page).to have_content "Invalid Email or password."
+    expect(page).to have_content "メールアドレスまたはパスワードが違います。"
+  end
+
+  scenario "authenticated user sign in" do
+    sign_in user
+    visit new_user_session_path
+    expect(page).to have_current_path root_path
+    expect(page).to have_content "ログイン済みです。"
   end
 end
