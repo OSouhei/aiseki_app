@@ -24,8 +24,7 @@ RSpec.describe "Create Rooms", type: :system do
       click_button "送信"
     }.to change(Room, :count).by(1)
     expect(page).to have_current_path(room_path(Room.last))
-    # flash
-    expect(page).to have_content "room was successfully created."
+    expect(page).to have_content "ルームを作成しました。"
   end
 
   scenario "user create rooms with invlid params" do
@@ -37,7 +36,7 @@ RSpec.describe "Create Rooms", type: :system do
       click_button "送信"
     }.to_not change(Room, :count)
     # エラーメッセージ
-    expect(page).to have_content "Title can't be blank"
-    expect(page).to have_content "Limit is not a number"
+    expect(page).to have_content "Titleを入力してください"
+    expect(page).to have_content "Limitは数値で入力してください"
   end
 end

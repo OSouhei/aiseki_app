@@ -10,13 +10,13 @@ RSpec.describe Member, type: :model do
   it "is invalid without user_id" do
     member.user_id = nil
     member.valid?
-    expect(member.errors[:user_id]).to include("can't be blank")
+    expect(member.errors[:user_id]).to include("を入力してください")
   end
 
   it "is invalid without room_id" do
     member.room_id = nil
     member.valid?
-    expect(member.errors[:room_id]).to include("can't be blank")
+    expect(member.errors[:room_id]).to include("を入力してください")
   end
 
   it "is invalid when room owner is included in members" do

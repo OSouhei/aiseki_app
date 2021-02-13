@@ -1,66 +1,44 @@
 require 'rails_helper'
 
 RSpec.describe "JoinRooms", type: :system do
-  let(:user) { FactoryBot.create(:user) }
-  let!(:room) { FactoryBot.create(:room) }
-  let(:full_room) { FactoryBot.create(:room, limit: 1) }
+  let(:user) { create(:user) }
+  let(:room) { create(:room) }
+  let(:user_room) { create(:room, owner: user) }
 
-  xscenario "user join room" do
+  scenario "user join and exit room" do
     sign_in user
-    visit rooms_path
-    expect(page).to have_current_path(rooms_path)
-    # rooms/showリンクをクリック
-    click_link "見る", href: room_path(room)
-    expect(page).to have_current_path(room_path(room))
-    expect {
-      click_link "入室"
-    }.to change(Member, :count).by(1)
-    expect(user.joining).to include room
-    expect(room.members).to include user
-    # flash
-    expect(page).to have_content "ルームに参加しました！"
-  end
-
-  xscenario "unauthenticated user does not join room" do
-    visit root_path
-    click_link "ルーム一覧"
-    click_link "見る", href: room_path(room)
-    expect(page).to have_current_path(room_path(room))
-    expect {
-      click_link "入室"
-    }.to_not change(Member, :count)
-    expect(page).to have_current_path(new_user_session_path)
-    expect(page).to have_content "You need to sign in or sign up before continuing."
-    expect {
-      fill_in "Email", with: user.email
-      fill_in "Password", with: user.password
-      click_button "Log in"
-    }.to change(Member, :count).by(1)
-    expect(page).to have_content "ルームに参加しました！"
-    expect(page).to have_current_path(root_path)
-  end
-
-  xscenario "room owner does not join his room" do
-    owner = room.owner
-    sign_in owner
     visit room_path(room)
-    expect(page).to_not have_link "入室", href: join_room_path(room)
+    expect(page).to have_link href: join_room_path(room)
     expect {
-      visit join_room_path(room)
-    }.to_not change(Member, :count)
-    expect(page).to have_content "ルームマスターは部屋に参加できません。"
-    expect(page).to have_current_path(root_path)
+      click_link href: join_room_path(room)
+    }.to change(Member, :count).by(1)
+    expect(page).to have_current_path joining_user_path(user)
+    expect(page).to have_content "ルームに参加しました！"
+    click_link "見る", href: room_path(room)
+    expect(page).to_not have_link href: join_room_path(room)
+    expect(page).to have_link href: exit_room_path(room)
+    expect {
+      click_link href: exit_room_path(room)
+    }.to change(Member, :count).by(-1)
+    expect(page).to have_current_path room_path(room)
+    expect(page).to have_content "ルームを退出しました。"
   end
 
-  xscenario "join a packed room" do
-    # full_roomを満員に
-    FactoryBot.create(:user).join full_room
+  scenario "user join full room" do
+    room.update(limit: 0) # 部屋を満員に
     sign_in user
-    visit room_path(full_room)
+    visit room_path(room)
     expect {
-      click_link "入室", href: join_room_path(full_room)
+      click_link href: join_room_path(room)
     }.to_not change(Member, :count)
-    expect(page).to have_current_path(root_path)
+    expect(page).to have_current_path root_path
     expect(page).to have_content "この部屋は満員です。"
+  end
+
+  scenario "user join his room" do
+    sign_in user
+    visit room_path(user_room)
+    expect(page).to have_current_path room_path(user_room)
+    expect(page).to_not have_link href: join_room_path(user_room)
   end
 end

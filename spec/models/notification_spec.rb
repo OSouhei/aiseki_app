@@ -16,7 +16,7 @@ RSpec.describe Notification, type: :model do
       it "is invalid when user who notify to is not found" do
         notification.to = notification.to + 100
         notification.valid?
-        expect(notification.errors[:notify_to]).to include "must exist"
+        expect(notification.errors[:notify_to]).to include "を入力してください"
       end
     end
 
@@ -27,7 +27,7 @@ RSpec.describe Notification, type: :model do
       it "is invalid when user who notifyed by is not found" do
         notification.by = notification.by + 100
         notification.valid?
-        expect(notification.errors[:notifyed_by]).to include "must exist"
+        expect(notification.errors[:notifyed_by]).to include "を入力してください"
       end
     end
 

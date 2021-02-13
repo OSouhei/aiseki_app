@@ -47,7 +47,7 @@ class RoomsController < ApplicationController
 
     message = {}
     current_user.join(@room) ? message[:notice] = "ルームに参加しました！" : message[:alert] = "ルームマスターは部屋に参加できません。"
-    redirect_to root_path, message
+    redirect_to joining_user_path(current_user), message
   end
 
   # GET /rooms/search

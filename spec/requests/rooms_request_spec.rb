@@ -191,7 +191,7 @@ RSpec.describe "Rooms", type: :request do
           post rooms_path, params: { room: invalid_room_params }
           variable = controller.instance_variable_get("@room")
           variable.valid?
-          expect(variable.errors[:title]).to include "can't be blank"
+          expect(variable.errors[:title]).to include "を入力してください"
         end
       end
     end
@@ -520,7 +520,7 @@ RSpec.describe "Rooms", type: :request do
 
       it "redirect to home page" do
         get join_room_path(room)
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to joining_user_path(other_user)
       end
 
       it "create member" do
@@ -563,7 +563,7 @@ RSpec.describe "Rooms", type: :request do
 
       it "redirect to home page" do
         get join_room_path(room)
-        expect(response).to redirect_to root_path
+        expect(response).to redirect_to joining_user_path(user)
       end
 
       it "does not create member" do

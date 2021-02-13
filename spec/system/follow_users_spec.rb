@@ -14,8 +14,8 @@ RSpec.describe "FollowUsers", type: :system do
       expect(page).to_not have_link "follow", href: follow_user_path(other_user)
     }.to change(user.following, :count).by(1)
     expect {
-      click_link "following"
-      expect(page).to_not have_link "following"
+      click_link "following", href: unfollow_user_path(other_user)
+      expect(page).to_not have_link "following", href: unfollow_user_path(other_user)
       expect(page).to have_link "follow", href: follow_user_path(other_user)
     }.to change(user.following, :count).by(-1)
   end
