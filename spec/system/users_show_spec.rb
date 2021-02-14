@@ -8,7 +8,7 @@ RSpec.feature "users/show", type: :system do
   scenario "has page title" do
     sign_in user
     visit root_path
-    click_link href: user_path(user)
+    click_link href: user_path(user), match: :first
     expect(page).to have_title "#{user.name} - 相席app"
     expect(page).to have_current_path user_path(user)
   end

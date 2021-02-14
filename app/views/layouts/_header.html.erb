@@ -5,7 +5,40 @@
       <path fill-rule="evenodd" d="M2 12.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"/>
     </svg>
   </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+  <!-- モバイル版 -->
+  <div class="navbar-mobile collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto d-flex">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+          <%= link_to "ルーム作成", new_room_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "参加中のルーム", joining_user_path(current_user), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to " プロフィール", user_path(current_user), class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ブックマーク", bookmarks_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= render 'layouts/notification_icon' %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "ログアウト", destroy_user_session_path, method: :delete ,class: "nav-link" %>
+        </li>
+      <% else %>
+        <li class="nav-item">
+          <%= link_to "サインイン", new_user_session_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "サインアップ", new_user_registration_path, class: "nav-link" %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <!-- PC版 -->
+  <div class="collapse navbar-collapse">
     <ul class="navbar-nav mr-auto d-flex">
       <% if user_signed_in? %>
         <li class="nav-item">
@@ -38,6 +71,7 @@
         </li>
         <li class="nav-item">
           <%= render 'layouts/notification_icon' %>
+          <span class="header-link-sp"></span>
         </li>
       <% else %>
         <li class="nav-item">

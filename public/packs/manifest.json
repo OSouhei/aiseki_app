@@ -10,6 +10,14 @@
         "/packs/js/application-63278748c77c4c5f175d.js.map"
       ]
     },
+    "flash": {
+      "js": [
+        "/packs/js/flash-84bd7de8448740314e50.js"
+      ],
+      "js.map": [
+        "/packs/js/flash-84bd7de8448740314e50.js.map"
+      ]
+    },
     "input": {
       "js": [
         "/packs/js/input-9ef19441859314f032c3.js"
@@ -27,6 +35,8 @@
       ]
     }
   },
+  "flash.js": "/packs/js/flash-84bd7de8448740314e50.js",
+  "flash.js.map": "/packs/js/flash-84bd7de8448740314e50.js.map",
   "input.js": "/packs/js/input-9ef19441859314f032c3.js",
   "input.js.map": "/packs/js/input-9ef19441859314f032c3.js.map",
   "shop_name.js": "/packs/js/shop_name-2e0e9e5f0eabf076448e.js",

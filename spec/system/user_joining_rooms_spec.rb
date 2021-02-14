@@ -19,7 +19,7 @@ RSpec.describe "UserJoiningRooms", type: :system do
     sign_in user
     visit root_path
     click_button id: "dropdownMenuButton"
-    click_link "参加中のルーム"
+    click_link "参加中のルーム", match: :first
     expect(page).to have_current_path joining_user_path(user)
     expect(page).to have_link "見る", href: room_path(room)
     expect(page).to have_content room.title

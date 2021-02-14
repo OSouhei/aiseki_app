@@ -18,7 +18,7 @@ RSpec.feature "Sign In", type: :system do
     expect(page).to have_content "ログインしました。"
     # ログアウト
     expect(page).to have_link "ログアウト"
-    click_link "ログアウト"
+    click_link "ログアウト", match: :first
     expect(page).to have_current_path root_path
     expect(page).to have_content "ログアウトしました。"
     expect(page).to have_link "サインアップ"
@@ -29,7 +29,7 @@ RSpec.feature "Sign In", type: :system do
     visit new_user_session_path
     fill_in "メールアドレス", with: user.email
     fill_in "パスワード", with: "foo"
-    click_button "ログイン"
+    click_button "ログイン", match: :first
     expect(page).to have_current_path new_user_session_path
     expect(page).to have_content "メールアドレスまたはパスワードが違います。"
   end

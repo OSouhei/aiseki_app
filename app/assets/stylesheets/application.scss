@@ -82,7 +82,11 @@ textarea {
   margin: 0;
   position: fixed;
   width: 100%;
-  z-index: 1;
+  height: 90px;
+  font-size: 1.5rem;
+  padding: 0;
+  line-height: 90px;
+  z-index: 10;
 }
 
 .form {
@@ -201,6 +205,7 @@ textarea {
 .header-icon {
   width: 40px;
   height: 40px;
+  color: $main-color;
 }
 
 .notification-icon {
@@ -215,6 +220,10 @@ textarea {
   top: 18px;
 }
 
+.navbar-mobile.collapse.navbar-collapse {
+  display: none !important;
+}
+
 @media (max-width: 991px) {
   .navbar-collapse.show {
     margin-top: 0px !important;
@@ -224,8 +233,31 @@ textarea {
     top: 80px;
     right: 40px;
   }
-  .navbar a {
-    color: $main-color !important;
+
+  .navbar {
+    a {
+      color: $main-color !important;
+    }
+    .navbar-nav {
+      flex-direction: column;
+    }
+    .navbar-mobile.show {
+      display: block !important;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding-left: 30px;
+    padding-right: 30px;
+    .navbar-brand {
+      font-size: 2rem;
+    }
+    .humburger-menu {
+      height: 40px;
+      width: 40px;
+    }
   }
 }
 
@@ -338,10 +370,13 @@ section.masthead {
   .rooms {
     grid-template-columns: 1fr;
   }
+  .room.card {
+    width: 100%;
+  }
   .header-buttons {
     flex-direction: column;
     align-items: center;
-    width: 300px;
+    max-width: 300px;
     .rooms-btn {
       margin-bottom: 30px;
       width: 100%;
