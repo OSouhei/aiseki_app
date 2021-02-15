@@ -390,6 +390,19 @@ section.masthead {
   margin-top: 50px;
 }
 
+@media (max-width: 450px) {
+  .rooms {
+    width: 100%;
+    margin: 0 auto;
+    .user-box.card {
+      width: 95%;
+    }
+  }
+  .page-item-num {
+    display: none;
+  }
+}
+
 /* users/show
 -------------------------------------------------*/
 .card {

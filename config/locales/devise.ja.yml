@@ -2,6 +2,13 @@
 # Japanese translation for devise
 
 ja:
+  views:
+    pagination:
+      first: "<<"
+      previous: "<"
+      last: ">>"
+      next: ">"
+      truncate: "..."
   errors:
     messages:
       extension_whitelist_error: "%{extension}ファイルのアップロードは許可されていません。アップロードできるファイルタイプ: %{allowed_types}"
