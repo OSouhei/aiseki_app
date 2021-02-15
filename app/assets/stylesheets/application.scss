@@ -123,7 +123,7 @@ textarea {
 
 .room {
   background-color: #fff8cf;
-  height: 230px;
+  height: autos;
   border: 1px solid $main-color !important;
 }
 
@@ -481,6 +481,65 @@ section.masthead {
 
 .collapse.show {
   margin-top: -60px;
+}
+
+@media (max-width: 680px) {
+  .collapse-links {
+    text-align: center;
+  }
+  .collapse-link {
+    font-size: 25px;
+  }
+  .collapse-link:nth-of-type(1) {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 500px) {
+
+}
+
+@media (max-width: 460px) {
+  .user-page-content {
+    .collapse.show {
+      margin-top: 35px;
+    }
+  }
+  .room-links {
+    flex-direction: column;
+  }
+  .room-link-left {
+    text-align: start;
+  }
+  .room-link-right {
+    margin-top: 10px;
+  }
+  .room-link-trash {
+    position: absolute;
+    right: 20px;
+  }
+  .book-mark {
+    position: absolute;
+    right: 60px;
+  }
+}
+
+@media (max-width: 400px) {
+  .user-info-box {
+    .user-info {
+      flex-direction: column;
+      .d-flex {
+        align-items: center;
+        justify-self: start;
+        flex-direction: unset !important;
+      }
+      .text-white {
+        font-weight: bold;
+        font-size: 12px;
+        margin-right: 10px;
+      }
+    }
+  }
 }
 
 /* users/registrations/new
