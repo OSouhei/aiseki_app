@@ -39,4 +39,8 @@ class Room < ApplicationRecord
   def booked_by?(user)
     booked_by.include?(user)
   end
+
+  def display_time
+    date ? date.strftime("%Y/%m/%d %R") : "日付が設定されていません。"
+  end
 end

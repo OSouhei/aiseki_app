@@ -150,5 +150,17 @@ RSpec.describe Room, type: :model do
         expect(room).to_not be_booked_by other_user
       end
     end
+
+    describe "#display_time" do
+      it "returns formatted time" do
+        room.update(date: Time.zone.local(2021, 12, 11, 15, 30))
+        expect(room.display_time).to eq "2021/12/11 15:30"
+      end
+
+      it "returns string when date is nil" do
+        room.update(date: nil)
+        expect(room.display_time).to eq "日付が設定されていません。"
+      end
+    end
   end
 end
