@@ -158,7 +158,7 @@ RSpec.describe Room, type: :model do
       end
 
       it "returns string when date is nil" do
-        expect(room.date).to be_nil
+        room.update(date: nil)
         expect(room.display_time).to eq "日付が設定されていません。"
       end
     end

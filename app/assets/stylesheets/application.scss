@@ -27,6 +27,10 @@ textarea {
   height: 150px;
 }
 
+label {
+  font-weight: bold;
+}
+
 /* shared
 -------------------------------------------------*/
 .wrapper {
@@ -91,6 +95,12 @@ textarea {
 
 .form {
   width: 60%;
+}
+
+@media(max-width: 680px) {
+  .form {
+    width: 90%;
+  }
 }
 
 .form-group {
@@ -652,6 +662,15 @@ section.masthead {
   width: 70px;
 }
 
+/* rooms/new
+-------------------------------------------------*/
+.date-input {
+  margin-top: 0;
+  line-height: 200%;
+  select {
+    margin: 0 3px;
+  }
+}
 
 /* notifications/index
 -------------------------------------------------*/

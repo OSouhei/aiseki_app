@@ -14,9 +14,14 @@
     <ul id="result" class="list-group"></ul>
   </div>
 
+  <%= f.label "日付", class: "form-label" %>
+  <div class="form-group d-flex date-input">
+    <%= f.datetime_select :date, { default: Time.zone.local(2021), start_year: 2021 }, class: "form-control form-select" %>
+  </div>
+
   <div class="form-group">
     <%= f.label "人数上限", class: "form-label" %>
-    <%= f.select :limit, ["no-limit"] + (1..10).to_a, class: "form-control" %>
+    <%= f.select :limit, ["上限を指定しない"] + (1..10).to_a, {}, class: "form-select" %>
   </div>
 
   <div class="actions">
