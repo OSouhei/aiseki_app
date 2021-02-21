@@ -9,6 +9,7 @@
     <div class="room-content">
       <p><%= room.content[0, 20] %><%= "..." if room.content.length > 20 %></p>
       <p>お店：<%= room.shop_name %></p>
+      <p>日付：<%= room.display_time %></p>
     </div>
     <div class="room-links d-flex">
       <div class="room-link-left">
