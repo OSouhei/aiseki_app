@@ -1,8 +1,9 @@
 test: &default
-  adapter: postgresql
-  encoding: unicode
-  username: postgres
+  adapter: mysql2
+  encoding: utf8
+  username: root
   password: password
-  host: <%= ENV["POSTGRES_HOST"] || "localhost" %>
+  socket: /tmp/mysql.sock
+  host: db
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   database: myapp_test
