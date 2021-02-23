@@ -13,8 +13,10 @@ jobs:
           POSTGRES_HOST: 127.0.0.1
       - image: circleci/mysql:8.0.23-ram
         environment:
-          MYSQL_ROOT_PASSWORD=password
-          MYSQL_USER=root
+          MYSQL_ROOT_PASSWORD: password
+          MYSQL_USER: root
+          MYSQL_DATABASE: myapp_test
+          MYSQL_PASSWORD: password
 
     working_directory: ~/repo
 
@@ -53,6 +55,23 @@ jobs:
 
       # Database setup
       - run: rm ./config/database.yml
+
+      - run:
+          name: setup mysql
+          command: |
+            for i in `seq 1 10`;
+            do
+              nc -z 127.0.0.1 3306 && echo Success && exit 0
+              echo -n .
+              sleep 1
+            done
+            echo Failed waiting for MySQL && exit 1
+      - run:
+          name: install  MySQL CLI
+          command: |
+            sudo apt-get install default-mysql-client
+            mysql -h 127.0.0.1 -u user -p password myapp_test < sql-data/dummy.sql
+            mysql -h 127.0.0.1 -u user -p password --execute="SELECT * FROM myapp_test.Persons"
 
       - run: mv ./config/database.yml.ci ./config/database.yml
 
