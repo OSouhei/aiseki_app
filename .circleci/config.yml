@@ -11,7 +11,7 @@ jobs:
           RAILS_ENV: test
           BUNDLER_VERSION: 1.17.2
           POSTGRES_HOST: 127.0.0.1
-      - image: circleci/mysql:8.0.23ram
+      - image: circleci/mysql:8.0.23-ram
         environment:
           MYSQL_ROOT_PASSWORD=password
           MYSQL_USER=root
