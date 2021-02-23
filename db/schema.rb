@@ -12,10 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2021_02_20_171250) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "bookmarks", force: :cascade do |t|
+  create_table "bookmarks", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "room_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -25,7 +22,7 @@ ActiveRecord::Schema.define(version: 2021_02_20_171250) do
     t.index ["user_id"], name: "index_bookmarks_on_user_id"
   end
 
-  create_table "members", force: :cascade do |t|
+  create_table "members", charset: "utf8", force: :cascade do |t|
     t.integer "user_id"
     t.integer "room_id"
     t.datetime "created_at", precision: 6, null: false
@@ -35,7 +32,7 @@ ActiveRecord::Schema.define(version: 2021_02_20_171250) do
     t.index ["user_id"], name: "index_members_on_user_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
+  create_table "notifications", charset: "utf8", force: :cascade do |t|
     t.integer "to"
     t.integer "by"
     t.integer "room_id"
@@ -45,7 +42,7 @@ ActiveRecord::Schema.define(version: 2021_02_20_171250) do
     t.string "action"
   end
 
-  create_table "relationships", force: :cascade do |t|
+  create_table "relationships", charset: "utf8", force: :cascade do |t|
     t.integer "follower_id"
     t.integer "followed_id"
     t.datetime "created_at", precision: 6, null: false
@@ -55,7 +52,7 @@ ActiveRecord::Schema.define(version: 2021_02_20_171250) do
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
-  create_table "rooms", force: :cascade do |t|
+  create_table "rooms", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -67,7 +64,7 @@ ActiveRecord::Schema.define(version: 2021_02_20_171250) do
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
