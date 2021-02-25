@@ -13,6 +13,7 @@ AllCops:
     - 'tmp/**/*'
     - 'node_modules/**/*'
     - 'lib/tasks/auto_annotate_models.rake'
+    - 'config/unicorn.conf.rb'
 
 Rails:
   Enabled: true
