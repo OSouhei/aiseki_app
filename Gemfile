@@ -24,6 +24,11 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'faker'
   gem 'dotenv-rails'
+  # Capistrano関連
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv'
 end
 
 group :development do

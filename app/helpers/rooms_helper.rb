@@ -17,7 +17,7 @@ module RoomsHelper
     Hash.from_xml(res.body)
   end
 
-  def parse_json(data)
+  def retrieve_shop_name_from_xml(data)
     shops = data["results"]["shop"]
     shop_names = []
     shops.each do |shop|
