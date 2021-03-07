@@ -116,6 +116,10 @@ Style/GlobalStdStream:
   Exclude:
     - 'config/environments/production.rb'
 
+Style/GlobalVars:
+  Exclude:
+    - 'config/unicorn/production.rb'
+
 Style/MutableConstant:
   Enabled: false
 
@@ -134,3 +138,7 @@ Style/SymbolArray:
 
 Layout/LineLength:
   Max: 190
+
+Lint/SuppressedException:
+  Exclude:
+    - 'config/unicorn/production.rb'

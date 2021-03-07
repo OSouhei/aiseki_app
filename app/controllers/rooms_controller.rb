@@ -35,7 +35,7 @@ class RoomsController < ApplicationController
   def search_shop
     term = params[:keyword]
     data = search_shops(term)
-    @shops = parse_json(data)
+    @shops = retrieve_shop_name_from_xml(data)
     respond_to do |format|
       format.json { render "index", json: @shops }
     end
