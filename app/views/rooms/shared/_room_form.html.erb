@@ -14,6 +14,11 @@
     <ul id="result" class="list-group"></ul>
   </div>
 
+  <!-- 店のurlのフォーム（非表示） -->
+  <div class="form-group">
+    <%= f.text_field :shop_url, class: "form-control d-none", id: "room_shop_url" %>
+  </div>
+
   <%= f.label "日付", class: "form-label" %>
   <div class="form-group d-flex date-input">
     <%= f.datetime_select :date, { default: Time.zone.local(2021), start_year: 2021 }, class: "form-control form-select" %>

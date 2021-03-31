@@ -6,17 +6,17 @@ default: &default
 development:
   <<: *default
   username: root
-  password: password
+  password: <%= ENV.fetch("MYSQL_ROOT_PASSWORD") { "password" } %>
   socket: /tmp/mysql.sock
-  host: db
+  host: <%= ENV.fetch("MYSQL_HOST") { "localhost" } %>
   database: myapp_development
 
 test:
   <<: *default
   username: root
-  password: password
+  password: <%= ENV.fetch("MYSQL_ROOT_PASSWORD") { "password" } %>
   socket: /tmp/mysql.sock
-  host: db
+  host: <%= ENV.fetch("MYSQL_HOST") { "localhost" } %>
   database: myapp_test
 
 production:
