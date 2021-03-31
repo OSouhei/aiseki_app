@@ -18,11 +18,12 @@ module RoomsHelper
   end
 
   def retrieve_shop_name_from_xml(data)
-    shops = data["results"]["shop"]
-    shop_names = []
-    shops.each do |shop|
-      shop_names << shop["name"]
+    shop_data = data["results"]["shop"]
+    shops = []
+    shop_data.each do |shop|
+      # shops << shop["name"]
+      shops << { name: shop["name"], url: shop["urls"]["pc"] }
     end
-    shop_names
+    shops
   end
 end

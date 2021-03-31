@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_20_171250) do
+ActiveRecord::Schema.define(version: 2021_03_31_041756) do
 
   create_table "bookmarks", charset: "utf8", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 2021_02_20_171250) do
     t.text "content"
     t.integer "limit", null: false
     t.datetime "date"
+    t.string "shop_url"
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
