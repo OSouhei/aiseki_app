@@ -30,7 +30,7 @@
       <p><%= @room.content %></p>
       <div class="room-card-footer d-flex justify-content-around">
         <ul class="room-info list-group">
-          <li class="list-group-item"><strong>お店: </strong><%= @room.shop_name %></li>
+          <li class="list-group-item"><strong>お店: </strong><a href="<%= @room.shop_url %>"><%= @room.shop_name %></a></li>
           <li class="list-group-item"><strong>人数: </strong><%= @room.members.count %> / <%= @room.limit %> 人</li>
           <li class="list-group-item"><strong>日付:</strong><%= @room.display_time %></li>
         </ul>
