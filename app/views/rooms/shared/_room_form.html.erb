@@ -26,7 +26,7 @@
 
   <div class="form-group">
     <%= f.label "人数上限", class: "form-label" %>
-    <%= f.select :limit, ["上限を指定しない"] + (1..10).to_a, {}, class: "form-select" %>
+    <%= f.select :limit, (1..10).to_a, {}, class: "form-select" %>
   </div>
 
   <div class="actions">

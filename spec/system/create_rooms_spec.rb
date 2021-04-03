@@ -37,6 +37,5 @@ RSpec.describe "Create Rooms", type: :system do
     }.to_not change(Room, :count)
     # エラーメッセージ
     expect(page).to have_content "Titleを入力してください"
-    expect(page).to have_content "Limitは数値で入力してください"
   end
 end
