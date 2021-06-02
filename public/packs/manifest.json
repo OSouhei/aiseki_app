@@ -1,13 +1,13 @@
 {
-  "application.js": "/packs/js/application-63278748c77c4c5f175d.js",
-  "application.js.map": "/packs/js/application-63278748c77c4c5f175d.js.map",
+  "application.js": "/packs/js/application-4d62b4a83425b690c1e0.js",
+  "application.js.map": "/packs/js/application-4d62b4a83425b690c1e0.js.map",
   "entrypoints": {
     "application": {
       "js": [
-        "/packs/js/application-63278748c77c4c5f175d.js"
+        "/packs/js/application-4d62b4a83425b690c1e0.js"
       ],
       "js.map": [
-        "/packs/js/application-63278748c77c4c5f175d.js.map"
+        "/packs/js/application-4d62b4a83425b690c1e0.js.map"
       ]
     },
     "flash": {
@@ -16,6 +16,14 @@
       ],
       "js.map": [
         "/packs/js/flash-84bd7de8448740314e50.js.map"
+      ]
+    },
+    "hello_vue": {
+      "js": [
+        "/packs/js/hello_vue-b0815c8b6a44bb25a80e.js"
+      ],
+      "js.map": [
+        "/packs/js/hello_vue-b0815c8b6a44bb25a80e.js.map"
       ]
     },
     "input": {
@@ -37,6 +45,8 @@
   },
   "flash.js": "/packs/js/flash-84bd7de8448740314e50.js",
   "flash.js.map": "/packs/js/flash-84bd7de8448740314e50.js.map",
+  "hello_vue.js": "/packs/js/hello_vue-b0815c8b6a44bb25a80e.js",
+  "hello_vue.js.map": "/packs/js/hello_vue-b0815c8b6a44bb25a80e.js.map",
   "input.js": "/packs/js/input-9ef19441859314f032c3.js",
   "input.js.map": "/packs/js/input-9ef19441859314f032c3.js.map",
   "shop_name.js": "/packs/js/shop_name-124b6f769f3f7f2129d8.js",
