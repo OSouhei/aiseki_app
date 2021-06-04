@@ -1,12 +1,15 @@
 <template>
+  <div id="app">
+    <Header></Header>
     <router-view></router-view>
+  </div>
 </template>
 
 <script>
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
-import Home from './components/Home.vue'
+import Header from './components/Header'
+import Home from './components/Home'
 
 // ルーティング
 const routes = [
@@ -25,7 +28,10 @@ const router = new VueRouter({
 Vue.use(VueRouter)
 
 export default {
-  router
+  router,
+  components: {
+    Header
+  }
 }
 </script>
 
