@@ -13,7 +13,7 @@
           </router-link>
         </el-menu-item>
         <el-menu-item index="5">
-          <router-link to="#">
+          <router-link to="/users/sign_up">
             <el-button type="primary" class="button" round>新規登録</el-button>
           </router-link>
         </el-menu-item>
@@ -23,14 +23,14 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        activeIndex: '1',
-        activeIndex2: '1'
-      };
-    },
-  }
+export default {
+  data() {
+    return {
+      activeIndex: '1',
+      activeIndex2: '1'
+    };
+  },
+}
 </script>
 
 <style scoped>

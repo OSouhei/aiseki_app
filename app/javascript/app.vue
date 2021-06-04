@@ -10,14 +10,19 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Header from './components/Header'
 import Home from './components/Home'
+import SignUpPage from './components/users/SignUpPage'
 
 // ルーティング
 const routes = [
   // トップページ
   {
     path: '/',
-    name: 'home',
     component: Home
+  },
+  // ユーザー新規登録ページ
+  {
+    path: '/users/sign_up',
+    component: SignUpPage
   },
 ]
 
