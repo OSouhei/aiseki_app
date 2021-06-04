@@ -9,24 +9,12 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= stylesheet_link_tag 'stylish-portfolio' %>
   </head>
 
-  <body class="text-center">
-    <div class="wrapper">
-      <%= render 'layouts/flash' %>
-      <%= render 'layouts/header' %>
-      <%= yield %>
-      <%= render 'layouts/footer' %>
-    </div>
-
-    <%= javascript_pack_tag 'shop_name' %>
-    <%= javascript_pack_tag 'input' %>
-    <%= javascript_pack_tag 'flash' %>
+  <body>
+    <%= javascript_pack_tag 'hello_vue' %>
+    <%= stylesheet_pack_tag 'hello_vue' %>
   </body>
 </html>
