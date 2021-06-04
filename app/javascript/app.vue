@@ -1,16 +1,31 @@
 <template>
-  <div id="app">
-    <p>{{ message }}</p>
-  </div>
+    <router-view></router-view>
 </template>
 
 <script>
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+
+import Home from './components/Home.vue'
+
+// ルーティング
+const routes = [
+  // トップページ
+  {
+    path: '/',
+    name: 'home',
+    component: Home
+  },
+]
+
+const router = new VueRouter({
+  routes,
+})
+
+Vue.use(VueRouter)
+
 export default {
-  data: function () {
-    return {
-      message: "Hello Vue!"
-    }
-  }
+  router
 }
 </script>
 

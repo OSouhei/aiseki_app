@@ -20,10 +20,10 @@
     },
     "hello_vue": {
       "js": [
-        "/packs/js/hello_vue-ee039cf802e64e4634d6.js"
+        "/packs/js/hello_vue-5b41735f4f26e918e379.js"
       ],
       "js.map": [
-        "/packs/js/hello_vue-ee039cf802e64e4634d6.js.map"
+        "/packs/js/hello_vue-5b41735f4f26e918e379.js.map"
       ]
     },
     "input": {
@@ -45,8 +45,8 @@
   },
   "flash.js": "/packs/js/flash-84bd7de8448740314e50.js",
   "flash.js.map": "/packs/js/flash-84bd7de8448740314e50.js.map",
-  "hello_vue.js": "/packs/js/hello_vue-ee039cf802e64e4634d6.js",
-  "hello_vue.js.map": "/packs/js/hello_vue-ee039cf802e64e4634d6.js.map",
+  "hello_vue.js": "/packs/js/hello_vue-5b41735f4f26e918e379.js",
+  "hello_vue.js.map": "/packs/js/hello_vue-5b41735f4f26e918e379.js.map",
   "input.js": "/packs/js/input-9ef19441859314f032c3.js",
   "input.js.map": "/packs/js/input-9ef19441859314f032c3.js.map",
   "shop_name.js": "/packs/js/shop_name-124b6f769f3f7f2129d8.js",
