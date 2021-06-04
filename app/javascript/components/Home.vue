@@ -1,6 +1,8 @@
 <template>
   <div>
     <h1>{{ page }}</h1>
+      <el-button type="primary">Primary</el-button>
+
   </div>
 </template>
 
