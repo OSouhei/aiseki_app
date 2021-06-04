@@ -2,7 +2,7 @@
   <div id="header">
     <!-- ログインしていないときのヘッダ -->
     <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
-      <el-menu-item index="1">ホーム</el-menu-item>
+      <el-menu-item index="1"><router-link to="/">ホーム</router-link></el-menu-item>
       <el-menu-item index="2">使い方</el-menu-item>
       <el-menu-item index="3">お知らせ</el-menu-item>
       <!-- ログイン＆新規登録ボタン -->
@@ -34,6 +34,10 @@ export default {
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+}
+
 .el-container {
   float: right;
 }
