@@ -24,6 +24,9 @@ Rails/FilePath:
     - 'spec/rails_helper.rb'
     - 'config/environments/development.rb'
 
+Rails/HttpStatus:
+  EnforcedStyle: numeric
+
 Rails/InverseOf:
   Enabled: false
 
@@ -93,6 +96,10 @@ Metrics/PerceivedComplexity:
 
 Naming/AccessorMethodName:
   Enabled: false
+
+Naming/VariableNumber:
+  Exclude:
+    - 'app/controllers/api/users_controller.rb'
 
 Style/AsciiComments:
   Enabled: false
