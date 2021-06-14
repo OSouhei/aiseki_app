@@ -17,12 +17,14 @@ const routes = [
   // トップページ
   {
     path: '/',
-    component: Home
+    component: Home,
+    meta: { title: '' }
   },
   // ユーザー新規登録ページ
   {
     path: '/users/sign_up',
-    component: SignUpPage
+    component: SignUpPage,
+    meta: { title: 'アカウント登録' }
   },
 ]
 
@@ -36,6 +38,25 @@ export default {
   router,
   components: {
     Header
+  },
+  methods: {
+    setTitle(routeInstance) {
+      const baseTitle = '相席アプリ'
+      let pageTitle = routeInstance.meta.title
+      if (routeInstance.meta.title) {
+        document.title = pageTitle + ' | ' + baseTitle
+      } else {
+        document.title = baseTitle
+      }
+    }
+  },
+  mounted() {
+    this.setTitle(this.$route)
+  },
+  watch: {
+    '$route'(to, from) {
+      this.setTitle(to)
+    }
   }
 }
 </script>

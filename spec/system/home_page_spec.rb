@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.feature "HomePage", type: :system do
-  scenario "home page has right title" do
-    visit root_path
-    expect(page).to have_title "相席app"
+RSpec.feature "Home", type: :system do
+  scenario "Home page has correct title", js: true do
+    visit "/"
+    expect(page).to have_title "相席アプリ"
   end
 end
