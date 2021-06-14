@@ -40,6 +40,7 @@ export default {
     Header
   },
   methods: {
+    // ページのタイトルを返すメソッド
     setTitle(routeInstance) {
       const baseTitle = '相席アプリ'
       let pageTitle = routeInstance.meta.title
@@ -51,9 +52,11 @@ export default {
     }
   },
   mounted() {
+    // マウント時にページタイトルを設定
     this.setTitle(this.$route)
   },
   watch: {
+    // ページが遷移するたびにページタイトルを変更
     '$route'(to, from) {
       this.setTitle(to)
     }
