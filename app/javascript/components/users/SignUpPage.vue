@@ -92,15 +92,16 @@ export default {
   methods: {
     // APIに問い合わせてユーザーを作成
     createUser() {
-      axios.post('/api/users', { user: this.user })
+      axios.post('/users', { user: this.user })
         .then(response => {
-          console.log(response)
           let user = response.data
-          this.$router.push({ path: '/', params: { id: user.id } })
+          this.$router.push({
+            path: '/',
+            params: { id: user.id }
+          })
         })
         .catch(error => {
           console.log(error)
-          console.log(error.response)
           if(error.response.data && error.response.data.errors) {
             this.errors = error.response.data.errors
           }
