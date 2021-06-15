@@ -30,39 +30,16 @@
 
 <script>
 import axios from 'axios'
+import { validateEmail } from '../../packs/modules/validate_email'
 
 export default {
   data() {
-    // メールアドレスのカスタムバリデーション関数
-    var validateEmail = (rule, value, callback) => {
-      const validEmailRegex = /^[A-Za-z0-9]{1}[A-Za-z0-9_.-]*@{1}[A-Za-z0-9_.-]{1,}\.[A-Za-z0-9]{1,}$/
-      if (value === '') {
-        callback(new Error('メールアドレスを入力して下さい'))
-      // メールアドレスが正規表現にマッチする時
-      } else if (validEmailRegex.test(value)) {
-        callback()
-      // メールアドレスが正規表現にマッチしない時
-      } else {
-        callback(new Error('正しい形式のメールアドレスを入力して下さい'))
-      }
-    }
-
-    // パスワード（確認）がパスワードと一致するか
-    var validatePasswordConfirmation = (rule, value, callback) => {
-      if (value == this.user.password) {
-        callback()
-      } else {
-        console.log(this.user.password)
-        callback(new Error('パスワードと一致していません'))
-      }
-    }
-
     return {
       user: {
         name: '',
         email: '',
         password: '',
-        password_confirmation: '',
+        password_confirmation: ''
       },
       // 検証ルール
       rules: {
@@ -82,7 +59,7 @@ export default {
         password_confirmation: [
           { required: true, message: 'パスワードを入力して下さい', trigger: 'blur' },
           { min: 6, message: 'パスワードは６文字以上にして下さい', trigger: 'blur' },
-          { validator: validatePasswordConfirmation, trigger: 'blur' },
+          { validator: this.validatePasswordConfirmation, trigger: 'blur' },
         ]
       },
       // サーバー側で発生したエラー
@@ -107,6 +84,15 @@ export default {
             this.errors = error.response.data.errors
           }
         })
+    },
+    // パスワード（確認）のバリデーション関数
+    validatePasswordConfirmation(rule, value, callback) {
+      // パスワード（確認）が入力したパスワードと一致するか
+      if (value == this.user.password) {
+        callback()
+      } else {
+        callback(new Error('パスワードと一致していません'))
+      }
     }
   }
 }

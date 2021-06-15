@@ -3,7 +3,7 @@ import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/ja'
-import CsrfTokenPlugin from './plugins/csrf-token-plugin'
+import CsrfTokenPlugin from './plugins/csrf_token_plugin'
 import App from '../app.vue'
 
 Vue.use(ElementUI, { locale })
