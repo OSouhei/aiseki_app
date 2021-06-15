@@ -20,10 +20,10 @@
     },
     "hello_vue": {
       "js": [
-        "/packs/js/hello_vue-0bf829c095af3bf13a2e.js"
+        "/packs/js/hello_vue-38d3be5425fbef3f9a05.js"
       ],
       "js.map": [
-        "/packs/js/hello_vue-0bf829c095af3bf13a2e.js.map"
+        "/packs/js/hello_vue-38d3be5425fbef3f9a05.js.map"
       ]
     },
     "input": {
@@ -53,8 +53,8 @@
   },
   "flash.js": "/packs/js/flash-84bd7de8448740314e50.js",
   "flash.js.map": "/packs/js/flash-84bd7de8448740314e50.js.map",
-  "hello_vue.js": "/packs/js/hello_vue-0bf829c095af3bf13a2e.js",
-  "hello_vue.js.map": "/packs/js/hello_vue-0bf829c095af3bf13a2e.js.map",
+  "hello_vue.js": "/packs/js/hello_vue-38d3be5425fbef3f9a05.js",
+  "hello_vue.js.map": "/packs/js/hello_vue-38d3be5425fbef3f9a05.js.map",
   "input.js": "/packs/js/input-9ef19441859314f032c3.js",
   "input.js.map": "/packs/js/input-9ef19441859314f032c3.js.map",
   "media/fonts/element-icons.ttf": "/packs/media/fonts/element-icons-45201881.ttf",

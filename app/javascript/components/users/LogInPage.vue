@@ -1,6 +1,6 @@
 <template>
   <div class="signup">
-    <h2>アカウント登録</h2>
+    <h2>ログイン</h2>
     <el-form ref="form" :model="user" :rules="rules" label-position="right" label-width="150px">
       <div v-if="errors.length != 0">
         <ul v-for="e in errors" :key="e">
@@ -9,20 +9,14 @@
           </li>
         </ul>
       </div>
-      <el-form-item label="名前" prop="name">
-        <el-input v-model="user.name"></el-input>
-      </el-form-item>
       <el-form-item label="メールアドレス" prop="email">
         <el-input v-model="user.email"></el-input>
       </el-form-item>
       <el-form-item label="パスワード" prop="password">
         <el-input v-model="user.password" show-password></el-input>
       </el-form-item>
-      <el-form-item label="パスワード（確認）" prop="password_confirmation">
-        <el-input v-model="user.password_confirmation" show-password></el-input>
-      </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click.prevent="createUser">登録</el-button>
+        <el-button type="primary" @click.prevent="login">ログイン</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -47,29 +41,13 @@ export default {
       }
     }
 
-    // パスワード（確認）がパスワードと一致するか
-    var validatePasswordConfirmation = (rule, value, callback) => {
-      if (value == this.user.password) {
-        callback()
-      } else {
-        console.log(this.user.password)
-        callback(new Error('パスワードと一致していません'))
-      }
-    }
-
     return {
       user: {
-        name: '',
         email: '',
-        password: '',
-        password_confirmation: '',
+        password: ''
       },
       // 検証ルール
       rules: {
-        name: [
-          { required: true, message: '名前を入力して下さい', trigger: 'blur' },
-          { max: 50, message: '名前は５０文字以内にして下さい', trigger: 'blur' },
-        ],
         email: [
           { required: true, message: 'メールアドレスを入力して下さい', trigger: 'blur' },
           { max: 255, message: 'メールアドレスは255文字以内にして下さい', trigger: 'blur' },
@@ -78,21 +56,16 @@ export default {
         password: [
           { required: true, message: 'パスワードを入力して下さい', trigger: 'blur' },
           { min: 6, message: 'パスワードは６文字以上にして下さい', trigger: 'blur' },
-        ],
-        password_confirmation: [
-          { required: true, message: 'パスワードを入力して下さい', trigger: 'blur' },
-          { min: 6, message: 'パスワードは６文字以上にして下さい', trigger: 'blur' },
-          { validator: validatePasswordConfirmation, trigger: 'blur' },
         ]
       },
       // サーバー側で発生したエラー
-      errors: '',
+      errors: ''
     }
   },
   methods: {
-    // APIに問い合わせてユーザーを作成
-    createUser() {
-      axios.post('/users', { user: this.user })
+    // APIに問い合わせてログインする
+    login() {
+      axios.post('/users/sign_in', { user: this.user })
         .then(response => {
           let user = response.data
           // ユーザの個別ページに遷移する

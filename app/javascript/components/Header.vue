@@ -8,12 +8,12 @@
       <!-- ログイン＆新規登録ボタン -->
       <el-container>
         <el-menu-item index="4">
-          <router-link to="#">
+          <router-link to="/log_in">
             <el-button type="primary" class="button">ログイン</el-button>
           </router-link>
         </el-menu-item>
         <el-menu-item index="5">
-          <router-link to="/users/sign_up">
+          <router-link to="/sign_up">
             <el-button type="primary" class="button" round>新規登録</el-button>
           </router-link>
         </el-menu-item>

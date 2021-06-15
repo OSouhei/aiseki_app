@@ -10,7 +10,6 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Header from './components/Header'
 import Home from './components/Home'
-import SignUpPage from './components/users/SignUpPage'
 
 // ルーティング
 const routes = [
@@ -22,14 +21,20 @@ const routes = [
   },
   // ユーザー新規登録ページ
   {
-    path: '/users/sign_up',
-    component: SignUpPage,
+    path: '/sign_up',
+    component: () => import('./components/users/SignUpPage'),
     meta: { title: 'アカウント登録' }
   },
+  // ログインページ
+  {
+    path: '/log_in',
+    component: () => import('./components/users/LogInPage'),
+    meta: { title: 'ログイン' }
+  }
 ]
 
 const router = new VueRouter({
-  routes,
+  routes
 })
 
 Vue.use(VueRouter)
