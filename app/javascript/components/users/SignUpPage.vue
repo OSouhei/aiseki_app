@@ -72,8 +72,8 @@ export default {
       axios.post('/users', { user: this.user })
         .then(response => {
           let user = response.data
-          // flashメッセージを設定
-          this.$store.dispatch('setFlashMessage', 'アカウント登録に成功しました')
+          this.$store.dispatch('setCurrentUser', user) // ログイン中のユーザ（currentUser)を設定
+          this.$store.dispatch('setFlashMessage', 'アカウント登録に成功しました') // flashメッセージを設定
           // ユーザの個別ページに遷移する
           this.$router.push({
             path: '/',

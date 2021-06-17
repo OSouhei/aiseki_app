@@ -9,6 +9,7 @@
 <script>
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import axios from 'axios'
 import Header from './components/Header'
 import Flash from './components/Flash'
 import Home from './components/Home'
@@ -62,6 +63,19 @@ export default {
   mounted() {
     // マウント時にページタイトルを設定
     this.setTitle(this.$route)
+    // マウント時にストアのログイン中のユーザを設定
+    axios.get('/api/logged_in')
+      .then(response => {
+        let user = response.data
+        if (Object.keys(user).length !== 0) {
+          this.$store.dispatch('setCurrentUser', user)
+        } else {
+          this.$store.dispatch('setCurrentUser', {})
+        }
+      })
+      .catch(error => {
+        console.log(error)
+      })
   },
   watch: {
     // ページが遷移するたびにページタイトルを変更

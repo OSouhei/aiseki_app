@@ -18,4 +18,16 @@ class Users::SessionsController < Devise::SessionsController
       end
     end
   end
+
+  # DELETE /users/sign_out
+  def destroy
+    super do
+      if request.format.json?
+        render json: {
+          csrf_param: request_forgery_protection_token,
+          csrf_token: form_authenticity_token
+        }
+      end
+    end
+  end
 end

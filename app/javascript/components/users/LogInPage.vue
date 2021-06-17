@@ -55,6 +55,8 @@ export default {
       axios.post('/users/sign_in', { user: this.user })
         .then(response => {
           let user = response.data
+          this.$store.dispatch('setCurrentUser', user) // ログイン中のユーザーを設定
+          this.$store.dispatch('setFlashMessage', 'ログインしました') // flash
           // ユーザの個別ページに遷移する
           this.$router.push({
             path: '/',
@@ -63,6 +65,7 @@ export default {
         })
         .catch(error => {
           console.error(error)
+          this.$store.dispatch('setFlashMessage', 'ログインに失敗しました') // flashメッセージ
           if(error.response.data && error.response.data.errors) {
             this.errors = error.response.data.errors
           }
