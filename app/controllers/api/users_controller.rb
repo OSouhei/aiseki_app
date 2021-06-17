@@ -18,6 +18,15 @@ class Api::UsersController < ApiController
     render json: @user
   end
 
+  # GET /api//logged_in
+  def logged_in
+    if user_signed_in?
+      render json: current_user
+    else
+      render json: {}
+    end
+  end
+
   private
 
   def set_user
