@@ -12,38 +12,10 @@ import VueRouter from 'vue-router'
 import axios from 'axios'
 import Header from './components/Header'
 import Flash from './components/Flash'
-import Home from './components/Home'
-
-// ルーティング
-const routes = [
-  // トップページ
-  {
-    path: '/',
-    component: Home,
-    meta: { title: '' }
-  },
-  // ユーザー新規登録ページ
-  {
-    path: '/sign_up',
-    component: () => import('./components/users/SignUpPage'),
-    meta: { title: 'アカウント登録' }
-  },
-  // ログインページ
-  {
-    path: '/log_in',
-    component: () => import('./components/users/LogInPage'),
-    meta: { title: 'ログイン' }
-  }
-]
-
-const router = new VueRouter({
-  routes
-})
 
 Vue.use(VueRouter)
 
 export default {
-  router,
   components: {
     Header,
     Flash

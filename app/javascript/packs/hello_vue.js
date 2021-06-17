@@ -1,5 +1,6 @@
 import Vue from 'vue'
-import store from '../store'
+import store from '../store/store'
+import router from '../router'
 import axios from 'axios'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
@@ -12,6 +13,7 @@ Vue.use(CsrfTokenPlugin, { axios })
 
 document.addEventListener('DOMContentLoaded', () => {
   const app = new Vue({
+    router,
     store,
     render: h => h(App)
   }).$mount()
