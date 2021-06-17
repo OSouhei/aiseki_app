@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <Header></Header>
+    <Flash></Flash>
     <router-view></router-view>
   </div>
 </template>
@@ -9,6 +10,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Header from './components/Header'
+import Flash from './components/Flash'
 import Home from './components/Home'
 
 // ルーティング
@@ -42,7 +44,8 @@ Vue.use(VueRouter)
 export default {
   router,
   components: {
-    Header
+    Header,
+    Flash
   },
   methods: {
     // ページのタイトルを返すメソッド
