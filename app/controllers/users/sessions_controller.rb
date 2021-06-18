@@ -1,4 +1,5 @@
 class Users::SessionsController < Devise::SessionsController
+  protect_from_forgery
   respond_to :json
 
   # POST /users/sign_in
