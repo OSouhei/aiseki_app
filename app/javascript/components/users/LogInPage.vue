@@ -53,17 +53,17 @@ export default {
     // APIに問い合わせてログインする
     login() {
       axios.post('/users/sign_in', { user: this.user })
-        .then(response => {
-          let user = response.data
+        .then(res => {
+          let user = res.data
           this.$store.dispatch('setCurrentUser', user) // ログイン中のユーザーを設定
           this.$store.dispatch('setFlashMessage', 'ログインしました') // flash
           this.$router.push({ path: '/' }).catch(err => {}) // トップページに移動
         })
-        .catch(error => {
-          console.error(error)
+        .catch(err => {
+          console.error(err)
           this.$store.dispatch('setFlashMessage', 'ログインに失敗しました') // flashメッセージ
-          if(error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors
+          if(err.response.data && err.response.data.errors) {
+            this.errors = err.response.data.errors
           }
         })
     }

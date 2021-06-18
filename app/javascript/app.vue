@@ -33,20 +33,19 @@ export default {
     }
   },
   mounted() {
-    // マウント時にページタイトルを設定
-    this.setTitle(this.$route)
+    this.setTitle(this.$route) // ページタイトルを設定
     // マウント時にストアのログイン中のユーザを設定
     axios.get('/api/logged_in')
-      .then(response => {
-        let user = response.data
+      .then(res => {
+        let user = res.data
         if (Object.keys(user).length !== 0) {
           this.$store.dispatch('setCurrentUser', user)
         } else {
           this.$store.dispatch('setCurrentUser', {})
         }
       })
-      .catch(error => {
-        console.log(error)
+      .catch(err => {
+        console.log(err)
       })
   },
   watch: {
