@@ -70,8 +70,8 @@ export default {
     // APIに問い合わせてユーザーを作成
     createUser() {
       axios.post('/users', { user: this.user })
-        .then(response => {
-          let user = response.data
+        .then(res => {
+          let user = res.data
           this.$store.dispatch('setCurrentUser', user) // ログイン中のユーザ（currentUser)を設定
           this.$store.dispatch('setFlashMessage', 'アカウント登録に成功しました') // flashメッセージを設定
           // ユーザの個別ページに遷移する
@@ -80,10 +80,10 @@ export default {
             params: { id: user.id }
           })
         })
-        .catch(error => {
-          console.error(error)
-          if(error.response.data && error.response.data.errors) {
-            this.errors = error.response.data.errors
+        .catch(err => {
+          console.error(err)
+          if(err.response.data && err.response.data.errors) {
+            this.errors = err.response.data.errors
           }
         })
     },

@@ -43,7 +43,7 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -57,13 +57,13 @@ export default {
     // ログアウトする
     logout() {
       axios.delete('/users/sign_out')
-        .then(response => {
+        .then(res => {
           this.$store.dispatch('setCurrentUser', {}) // ログイン中のユーザーを空に
           this.$store.dispatch('setFlashMessage', 'ログアウトしました') // flash
           this.$router.push({ path: '/' }).catch(err => {}) // トップページに移動
         })
-        .catch(error => {
-          console.error(error)
+        .catch(err => {
+          console.error(err)
           this.$store.dispatch('setFlashMessage', 'ログアウトに失敗しました') // flash
         })
     }
