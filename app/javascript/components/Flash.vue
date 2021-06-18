@@ -1,12 +1,10 @@
 <template>
   <div id="flash">
-    <el-alert v-show="flag" :title="message" type="success" effect="dark"></el-alert>
+    <el-alert v-show="flag" :title="flashMessage" type="success" effect="dark" :closable="false"></el-alert>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   data() {
     return {
@@ -14,18 +12,17 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      message: state => state.flashMessage
-    })
+    flashMessage() {
+      return this.$store.getters.getFlashMessage
+    }
   },
   watch: {
-    // flashメッセージが空になるなら非表示に、逆なら表示する
-    message(to, from) {
-      if (to === '') {
+    // flashが更新されたら表示、3000ミリ秒後に非表示に
+    flashMessage(val, old) {
+      this.flag = true
+      setTimeout(() => {
         this.flag = false
-      } else {
-        this.flag = true
-      }
+      }, 3000)
     }
   }
 }

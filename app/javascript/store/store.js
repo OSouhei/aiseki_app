@@ -10,6 +10,9 @@ export default new Vuex.Store({
     currentUser: {} // ログイン中のユーザ
   },
   getters: {
+    getFlashMessage(state) {
+      return state.flashMessage
+    },
     // ユーザーがログインしているか？
     isLoggedIn(state) {
       return Object.keys(state.currentUser).length !== 0 ? true : false

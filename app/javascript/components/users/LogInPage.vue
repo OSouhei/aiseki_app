@@ -57,11 +57,7 @@ export default {
           let user = response.data
           this.$store.dispatch('setCurrentUser', user) // ログイン中のユーザーを設定
           this.$store.dispatch('setFlashMessage', 'ログインしました') // flash
-          // ユーザの個別ページに遷移する
-          this.$router.push({
-            path: '/',
-            params: { id: user.id }
-          })
+          this.$router.push({ path: '/' }).catch(err => {}) // トップページに移動
         })
         .catch(error => {
           console.error(error)
