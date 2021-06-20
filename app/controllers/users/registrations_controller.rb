@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
               email: @user.email
             }
           }
-        }
+        } and return
       end
     end
   end
