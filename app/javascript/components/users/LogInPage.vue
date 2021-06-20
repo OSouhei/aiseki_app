@@ -54,7 +54,7 @@ export default {
     login() {
       axios.post('/users/sign_in', { user: this.user })
         .then(res => {
-          let user = res.data
+          let user = res.data.result.user
           this.$store.dispatch('setCurrentUser', user) // ログイン中のユーザーを設定
           this.$store.dispatch('setFlashMessage', 'ログインしました') // flash
           this.$router.push({ path: '/' }).catch(err => {}) // トップページに移動
@@ -62,7 +62,7 @@ export default {
         .catch(err => {
           console.error(err)
           this.$store.dispatch('setFlashMessage', 'ログインに失敗しました') // flashメッセージ
-          if(err.response.data && err.response.data.errors) {
+          if (err.response.data && err.response.data.errors) {
             this.errors = err.response.data.errors
           }
         })

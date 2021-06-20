@@ -7,13 +7,10 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import VueRouter from 'vue-router'
 import axios from 'axios'
+import router from './router'
 import Header from './components/Header'
 import Flash from './components/Flash'
-
-Vue.use(VueRouter)
 
 export default {
   components: {
@@ -33,11 +30,10 @@ export default {
     }
   },
   mounted() {
-    this.setTitle(this.$route) // ページタイトルを設定
     // マウント時にストアのログイン中のユーザを設定
     axios.get('/api/logged_in')
       .then(res => {
-        let user = res.data
+        const user = res.data
         if (Object.keys(user).length !== 0) {
           this.$store.dispatch('setCurrentUser', user)
         } else {
@@ -51,7 +47,6 @@ export default {
   watch: {
     // ページが遷移するたびにページタイトルを変更
     '$route'(to, from) {
-      this.setTitle(to)
     }
   }
 }
