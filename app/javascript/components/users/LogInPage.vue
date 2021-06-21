@@ -46,7 +46,7 @@ export default {
         ]
       },
       // サーバー側で発生したエラー
-      errors: ''
+      errors: []
     }
   },
   methods: {
@@ -61,7 +61,7 @@ export default {
         })
         .catch(err => {
           console.error(err)
-          this.$store.dispatch('setFlash', { message: 'ログインに失敗しました', type: 'error' }) // flash
+          this.$store.dispatch('setFlash', { message: 'ログインに失敗しました。メールアドレス、パスワードが正しいか確認して下さい', type: 'error' }) // flash
           if (err.response.data && err.response.data.errors) {
             this.errors = err.response.data.errors
           }

@@ -70,23 +70,28 @@ export default {
   methods: {
     // APIに問い合わせてユーザーを作成
     createUser() {
+      let errors = []
       axios.post('/users', { user: this.user })
         .then(res => {
-          let user = res.data.result.user
-          this.$store.dispatch('setCurrentUser', user) // ログイン中のユーザ（currentUser)を設定
-          this.$store.dispatch('setFlash', { message: 'アカウントを登録しました', type: 'success' }) // flash
-          // ユーザの個別ページに遷移する
-          this.$router.push({
-            path: '/',
-            params: { id: user.id }
-          })
+          errors = res.data.result.errors
+          // アカウントの作成に失敗した場合
+          if (errors.length !== 0) {
+            throw new Error(errors)
+          // アカウントの作成に成功した場合
+          } else {
+            let user = res.data.result.user
+            this.$store.dispatch('setCurrentUser', user) // ログイン中のユーザ（currentUser)を設定
+            this.$store.dispatch('setFlash', { message: 'アカウントを登録しました', type: 'success' }) // flash
+            // ユーザの個別ページに遷移する
+            this.$router.push({
+              path: '/',
+              params: { id: user.id }
+            })
+          }
         })
         .catch(err => {
           console.error(err)
-          this.$store.dispatch('setFlash', { message: 'アカウント作成に失敗しました', type: 'error' }) // flash
-          if (err.response.data && err.response.data.errors) {
-            this.errors = err.response.data.errors
-          }
+          this.errors = errors
         })
     },
     // パスワード（確認）のバリデーション関数

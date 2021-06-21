@@ -8,6 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         status: 'ok',
         csrf_token: form_authenticity_token,
         result: {
+          errors: @user.errors.full_messages,
           user: {
             id: @user.id,
             name: @user.name,
