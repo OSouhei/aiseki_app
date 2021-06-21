@@ -6,12 +6,16 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   strict: true,
   state: {
-    flashMessage: '', // flashの文章
+    // flash
+    flash: {
+      message: '', // flashの文章
+      type: 'success' // flashのタイプ（success, warning, error）
+    },
     currentUser: {} // ログイン中のユーザ
   },
   getters: {
-    getFlashMessage(state) {
-      return state.flashMessage
+    getFlash(state) {
+      return state.flash
     },
     // ユーザーがログインしているか？
     isLoggedIn(state) {
@@ -19,9 +23,10 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    // flashメッセージを設定
-    setFlashMessage(state, message) {
-      state.flashMessage = message
+    // flashを設定
+    setFlash(state, { message, type }) {
+      state.flash.message = message
+      state.flash.type = type
     },
     // ログイン中のユーザを設定
     setCurrentUser(state, user) {
@@ -29,8 +34,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    setFlashMessage(context, message) {
-      context.commit('setFlashMessage', message)
+    setFlash(context, flash) {
+      context.commit('setFlash', flash)
     },
     setCurrentUser(context, user) {
       context.commit('setCurrentUser', user)

@@ -12,10 +12,10 @@
     },
     "hello_vue": {
       "js": [
-        "/packs/js/hello_vue-8da90dcb8388b8b5bc44.js"
+        "/packs/js/hello_vue-a3153cdaa18b9e5de805.js"
       ],
       "js.map": [
-        "/packs/js/hello_vue-8da90dcb8388b8b5bc44.js.map"
+        "/packs/js/hello_vue-a3153cdaa18b9e5de805.js.map"
       ]
     },
     "modules/validate_email": {
@@ -43,8 +43,8 @@
       ]
     }
   },
-  "hello_vue.js": "/packs/js/hello_vue-8da90dcb8388b8b5bc44.js",
-  "hello_vue.js.map": "/packs/js/hello_vue-8da90dcb8388b8b5bc44.js.map",
+  "hello_vue.js": "/packs/js/hello_vue-a3153cdaa18b9e5de805.js",
+  "hello_vue.js.map": "/packs/js/hello_vue-a3153cdaa18b9e5de805.js.map",
   "media/fonts/element-icons.ttf": "/packs/media/fonts/element-icons-45201881.ttf",
   "media/fonts/element-icons.woff": "/packs/media/fonts/element-icons-313f7dac.woff",
   "modules/validate_email.js": "/packs/js/modules/validate_email-b78a599216fa2f5d76d1.js",

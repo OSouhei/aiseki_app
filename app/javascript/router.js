@@ -44,11 +44,11 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
   // 認証が必要なページで、ログインしていない場合
   if (to.meta.requiresAuth && !store.getters.isLoggedIn) {
-    store.dispatch('setFlashMessage', 'このページにアクセスするにはログインする必要があります')
+    store.dispatch('setFlash', { message: 'このページにアクセスするにはログインする必要があります', type: 'warning' })
     next('/log_in')
   // 認証済みではアクセスできないページで、ログイン済みの場合
   } else if (to.meta.requiresAuth === false && store.getters.isLoggedIn) {
-    store.dispatch('setFlashMessage', 'このページにはアクセスできません')
+    store.dispatch('setFlash', { message: 'このページにはアクセスできません', type: 'warning' })
     next(false)
   // ログインしていても、してなくても大丈夫なページの場合
   } else {

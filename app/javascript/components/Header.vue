@@ -59,12 +59,12 @@ export default {
       axios.delete('/users/sign_out')
         .then(res => {
           this.$store.dispatch('setCurrentUser', {}) // ログイン中のユーザーを空に
-          this.$store.dispatch('setFlashMessage', 'ログアウトしました') // flash
+          this.$store.dispatch('setFlash', { message: 'ログアウトしました', type: 'success' }) // flash
           this.$router.push({ path: '/' }).catch(err => {}) // トップページに移動
         })
         .catch(err => {
           console.error(err)
-          this.$store.dispatch('setFlashMessage', 'ログアウトに失敗しました') // flash
+          this.$store.dispatch('setFlash', { message: 'ログアウトに失敗しました', type: 'error' }) // flash
         })
     }
   }

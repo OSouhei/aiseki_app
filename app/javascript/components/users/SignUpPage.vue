@@ -2,7 +2,8 @@
   <div class="signup">
     <h2>アカウント登録</h2>
     <el-form ref="form" :model="user" :rules="rules" label-position="right" label-width="150px">
-      <div v-if="errors.length != 0">
+      <!-- errors -->
+      <div id="errors" v-if="errors.length !== 0">
         <ul v-for="e in errors" :key="e">
           <li>
             <el-alert :title="e" type="error" center show-icon></el-alert>
@@ -63,7 +64,7 @@ export default {
         ]
       },
       // サーバー側で発生したエラー
-      errors: '',
+      errors: [],
     }
   },
   methods: {
@@ -71,9 +72,9 @@ export default {
     createUser() {
       axios.post('/users', { user: this.user })
         .then(res => {
-          let user = res.data
+          let user = res.data.result.user
           this.$store.dispatch('setCurrentUser', user) // ログイン中のユーザ（currentUser)を設定
-          this.$store.dispatch('setFlashMessage', 'アカウント登録に成功しました') // flashメッセージを設定
+          this.$store.dispatch('setFlash', { message: 'アカウントを登録しました', type: 'success' }) // flash
           // ユーザの個別ページに遷移する
           this.$router.push({
             path: '/',
@@ -82,7 +83,8 @@ export default {
         })
         .catch(err => {
           console.error(err)
-          if(err.response.data && err.response.data.errors) {
+          this.$store.dispatch('setFlash', { message: 'アカウント作成に失敗しました', type: 'error' }) // flash
+          if (err.response.data && err.response.data.errors) {
             this.errors = err.response.data.errors
           }
         })

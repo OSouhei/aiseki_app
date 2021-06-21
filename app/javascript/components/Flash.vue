@@ -1,6 +1,6 @@
 <template>
   <div id="flash">
-    <el-alert v-show="flag" :title="flashMessage" type="success" effect="dark" :closable="false"></el-alert>
+    <el-alert v-show="flag" :title="flash.message" :type="flash.type" effect="dark" :closable="false"></el-alert>
   </div>
 </template>
 
@@ -8,17 +8,17 @@
 export default {
   data() {
     return {
-      flag: false
+      flag: false // flashの表示・非表示
     }
   },
   computed: {
-    flashMessage() {
-      return this.$store.getters.getFlashMessage
+    flash() {
+      return this.$store.getters.getFlash
     }
   },
   watch: {
     // flashが更新されたら表示、3000ミリ秒後に非表示に
-    flashMessage(val, old) {
+    'flash.message'(val, old) {
       this.flag = true
       setTimeout(() => {
         this.flag = false
