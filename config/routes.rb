@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api, { format: 'json' } do
-    resources :users, only: [:index, :show, :create]
+    resources :users, only: [:index, :show]
     get "logged_in", to: "users#logged_in"
   end
 
