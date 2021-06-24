@@ -6,7 +6,6 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   strict: true,
   state: {
-    // flash
     flash: {
       message: '', // flashの文章
       type: 'success' // flashのタイプ（success, warning, error）
@@ -20,13 +19,15 @@ export default new Vuex.Store({
     // ユーザーがログインしているか？
     isLoggedIn(state) {
       return Object.keys(state.currentUser).length !== 0 ? true : false
+    },
+    getCurrentUser(state) {
+      return state.currentUser
     }
   },
   mutations: {
     // flashを設定
     setFlash(state, { message, type }) {
-      state.flash.message = message
-      state.flash.type = type
+      state.flash = { message, type }
     },
     // ログイン中のユーザを設定
     setCurrentUser(state, user) {

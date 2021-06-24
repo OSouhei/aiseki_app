@@ -18,7 +18,7 @@ export default {
   },
   watch: {
     // flashが更新されたら表示、3000ミリ秒後に非表示に
-    'flash.message'(val, old) {
+    flash(val, old) {
       this.flag = true
       setTimeout(() => {
         this.flag = false

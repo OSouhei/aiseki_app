@@ -10,6 +10,7 @@ const routes = [
   // トップページ
   {
     path: '/',
+    name: 'home',
     component: Home,
     meta: {
       title: '', // ページ固有のタイトル
@@ -19,6 +20,7 @@ const routes = [
   // ユーザー新規登録ページ
   {
     path: '/sign_up',
+    name: 'signUp',
     component: () => import('./components/users/SignUpPage'),
     meta: {
       title: 'アカウント登録',
@@ -28,10 +30,21 @@ const routes = [
   // ログインページ
   {
     path: '/log_in',
+    name: 'logIn',
     component: () => import('./components/users/LogInPage'),
     meta: {
       title: 'ログイン',
       requiresAuth: false
+    }
+  },
+  // ユーザー個別ページ
+  {
+    path: '/users/:id',
+    name: 'userPage',
+    component: () => import('./components/users/UserPage'),
+    meta: {
+      title: '',
+      requiresAuth: null
     }
   }
 ]

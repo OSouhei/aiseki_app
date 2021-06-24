@@ -10,6 +10,7 @@
 import axios from 'axios'
 import Header from './components/Header'
 import Flash from './components/Flash'
+import { BASE_TITLE } from './const'
 
 export default {
   components: {
@@ -17,18 +18,18 @@ export default {
     Flash
   },
   methods: {
-    // ページのタイトルを返すメソッド
+    // ページのタイトルを設定
     setTitle(routeInstance) {
-      const baseTitle = '相席アプリ'
       let pageTitle = routeInstance.meta.title
       if (routeInstance.meta.title) {
-        document.title = pageTitle + ' | ' + baseTitle
+        document.title = pageTitle + ' | ' + BASE_TITLE
       } else {
-        document.title = baseTitle
+        document.title = BASE_TITLE
       }
     }
   },
   mounted() {
+    this.setTitle(this.$route)
     // マウント時にストアのログイン中のユーザを設定
     axios.get('/api/logged_in')
       .then(res => {
@@ -46,6 +47,7 @@ export default {
   watch: {
     // ページが遷移するたびにページタイトルを変更
     '$route'(to, from) {
+      this.setTitle(to)
     }
   }
 }

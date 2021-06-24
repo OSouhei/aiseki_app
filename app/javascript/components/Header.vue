@@ -8,7 +8,7 @@
         <el-menu-item index="3">お知らせ</el-menu-item>
         <el-container>
           <el-menu-item index="4">
-            <router-link to="#">
+            <router-link :to="'/users/' + currentUser.id">
               <el-button type="primary" class="button">アカウント情報</el-button>
             </router-link>
           </el-menu-item>
@@ -43,7 +43,6 @@
 
 <script>
 import axios from 'axios'
-import { mapGetters } from 'vuex'
 
 export default {
   data() {
@@ -52,7 +51,14 @@ export default {
       activeIndex2: '1'
     };
   },
-  computed: mapGetters([ 'isLoggedIn' ]),
+  computed: {
+    isLoggedIn() {
+      return this.$store.getters.isLoggedIn
+    },
+    currentUser() {
+      return this.$store.getters.getCurrentUser
+    }
+  },
   methods: {
     // ログアウトする
     logout() {

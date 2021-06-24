@@ -12,10 +12,18 @@
     },
     "hello_vue": {
       "js": [
-        "/packs/js/hello_vue-da664984bfb6b68cd6eb.js"
+        "/packs/js/hello_vue-9926974dc28220e3a576.js"
       ],
       "js.map": [
-        "/packs/js/hello_vue-da664984bfb6b68cd6eb.js.map"
+        "/packs/js/hello_vue-9926974dc28220e3a576.js.map"
+      ]
+    },
+    "modules/get_user": {
+      "js": [
+        "/packs/js/modules/get_user-2186a5ba23ab14a19a9a.js"
+      ],
+      "js.map": [
+        "/packs/js/modules/get_user-2186a5ba23ab14a19a9a.js.map"
       ]
     },
     "modules/validate_email": {
@@ -43,10 +51,12 @@
       ]
     }
   },
-  "hello_vue.js": "/packs/js/hello_vue-da664984bfb6b68cd6eb.js",
-  "hello_vue.js.map": "/packs/js/hello_vue-da664984bfb6b68cd6eb.js.map",
+  "hello_vue.js": "/packs/js/hello_vue-9926974dc28220e3a576.js",
+  "hello_vue.js.map": "/packs/js/hello_vue-9926974dc28220e3a576.js.map",
   "media/fonts/element-icons.ttf": "/packs/media/fonts/element-icons-45201881.ttf",
   "media/fonts/element-icons.woff": "/packs/media/fonts/element-icons-313f7dac.woff",
+  "modules/get_user.js": "/packs/js/modules/get_user-2186a5ba23ab14a19a9a.js",
+  "modules/get_user.js.map": "/packs/js/modules/get_user-2186a5ba23ab14a19a9a.js.map",
   "modules/validate_email.js": "/packs/js/modules/validate_email-b78a599216fa2f5d76d1.js",
   "modules/validate_email.js.map": "/packs/js/modules/validate_email-b78a599216fa2f5d76d1.js.map",
   "plugins/csrf_token_plugin.js": "/packs/js/plugins/csrf_token_plugin-3f3dd5606e5b518e6d1e.js",
