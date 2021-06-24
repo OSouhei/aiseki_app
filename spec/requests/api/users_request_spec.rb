@@ -52,10 +52,10 @@ RSpec.describe "Api::Users", type: :request do
     end
   end
 
-  # Api;;Users#logged_in
-  describe "GET /api/logged_in" do
+  # Api;;Users#login_user
+  describe "GET /api/login_user" do
     before do
-      get api_logged_in_path
+      get api_login_user_path
     end
 
     it "responds :ok" do
@@ -69,7 +69,7 @@ RSpec.describe "Api::Users", type: :request do
     context "when user is log in" do
       before do
         sign_in user
-        get api_logged_in_path
+        get api_login_user_path
       end
 
       it "has current_user data" do

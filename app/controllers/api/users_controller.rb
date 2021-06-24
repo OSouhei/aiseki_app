@@ -22,8 +22,8 @@ class Api::UsersController < ApiController
     }
   end
 
-  # GET /api/logged_in
-  def logged_in
+  # GET /api/login_user
+  def login_user
     if user_signed_in?
       render json: current_user
     else
