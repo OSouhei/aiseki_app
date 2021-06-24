@@ -14,7 +14,7 @@ RSpec.describe "Api::Users", type: :request do
     end
 
     it "render json" do
-      expect(response.content_type).to eq "application/json; charset=utf-8"
+      expect(response).to have_content_type_json
     end
 
     it "has users data" do
@@ -39,7 +39,7 @@ RSpec.describe "Api::Users", type: :request do
     end
 
     it "render json" do
-      expect(response.content_type).to eq "application/json; charset=utf-8"
+      expect(response).to have_content_type_json
     end
 
     it "has user data" do
@@ -63,7 +63,7 @@ RSpec.describe "Api::Users", type: :request do
     end
 
     it "render json" do
-      expect(response.content_type).to eq "application/json; charset=utf-8"
+      expect(response).to have_content_type_json
     end
 
     context "when user is log in" do

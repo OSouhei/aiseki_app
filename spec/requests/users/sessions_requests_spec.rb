@@ -15,7 +15,7 @@ RSpec.describe "SessionsRequests", type: :request do
       end
 
       it "render json" do
-        expect(response.content_type).to eq "application/json; charset=utf-8"
+        expect(response).to have_content_type_json
       end
 
       it "responds user data" do
@@ -49,7 +49,7 @@ RSpec.describe "SessionsRequests", type: :request do
       end
 
       it "render json" do
-        expect(response.content_type).to eq "application/json; charset=utf-8"
+        expect(response).to have_content_type_json
       end
 
       it "responds user data as nil" do
@@ -81,7 +81,7 @@ RSpec.describe "SessionsRequests", type: :request do
       end
 
       it "render json" do
-        expect(response.content_type).to eq "application/json; charset=utf-8"
+        expect(response).to have_content_type_json
       end
 
       it "logout" do

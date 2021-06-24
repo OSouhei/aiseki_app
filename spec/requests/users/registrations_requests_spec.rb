@@ -15,7 +15,7 @@ RSpec.describe "Users::Registrations", type: :request do
 
       it "render json" do
         post user_registration_path, params: { user: user_params }
-        expect(response.content_type).to eq "application/json; charset=utf-8"
+        expect(response).to have_content_type_json
       end
 
       it "create user" do
@@ -50,7 +50,7 @@ RSpec.describe "Users::Registrations", type: :request do
 
       it "render json" do
         post user_registration_path, params: { user: invalid_user_params }
-        expect(response.content_type).to eq "application/json; charset=utf-8"
+        expect(response).to have_content_type_json
       end
 
       it "does not create user" do
