@@ -7,11 +7,7 @@ RSpec.describe "Homes", type: :request do
     end
 
     it "responds successfully" do
-      expect(response).to have_http_status 200
-    end
-
-    it "render template home/index" do
-      expect(response).to render_template :index
+      expect(response).to have_http_status :ok
     end
   end
 end

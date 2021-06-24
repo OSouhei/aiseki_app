@@ -66,9 +66,6 @@ RSpec/LetSetup:
 RSpec/NotToNot:
   Enabled: false
 
-RSpec/Rails/HttpStatus:
-  EnforcedStyle: numeric
-
 Bundler/OrderedGems:
   Enabled: false
 

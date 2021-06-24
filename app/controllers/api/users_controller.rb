@@ -10,7 +10,9 @@ class Api::UsersController < ApiController
   # GET /api/users
   def index
     users = User.all
-    render json: users
+    render json: {
+      result: users
+    }
   end
 
   # GET /api/users/:id

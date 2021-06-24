@@ -1,15 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:joining, :follow, :unfollow]
-  before_action :set_user, only: [:show, :joining, :follow, :unfollow]
-
-  def index
-    @users = User.page(params[:page]).per(9)
-  end
-
-  def show
-    @users = @user.following
-    @rooms = @user.rooms
-  end
+  before_action :set_user, only: [:joining, :follow, :unfollow]
 
   # GET /users/:id/joining
   def joining

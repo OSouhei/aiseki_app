@@ -4,18 +4,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /users
   def create
     super do
+      err = @user.errors.full_messages
+      sign_in(@user, event: :authentication) if err.empty? # エラーがなければログイン
+      http_status = err.empty? ? :created : :bad_request # ユーザー作成の結果に応じてステータスコードを返す
       render json: {
-        status: 'ok',
         csrf_token: form_authenticity_token,
         result: {
-          errors: @user.errors.full_messages,
-          user: {
-            id: @user.id,
-            name: @user.name,
-            email: @user.email
-          }
+          errors: err,
+          user: { id: @user.id, name: @user.name, email: @user.email }
         }
-      } and return
+      }, status: http_status and return
     end
   end
 end
