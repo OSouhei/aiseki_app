@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users, skip: :all
   devise_scope :user do
     post '/users' => 'users/registrations#create', as: :user_registration
+    patch '/users' => 'users/registrations#update'
     post '/users/sign_in' => 'users/sessions#create', as: :user_session
     delete '/users/sign_out' => 'users/sessions#destroy', as: :destroy_user_session
   end

@@ -16,4 +16,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
       }, status: http_status and return
     end
   end
+
+  # PATCH /users
+  def update
+    super do
+      err = @user.errors.full_messages
+      http_status = err.empty? ? :ok : :bad_request
+      render json: {
+        csrf_token: form_authenticity_token,
+        result: {
+          errors: err,
+          user: { id: @user.id, name: @user.name, email: @user.email }
+        }
+      }, status: http_status and return
+    end
+  end
 end
