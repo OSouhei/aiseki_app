@@ -31,7 +31,7 @@ export default {
   mounted() {
     this.setTitle(this.$route)
     // マウント時にストアのログイン中のユーザを設定
-    axios.get('/api/logged_in')
+    axios.get('/api/login_user')
       .then(res => {
         const user = res.data
         if (Object.keys(user).length !== 0) {
