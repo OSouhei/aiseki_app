@@ -16,6 +16,7 @@ class RoomsController < ApplicationController
   end
 
   def create
+    # debugger
     @room = current_user.rooms.build(room_params)
     @room.save ? redirect_to(room_path(@room), notice: "ルームを作成しました。") : render(:new)
   end

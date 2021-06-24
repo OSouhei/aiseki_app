@@ -8,7 +8,7 @@ class Room < ApplicationRecord
 
   validates :title, presence: true, length: { maximum: 30 }
   validates :content, length: { maximum: 200 }
-  validates :limit, presence: true, numericality: { only_integer: true }
+  validates :limit, presence: true, numericality: { only_integer: true }, allow_nil: true
   validate :member_limit
 
   def self.search(term = "")

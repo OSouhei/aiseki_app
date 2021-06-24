@@ -149,7 +149,7 @@ RSpec.describe User, type: :model do
       it "is invalid with invalid extension" do
         user.profile_image = File.new("spec/files/test.txt")
         user.valid?
-        expect(user.errors[:profile_image]).to include "\"txt\"ファイルのアップロードは許可されていません。アップロードできるファイルタイプ: jpg, jpeg, gif, png"
+        expect(user.errors[:profile_image]).to include "この形式のファイルのアップロードは許可されていません。アップロードできるファイルタイプ: jpg, jpeg, gif, png"
       end
     end
   end

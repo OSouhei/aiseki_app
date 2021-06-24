@@ -43,7 +43,7 @@ RSpec.describe Room, type: :model do
   context "limit" do
     let(:limited_room) { create(:room, :limited) }
 
-    it { should validate_presence_of(:limit) }
+    it { should validate_presence_of(:limit).allow_nil }
     it { should validate_numericality_of(:limit).only_integer }
 
     it "is invalid when room's member is more than limit" do

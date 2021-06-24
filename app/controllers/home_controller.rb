@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @rooms = Room.take 3
+    render 'layouts/application'
   end
 end
