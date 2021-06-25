@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Header from './components/Header'
 import Flash from './components/Flash'
+import { getCurrentUser } from './packs/modules/get_current_user'
 import { BASE_TITLE } from './const'
 
 export default {
@@ -28,12 +28,11 @@ export default {
       }
     }
   },
-  mounted() {
+  created() {
     this.setTitle(this.$route)
     // マウント時にストアのログイン中のユーザを設定
-    axios.get('/api/login_user')
-      .then(res => {
-        const user = res.data
+    getCurrentUser()
+      .then(user => {
         if (Object.keys(user).length !== 0) {
           this.$store.dispatch('setCurrentUser', user)
         } else {
@@ -41,14 +40,16 @@ export default {
         }
       })
       .catch(err => {
-        console.log(err)
+        console.error(err)
+        this.$store.dispatch('setCurrentUser', {})
       })
   },
   watch: {
     // ページが遷移するたびにページタイトルを変更
     '$route'(to, from) {
       this.setTitle(to)
-    }
+    },
+    
   }
 }
 </script>

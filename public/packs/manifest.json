@@ -12,18 +12,26 @@
     },
     "hello_vue": {
       "js": [
-        "/packs/js/hello_vue-9926974dc28220e3a576.js"
+        "/packs/js/hello_vue-32bae40fd01f2211e2e2.js"
       ],
       "js.map": [
-        "/packs/js/hello_vue-9926974dc28220e3a576.js.map"
+        "/packs/js/hello_vue-32bae40fd01f2211e2e2.js.map"
+      ]
+    },
+    "modules/get_current_user": {
+      "js": [
+        "/packs/js/modules/get_current_user-b2cd6f8df8118afd580c.js"
+      ],
+      "js.map": [
+        "/packs/js/modules/get_current_user-b2cd6f8df8118afd580c.js.map"
       ]
     },
     "modules/get_user": {
       "js": [
-        "/packs/js/modules/get_user-2186a5ba23ab14a19a9a.js"
+        "/packs/js/modules/get_user-9c43c6bd8bbad3a58e32.js"
       ],
       "js.map": [
-        "/packs/js/modules/get_user-2186a5ba23ab14a19a9a.js.map"
+        "/packs/js/modules/get_user-9c43c6bd8bbad3a58e32.js.map"
       ]
     },
     "modules/validate_email": {
@@ -51,12 +59,14 @@
       ]
     }
   },
-  "hello_vue.js": "/packs/js/hello_vue-9926974dc28220e3a576.js",
-  "hello_vue.js.map": "/packs/js/hello_vue-9926974dc28220e3a576.js.map",
+  "hello_vue.js": "/packs/js/hello_vue-32bae40fd01f2211e2e2.js",
+  "hello_vue.js.map": "/packs/js/hello_vue-32bae40fd01f2211e2e2.js.map",
   "media/fonts/element-icons.ttf": "/packs/media/fonts/element-icons-45201881.ttf",
   "media/fonts/element-icons.woff": "/packs/media/fonts/element-icons-313f7dac.woff",
-  "modules/get_user.js": "/packs/js/modules/get_user-2186a5ba23ab14a19a9a.js",
-  "modules/get_user.js.map": "/packs/js/modules/get_user-2186a5ba23ab14a19a9a.js.map",
+  "modules/get_current_user.js": "/packs/js/modules/get_current_user-b2cd6f8df8118afd580c.js",
+  "modules/get_current_user.js.map": "/packs/js/modules/get_current_user-b2cd6f8df8118afd580c.js.map",
+  "modules/get_user.js": "/packs/js/modules/get_user-9c43c6bd8bbad3a58e32.js",
+  "modules/get_user.js.map": "/packs/js/modules/get_user-9c43c6bd8bbad3a58e32.js.map",
   "modules/validate_email.js": "/packs/js/modules/validate_email-b78a599216fa2f5d76d1.js",
   "modules/validate_email.js.map": "/packs/js/modules/validate_email-b78a599216fa2f5d76d1.js.map",
   "plugins/csrf_token_plugin.js": "/packs/js/plugins/csrf_token_plugin-3f3dd5606e5b518e6d1e.js",

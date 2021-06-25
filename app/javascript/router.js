@@ -37,6 +37,16 @@ const routes = [
       requiresAuth: false
     }
   },
+  // ユーザー編集ページ
+  {
+    path: '/users/edit',
+    name: 'editUserPage',
+    component: () => import('./components/users/EditUserPage'),
+    meta: {
+      title: 'プロフィール編集',
+      requiresAuth: true
+    }
+  },
   // ユーザー個別ページ
   {
     path: '/users/:id',

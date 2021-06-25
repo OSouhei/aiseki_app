@@ -1,6 +1,6 @@
 <template>
-  <div class="signup">
-    <h2>アカウント登録</h2>
+  <div id="edit-user">
+    <h2>プロフィール編集</h2>
     <el-form ref="form" :model="user" :rules="rules" label-position="right" label-width="150px">
       <!-- errors -->
       <div id="errors" v-if="errors.length !== 0">
@@ -16,14 +16,17 @@
       <el-form-item label="メールアドレス" prop="email">
         <el-input v-model="user.email"></el-input>
       </el-form-item>
-      <el-form-item label="パスワード" prop="password">
+      <el-form-item label="変更するパスワード" prop="password">
         <el-input v-model="user.password" show-password></el-input>
       </el-form-item>
       <el-form-item label="パスワード（確認）" prop="password_confirmation">
         <el-input v-model="user.password_confirmation" show-password></el-input>
       </el-form-item>
+      <el-form-item label="現在のパスワード" prop="current_password">
+        <el-input v-model="user.current_password" show-password></el-input>
+      </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click.prevent="createUser">登録</el-button>
+        <el-button type="primary" @click.prevent="updateUser">登録</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -40,7 +43,8 @@ export default {
         name: '',
         email: '',
         password: '',
-        password_confirmation: ''
+        password_confirmation: '',
+        current_password: ''
       },
       // 検証ルール
       rules: {
@@ -54,35 +58,43 @@ export default {
           { validator: validateEmail, trigger: 'blur' },
         ],
         password: [
-          { required: true, message: 'パスワードを入力して下さい', trigger: 'blur' },
           { min: 6, message: 'パスワードは６文字以上にして下さい', trigger: 'blur' },
         ],
         password_confirmation: [
-          { required: true, message: 'パスワードを入力して下さい', trigger: 'blur' },
           { min: 6, message: 'パスワードは６文字以上にして下さい', trigger: 'blur' },
           { validator: this.validatePasswordConfirmation, trigger: 'blur' },
+        ],
+        current_password: [
+          { required: true, message: 'パスワードを入力して下さい', trigger: 'blur' },
+          { min: 6, message: 'パスワードは6文字以上です', trigger: 'blur' }
         ]
       },
       // サーバー側で発生したエラー
       errors: [],
     }
   },
+  computed: {
+    currentUser() {
+      return this.$store.getters.getCurrentUser
+    }
+  },
   methods: {
-    // APIに問い合わせてユーザーを作成
-    createUser() {
-      axios.post('/users', { user: this.user })
+    updateUser() {
+      axios.patch('/users', { user: this.user })
         .then(res => {
-          if (res.data.result.errors.length === 0) {
+          const errors = res.data.result.errors
+          // ユーザーの編集に成功した場合
+          if (errors.length === 0) {
             const user = res.data.result.user
-            this.$store.dispatch('setCurrentUser', user) // ログイン中のユーザーを設定
-            this.$store.dispatch('setFlash', { message: 'アカウントを登録しました', type: 'success' }) // flash
-            // ユーザーの個別ページに移動
+            this.$store.dispatch('setCurrentUser', user) // storeのcurrentUserを更新する
+            this.$store.dispatch('setFlash', { message: 'ユーザー情報を編集しました', type: 'success' }) // flash
             this.$router.push({
               name: 'userPage',
               params: { id: user.id }
             })
+          // ユーザーの編集に失敗した場合
           } else {
-            this.errors = res.data.result.errors
+            this.errors = errors
           }
         })
         .catch(err => {
@@ -91,16 +103,13 @@ export default {
             this.errors = err.response.data.result.errors
           }
         })
-    },
-    // パスワード（確認）のバリデーション関数
-    validatePasswordConfirmation(rule, value, callback) {
-      // パスワード（確認）が入力したパスワードと一致するか
-      if (value == this.user.password) {
-        callback()
-      } else {
-        callback(new Error('パスワードと一致していません'))
-      }
     }
+  },
+  mounted() {
+    // マウント時に現在のユーザーの情報をフォームに設定
+    console.log(this.currentUser)
+    this.user.name = this.currentUser.name
+    this.user.email = this.currentUser.email
   }
 }
 </script>
@@ -116,7 +125,7 @@ li {
   list-style: none;
 }
 
-.signup {
+.edit-user {
   margin-top: 80px;
 }
 
