@@ -204,4 +204,60 @@ RSpec.describe "Users::Registrations", type: :request do
       end
     end
   end
+
+  # Users::Registrations#destroy
+  describe "DELETE /users" do
+    # ユーザーがログインしている場合
+    context "when user is logged in" do
+      before do
+        sign_in user
+      end
+
+      it "redponds :ok" do
+        delete user_registration_path
+        expect(response).to have_http_status :ok
+      end
+
+      it "render json" do
+        delete user_registration_path
+        expect(response).to have_content_type_json
+      end
+
+      it "destroy user" do
+        expect {
+          delete user_registration_path
+        }.to change(User, :count).by(-1)
+      end
+
+      it "does not has logged in user after destroying" do
+        delete user_registration_path
+        expect(controller).to_not be_user_signed_in
+      end
+
+      it "response has content" do
+        delete user_registration_path
+        data = JSON.parse(response.body)
+        expect(data["csrf_token"]).to_not be_nil
+      end
+    end
+
+    # ユーザーがログインしていない場合
+    context "when user is not logged in" do
+      it "responds :found" do
+        delete user_registration_path
+        expect(response).to have_http_status :found
+      end
+
+      it "redirect to top page" do
+        delete user_registration_path
+        expect(response).to redirect_to root_path
+      end
+
+      it "does not destroy user" do
+        expect {
+          delete user_registration_path
+        }.to_not change(User, :count)
+      end
+    end
+  end
 end

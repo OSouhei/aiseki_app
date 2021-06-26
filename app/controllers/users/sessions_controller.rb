@@ -15,7 +15,6 @@ class Users::SessionsController < Devise::SessionsController
   def destroy
     super do
       render json: {
-        csrf_param: request_forgery_protection_token,
         csrf_token: form_authenticity_token
       }, status: 200 and return
     end

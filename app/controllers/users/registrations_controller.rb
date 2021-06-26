@@ -31,4 +31,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
       }, status: http_status and return
     end
   end
+
+  # DELETE /users
+  def destroy
+    super do
+      render json: {
+        csrf_token: form_authenticity_token
+      }, status: 200 and return
+    end
+  end
 end

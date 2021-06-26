@@ -84,8 +84,15 @@ RSpec.describe "SessionsRequests", type: :request do
         expect(response).to have_content_type_json
       end
 
-      it "logout" do
+      it "has no login user after logout" do
         expect(controller).not_to be_user_signed_in
+      end
+
+      it "response has content" do
+        data = JSON.parse(response.body)
+        aggregate_failures do
+          expect(data["csrf_token"]).to_not be_blank
+        end
       end
     end
 
