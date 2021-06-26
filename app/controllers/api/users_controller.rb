@@ -18,14 +18,22 @@ class Api::UsersController < ApiController
   # GET /api/users/:id
   def show
     render json: {
-      user: @user
+      user: {
+        id: @user.id,
+        name: @user.name,
+        email: @user.email
+      }
     }
   end
 
   # GET /api/login_user
   def login_user
     if user_signed_in?
-      render json: current_user
+      render json: {
+        id: current_user.id,
+        name: current_user.name,
+        email: current_user.email
+      }
     else
       render json: {}
     end

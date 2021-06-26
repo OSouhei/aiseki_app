@@ -3,6 +3,8 @@
     <p>id: {{ user.id }}</p>
     <p>name: {{ user.name }}</p>
     <p>email: {{ user.email }}</p>
+
+    <router-link v-show="flag" :to="{ name: 'editUserPage' }">編集</router-link>
   </div>
 </template>
 
@@ -13,7 +15,13 @@ import { BASE_TITLE } from '../../const'
 export default {
   data() {
     return {
-      user: {}
+      user: {},
+      flag: false
+    }
+  },
+  computed: {
+    currentUser() {
+      return this.$store.getters.getCurrentUser
     }
   },
   methods: {
@@ -41,10 +49,22 @@ export default {
       } else {
         document.title = BASE_TITLE
       }
+    },
+    setFlag() {
+      console.log(JSON.stringify(this.currentUser))
+      console.log(JSON.stringify(this.user))
+      // ログインしているユーザーとこのページのユーザーが同じ場合はユーザー編集ページへのリンクを表示
+      if (JSON.stringify(this.currentUser) === JSON.stringify(this.user)) {
+        this.flag = true
+      // 同じでない場合はユーザー編集ページへのリンクを非表示
+      } else {
+        this.flag = false
+      }
     }
   },
   created() {
     this.setUser(this.$route.params.id)
+    this.setFlag()
   },
   watch: {
     // ルートパラメータだけが変化してもデータを更新
@@ -53,6 +73,8 @@ export default {
     },
     user(val, old) {
       this.setTitle(val.name)
+      // このページのユーザーが存在する場合
+      this.setFlag()
     }
   }
 }

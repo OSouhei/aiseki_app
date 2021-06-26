@@ -12,10 +12,10 @@
     },
     "hello_vue": {
       "js": [
-        "/packs/js/hello_vue-32bae40fd01f2211e2e2.js"
+        "/packs/js/hello_vue-5fb09486a026a5948873.js"
       ],
       "js.map": [
-        "/packs/js/hello_vue-32bae40fd01f2211e2e2.js.map"
+        "/packs/js/hello_vue-5fb09486a026a5948873.js.map"
       ]
     },
     "modules/get_current_user": {
@@ -59,8 +59,8 @@
       ]
     }
   },
-  "hello_vue.js": "/packs/js/hello_vue-32bae40fd01f2211e2e2.js",
-  "hello_vue.js.map": "/packs/js/hello_vue-32bae40fd01f2211e2e2.js.map",
+  "hello_vue.js": "/packs/js/hello_vue-5fb09486a026a5948873.js",
+  "hello_vue.js.map": "/packs/js/hello_vue-5fb09486a026a5948873.js.map",
   "media/fonts/element-icons.ttf": "/packs/media/fonts/element-icons-45201881.ttf",
   "media/fonts/element-icons.woff": "/packs/media/fonts/element-icons-313f7dac.woff",
   "modules/get_current_user.js": "/packs/js/modules/get_current_user-b2cd6f8df8118afd580c.js",
