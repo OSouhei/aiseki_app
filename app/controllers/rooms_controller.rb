@@ -1,20 +1,19 @@
 class RoomsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy, :join, :exit]
-  before_action :set_room, only: [:show, :edit, :update, :destroy, :join, :exit]
-  before_action :room_owner?, only: [:edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy, :join, :exit]
+  before_action :set_room, only: [:show, :update, :destroy, :join, :exit]
+  before_action :room_owner?, only: [:update, :destroy]
 
+  # GET /rooms
   def index
     @rooms = Room.all.page(params[:page]).per(9)
   end
 
+  # GET /rooms/:id
   def show
     @members = @room.members
   end
 
-  def new
-    @room = current_user.rooms.build
-  end
-
+  # POST /rooms
   def create
     @room = current_user.rooms.build(room_params)
     if @room.save
@@ -30,13 +29,12 @@ class RoomsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
+  # PATCH /rooms/:id
   def update
     @room.update(room_params) ? redirect_to(room_path(@room), notice: "ルームを編集しました！") : render(:edit)
   end
 
+  # DELETE /rooms/:id
   def destroy
     @room.destroy ? redirect_to(root_path, notice: "ルームは削除されました。") : redirect_to(root_path, alert: "ルームが削除できませんでした。")
   end
