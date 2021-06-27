@@ -7,6 +7,7 @@ class Room < ApplicationRecord
   belongs_to :owner, class_name: "User", foreign_key: :user_id
 
   validates :title, presence: true, length: { maximum: 30 }
+  validates :shop_name, presence: true
   validates :content, length: { maximum: 200 }
   validates :limit, presence: true, numericality: { only_integer: true }, allow_nil: true
   validate :member_limit
