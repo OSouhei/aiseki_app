@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { getUser } from '../../packs/modules/get_user'
+import { getUser } from '../../packs/modules/getUser'
 import { BASE_TITLE } from '../../const'
 
 export default {

@@ -31,7 +31,7 @@
 
 <script>
 import axios from 'axios'
-import { validateEmail } from '../../packs/modules/validate_email'
+import { validateEmail } from '../../packs/modules/validateEmail'
 
 export default {
   data() {

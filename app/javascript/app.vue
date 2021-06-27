@@ -9,7 +9,7 @@
 <script>
 import Header from './components/Header'
 import Flash from './components/Flash'
-import { getCurrentUser } from './packs/modules/get_current_user'
+import { getCurrentUser } from './packs/modules/getCurrentUser'
 import { BASE_TITLE } from './const'
 
 export default {
