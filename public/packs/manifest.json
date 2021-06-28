@@ -12,10 +12,10 @@
     },
     "hello_vue": {
       "js": [
-        "/packs/js/hello_vue-5fa3e89b6d226642980a.js"
+        "/packs/js/hello_vue-578227796df8566de863.js"
       ],
       "js.map": [
-        "/packs/js/hello_vue-5fa3e89b6d226642980a.js.map"
+        "/packs/js/hello_vue-578227796df8566de863.js.map"
       ]
     },
     "modules/getCurrentUser": {
@@ -32,6 +32,14 @@
       ],
       "js.map": [
         "/packs/js/modules/getUser-5848f4a5d7c5026b8758.js.map"
+      ]
+    },
+    "modules/searchShop": {
+      "js": [
+        "/packs/js/modules/searchShop-e1139af6b00a4a54903d.js"
+      ],
+      "js.map": [
+        "/packs/js/modules/searchShop-e1139af6b00a4a54903d.js.map"
       ]
     },
     "modules/validateEmail": {
@@ -59,14 +67,16 @@
       ]
     }
   },
-  "hello_vue.js": "/packs/js/hello_vue-5fa3e89b6d226642980a.js",
-  "hello_vue.js.map": "/packs/js/hello_vue-5fa3e89b6d226642980a.js.map",
+  "hello_vue.js": "/packs/js/hello_vue-578227796df8566de863.js",
+  "hello_vue.js.map": "/packs/js/hello_vue-578227796df8566de863.js.map",
   "media/fonts/element-icons.ttf": "/packs/media/fonts/element-icons-45201881.ttf",
   "media/fonts/element-icons.woff": "/packs/media/fonts/element-icons-313f7dac.woff",
   "modules/getCurrentUser.js": "/packs/js/modules/getCurrentUser-23d5c17ea90c38843dbc.js",
   "modules/getCurrentUser.js.map": "/packs/js/modules/getCurrentUser-23d5c17ea90c38843dbc.js.map",
   "modules/getUser.js": "/packs/js/modules/getUser-5848f4a5d7c5026b8758.js",
   "modules/getUser.js.map": "/packs/js/modules/getUser-5848f4a5d7c5026b8758.js.map",
+  "modules/searchShop.js": "/packs/js/modules/searchShop-e1139af6b00a4a54903d.js",
+  "modules/searchShop.js.map": "/packs/js/modules/searchShop-e1139af6b00a4a54903d.js.map",
   "modules/validateEmail.js": "/packs/js/modules/validateEmail-e02d71fa143ebb41ee42.js",
   "modules/validateEmail.js.map": "/packs/js/modules/validateEmail-e02d71fa143ebb41ee42.js.map",
   "plugins/csrf_token_plugin.js": "/packs/js/plugins/csrf_token_plugin-3f3dd5606e5b518e6d1e.js",

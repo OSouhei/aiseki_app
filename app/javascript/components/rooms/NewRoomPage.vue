@@ -1,0 +1,138 @@
+<template>
+  <div id="new-room">
+    <h2>ルーム作成</h2>
+    <el-form ref="form" :model="room" :rules="rules" label-position="right" label-width="150px">
+      <!-- errors -->
+      <div id="errors" v-if="errors.length !== 0">
+        <ul v-for="e in errors" :key="e">
+          <li>
+            <el-alert :title="e" type="error" center show-icon></el-alert>
+          </li>
+        </ul>
+      </div>
+      <el-form-item label="タイトル" prop="title">
+        <el-input v-model="room.title"></el-input>
+      </el-form-item>
+      <el-form-item label="メッセージ" prop="content">
+        <el-input type="textarea" v-model="room.content"></el-input>
+      </el-form-item>
+      <el-form-item label="店名" prop="shop_name">
+        <vue-simple-suggest v-model="room.shop_name" display-attribute="name" value-attribute="name" :list="shops" @change="setShops" @input="setShops" @select="setShop"></vue-simple-suggest>
+      </el-form-item>
+      <el-form-item label="人数制限" prop="limit">
+        <el-input v-model="room.limit"></el-input>
+      </el-form-item>
+      <el-form-item label="日付" prop="date">
+        <Datetime v-model="room.date" type="datetime" @input="setDate"></Datetime>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click.prevent="createRoom">ルーム作成</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+import VueSimpleSuggest from 'vue-simple-suggest'
+import 'vue-simple-suggest/dist/styles.css'
+import { Datetime } from 'vue-datetime'
+import 'vue-datetime/dist/vue-datetime.css'
+import { searchShop } from '../../packs/modules/searchShop'
+
+export default {
+  components: {
+      VueSimpleSuggest,
+      Datetime
+    },
+  data() {
+    return {
+      room: { title: '', content: '', shop_name: '', limit: '', date: '', shop_url: '' },
+      shops: [], // 検索した店
+      errors: [],
+      // 検証ルール
+      rules: {
+        title: [
+          { required: true, message: 'ルームタイトルを入力して下さい', trigger: 'blur' },
+          { max: 30, message: 'ルームタイトルは30文字以内にして下さい', trigger: 'blur' }
+        ],
+        content: [
+          { max: 200, message: 'ルームメッセージは200文字以内にして下さい', trigger: 'blur' }
+        ],
+        shop_name: [
+          { required: true, message: '店名を入力して下さい', trigger: 'blur' }
+        ],
+        limit: [
+          { type: 'integer', required: true, message: '上限人数を入力して下さい', trigger: 'blur' },
+        ],
+        date: [
+          { type: 'date', required: true, message: '日時を入力して下さい', trigger: 'blur' }
+        ]
+      }
+    }
+  },
+  methods: {
+    createRoom() {
+      axios.post('/rooms', { room: this.room })
+        .then(res => {
+          if (res.data.errors && res.data.errors.length !== 0) {
+            this.errors = res.data.errors
+          } else {
+            this.$store.dispatch('setFlash', { message: 'ルームを作成しました', type: 'success' })
+            this.$router.push('/')
+          }
+        })
+        .catch(err => {
+          this.$store.dispatch('setFlash', { message: 'ルームの作成に失敗しました', type: 'error' })
+          this.$router.push('/')
+        })
+    },
+    setShops(keyword) {
+      searchShop(keyword)
+        .then(shops => {
+          console.log(shops)
+          this.shops = shops
+        })
+        .catch(err => {
+          console.error(err)
+        })
+    },
+    setShop(shop) {
+      this.room.shop_name = shop.name
+      this.room.shop_url = shop.url
+    },
+    setDate(time) {
+      this.room.date = time
+    }
+  }
+}
+</script>
+
+<style scoped>
+h2 {
+  text-align: center;
+  margin-left: 40px;
+  margin-bottom: 60px;
+}
+
+li {
+  list-style: none;
+}
+
+#new-room {
+  margin-top: 80px;
+}
+
+.el-form {
+  width: 600px;
+  margin: 30px auto;
+}
+
+.el-form-item {
+  margin-bottom: 45px;
+}
+
+.el-button--primary {
+  margin-left: 150px;
+}
+</style>
