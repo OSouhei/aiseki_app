@@ -55,7 +55,13 @@ class RoomsController < ApplicationController
 
   # DELETE /rooms/:id
   def destroy
-    @room.destroy ? redirect_to(root_path, notice: "ルームは削除されました。") : redirect_to(root_path, alert: "ルームが削除できませんでした。")
+    if @room.destroy
+      render json: {}, status: :ok
+    else
+      render json: {
+        errors: '未知のエラー'
+      }, status: :bad_request
+    end
   end
 
   # GET /rooms/search_shop

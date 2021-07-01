@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Rooms", type: :request do
   let(:user) { create(:user) }
+  let(:other_user) { create(:user) }
   let(:room) { create(:room, owner: user) }
   let(:room_params) { attributes_for(:room) }
   let(:new_room_params) { attributes_for(:new_room) }
@@ -241,8 +242,6 @@ RSpec.describe "Rooms", type: :request do
       end
 
       context "when other user" do
-        let(:other_user) { create(:user) }
-
         before do
           sign_in other_user
           patch room_path(room), params: { room: new_room_params }
@@ -285,6 +284,75 @@ RSpec.describe "Rooms", type: :request do
             expect(room.shop_name).to_not eq new_room_params[:shop_name]
           end
         end
+      end
+    end
+  end
+
+  # Rooms#destroy
+  describe "DELETE /rooms/:id" do
+    # ユーザーがログインしている場合
+    context "when user is logged in" do
+      before do
+        sign_in user
+      end
+
+      it "responds :ok" do
+        delete room_path(room)
+        expect(response).to have_http_status :ok
+      end
+
+      it "render json" do
+        delete room_path(room)
+        expect(response).to have_content_type_json
+      end
+
+      it "destroy room" do
+        room
+        expect {
+          delete room_path(room)
+        }.to change(Room, :count).by(-1)
+      end
+    end
+
+    context "when other user" do
+      before do
+        sign_in other_user
+      end
+
+      it "responds :found" do
+        delete room_path(room)
+        expect(response).to have_http_status :found
+      end
+
+      it "redirect to top page" do
+        delete room_path(room)
+        expect(response).to redirect_to root_path
+      end
+
+      it "does not destroy room" do
+        room
+        expect {
+          delete room_path(room)
+        }.to_not change(Room, :count)
+      end
+    end
+
+    context "when user is not logged in" do
+      it "responds :found" do
+        delete room_path(room)
+        expect(response).to have_http_status :found
+      end
+
+      it "redirect to top page" do
+        delete room_path(room)
+        expect(response).to redirect_to root_path
+      end
+
+      it "does not destroy room" do
+        room
+        expect {
+          delete room_path(room)
+        }.to_not change(Room, :count)
       end
     end
   end
