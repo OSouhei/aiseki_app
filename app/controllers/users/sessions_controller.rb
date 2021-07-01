@@ -4,10 +4,10 @@ class Users::SessionsController < Devise::SessionsController
   # POST /users/sign_in
   def create
     @user = current_user
-    render(json: data_of(@user), status: 400) and return unless @user
+    render(json: data_of(@user), status: :bad_request) and return unless @user
 
     super do
-      render(json: data_of(@user), status: 200) and return
+      render(json: data_of(@user), status: :ok) and return
     end
   end
 
@@ -16,7 +16,7 @@ class Users::SessionsController < Devise::SessionsController
     super do
       render json: {
         csrf_token: form_authenticity_token
-      }, status: 200 and return
+      }, status: :ok and return
     end
   end
 

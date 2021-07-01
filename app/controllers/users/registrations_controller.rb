@@ -37,7 +37,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super do
       render json: {
         csrf_token: form_authenticity_token
-      }, status: 200 and return
+      }, status: :ok and return
     end
   end
 end

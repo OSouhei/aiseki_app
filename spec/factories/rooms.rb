@@ -11,4 +11,12 @@ FactoryBot.define do
       limit { 0 }
     end
   end
+
+  factory :new_room, class: 'Room' do
+    title { "New Room" }
+    content { "This is new content." }
+    shop_name { "new shop" }
+    limit { 1 }
+    association :owner
+  end
 end

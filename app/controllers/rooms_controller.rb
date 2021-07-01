@@ -5,12 +5,21 @@ class RoomsController < ApplicationController
 
   # GET /rooms
   def index
-    @rooms = Room.all.page(params[:page]).per(9)
+    @rooms = Room.all
+    render json: {
+      result: {
+        rooms: @rooms
+      }
+    }
   end
 
   # GET /rooms/:id
   def show
-    @members = @room.members
+    render json: {
+      result: {
+        room: @room
+      }
+    }
   end
 
   # POST /rooms
@@ -25,13 +34,23 @@ class RoomsController < ApplicationController
     else
       render json: {
         errors: @room.errors.full_messages
-      }
+      }, status: :bad_request
     end
   end
 
   # PATCH /rooms/:id
   def update
-    @room.update(room_params) ? redirect_to(room_path(@room), notice: "ルームを編集しました！") : render(:edit)
+    if @room.update(room_params)
+      render json: {
+        result: {
+          room: @room.reload
+        }
+      }
+    else
+      render json: {
+        errors: @room.errors.full_messages
+      }, status: :bad_request
+    end
   end
 
   # DELETE /rooms/:id
