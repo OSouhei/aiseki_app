@@ -11,16 +11,16 @@
         </ul>
       </div>
       <el-form-item label="名前" prop="name">
-        <el-input v-model="user.name"></el-input>
+        <el-input v-model="user.name" id="name"></el-input>
       </el-form-item>
       <el-form-item label="メールアドレス" prop="email">
-        <el-input v-model="user.email"></el-input>
+        <el-input v-model="user.email" id="email"></el-input>
       </el-form-item>
       <el-form-item label="パスワード" prop="password">
-        <el-input v-model="user.password" show-password></el-input>
+        <el-input v-model="user.password" id="password" show-password></el-input>
       </el-form-item>
       <el-form-item label="パスワード（確認）" prop="password_confirmation">
-        <el-input v-model="user.password_confirmation" show-password></el-input>
+        <el-input v-model="user.password_confirmation" id="password-confirmation" show-password></el-input>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click.prevent="createUser">登録</el-button>
@@ -58,7 +58,7 @@ export default {
           { min: 6, message: 'パスワードは６文字以上にして下さい', trigger: 'blur' },
         ],
         password_confirmation: [
-          { required: true, message: 'パスワードを入力して下さい', trigger: 'blur' },
+          { required: true, message: 'パスワード（確認）を入力して下さい', trigger: 'blur' },
           { min: 6, message: 'パスワードは６文字以上にして下さい', trigger: 'blur' },
           { validator: this.validatePasswordConfirmation, trigger: 'blur' },
         ]

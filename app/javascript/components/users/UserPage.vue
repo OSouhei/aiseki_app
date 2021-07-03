@@ -5,10 +5,12 @@
     <p>email: {{ user.email }}</p>
 
     <router-link v-show="flag" :to="{ name: 'editUserPage' }">編集</router-link>
+    <el-button v-show="flag" @click="signout" type="primary" class="button" round>退会</el-button>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import { getUser } from '../../packs/modules/getUser'
 import { BASE_TITLE } from '../../const'
 
@@ -50,9 +52,8 @@ export default {
         document.title = BASE_TITLE
       }
     },
+    // 編集ページヘのリンクの表示・非表示
     setFlag() {
-      console.log(JSON.stringify(this.currentUser))
-      console.log(JSON.stringify(this.user))
       // ログインしているユーザーとこのページのユーザーが同じ場合はユーザー編集ページへのリンクを表示
       if (JSON.stringify(this.currentUser) === JSON.stringify(this.user)) {
         this.flag = true
@@ -60,6 +61,19 @@ export default {
       } else {
         this.flag = false
       }
+    },
+    signout() {
+      if (!window.confirm('本当に退会しますか？')) return // キャンセルを押した場合は、return
+      axios.delete('/users')
+        .then(res => {
+          this.$store.dispatch('setFlash', { message: '退会しました', type: 'success' })
+          this.$store.dispatch('setCurrentUser', {}) // 現在のユーザーを削除
+          this.$router.push('/')
+        })
+        .catch(err => {
+          console.error(err)
+          this.$store.dispatch('setFlash', { message: '退会に失敗しました', type: 'error' })
+        })
     }
   },
   created() {
