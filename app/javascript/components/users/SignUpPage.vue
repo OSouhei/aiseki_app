@@ -23,7 +23,7 @@
         <el-input v-model="user.password_confirmation" id="password-confirmation" show-password></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click.prevent="createUser">登録</el-button>
+        <el-button type="primary" id="submit" @click.prevent="createUser">登録</el-button>
       </el-form-item>
     </el-form>
   </div>

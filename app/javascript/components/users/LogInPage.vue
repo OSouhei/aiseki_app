@@ -10,13 +10,13 @@
         </ul>
       </div>
       <el-form-item label="メールアドレス" prop="email">
-        <el-input v-model="user.email"></el-input>
+        <el-input v-model="user.email" id="email"></el-input>
       </el-form-item>
       <el-form-item label="パスワード" prop="password">
-        <el-input v-model="user.password" show-password></el-input>
+        <el-input v-model="user.password" id="password" show-password></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click.prevent="login">ログイン</el-button>
+        <el-button type="primary" @click.prevent="login" id="submit">ログイン</el-button>
       </el-form-item>
     </el-form>
   </div>

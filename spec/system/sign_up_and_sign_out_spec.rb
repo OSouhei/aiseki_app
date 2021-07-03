@@ -24,18 +24,17 @@ RSpec.describe "Sign up and sign out", type: :system do
       fill_in id: "password", with: user.password
       fill_in id: "password-confirmation", with: user.password
       click_button "登録"
-      expect(page).to have_title "#{user.name} | 相席アプリ"
       expect(page).to have_content "アカウントを登録しました" # flash
+      expect(page).to have_title "#{user.name} | 相席アプリ"
     }.to change(User, :count).by(1)
     # ユーザー個別ページに遷移しているか？
-    expect(page).to have_content user.id
     expect(page).to have_content user.name
     expect(page).to have_content user.email
     # ユーザーがログインしているか？
-    expect(page).to have_content "アカウント情報"
-    expect(page).to have_content "ログアウト"
-    expect(page).to_not have_content "ログイン"
-    expect(page).to_not have_content "新規登録"
+    expect(page).to have_button "アカウント情報"
+    expect(page).to have_button "ログアウト"
+    expect(page).to_not have_button "ログイン"
+    expect(page).to_not have_button "新規登録"
     expect(page).to have_button "退会"
     # ここからサインアウトのテスト
     # confirmダイアログでキャンセルを押した場合は退会もキャンセルされる
@@ -45,7 +44,7 @@ RSpec.describe "Sign up and sign out", type: :system do
       end
       expect(page).to have_title "#{user.name} | 相席アプリ"
     }.to_not change(User, :count)
-    # confirmダイアログでokした場合は退会
+    # confirmダイアログでokしkた場合は退会
     expect {
       page.accept_confirm do
         click_button "退会"
