@@ -9,7 +9,6 @@
 <script>
 import Header from './components/Header'
 import Flash from './components/Flash'
-import { getCurrentUser } from './packs/modules/getCurrentUser'
 import { BASE_TITLE } from './const'
 
 export default {
@@ -30,19 +29,6 @@ export default {
   },
   created() {
     this.setTitle(this.$route)
-    // マウント時にストアのログイン中のユーザを設定
-    getCurrentUser()
-      .then(user => {
-        if (Object.keys(user).length !== 0) {
-          this.$store.dispatch('setCurrentUser', user)
-        } else {
-          this.$store.dispatch('setCurrentUser', {})
-        }
-      })
-      .catch(err => {
-        console.error(err)
-        this.$store.dispatch('setCurrentUser', {})
-      })
   },
   watch: {
     // ページが遷移するたびにページタイトルを変更
