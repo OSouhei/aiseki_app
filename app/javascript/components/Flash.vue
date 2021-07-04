@@ -24,6 +24,15 @@ export default {
         this.flag = false
       }, 3000)
     }
+  },
+  created() {
+    // 初回アクセス時にflashが表示されない場合がある
+    if (this.flash.message.length !== 0) {
+      this.flag = true
+      setTimeout(() => {
+        this.flag = false
+      }, 3000)
+    }
   }
 }
 </script>

@@ -8,4 +8,10 @@ FactoryBot.define do
       profile_image { File.new(Rails.root.join("spec/files/test_image.jpg")) }
     end
   end
+
+  factory :new_user, class: 'User' do
+    name { "New user" }
+    sequence(:email) { |n| "new-user-#{n}@example.com" }
+    password { "newpassword" }
+  end
 end

@@ -11,22 +11,22 @@
         </ul>
       </div>
       <el-form-item label="名前" prop="name">
-        <el-input v-model="user.name"></el-input>
+        <el-input v-model="user.name" id="name"></el-input>
       </el-form-item>
       <el-form-item label="メールアドレス" prop="email">
-        <el-input v-model="user.email"></el-input>
+        <el-input v-model="user.email" id="email"></el-input>
       </el-form-item>
       <el-form-item label="変更するパスワード" prop="password">
-        <el-input v-model="user.password" show-password></el-input>
+        <el-input v-model="user.password" show-password id="password"></el-input>
       </el-form-item>
       <el-form-item label="パスワード（確認）" prop="password_confirmation">
-        <el-input v-model="user.password_confirmation" show-password></el-input>
+        <el-input v-model="user.password_confirmation" show-password id="password-confirmation"></el-input>
       </el-form-item>
       <el-form-item label="現在のパスワード" prop="current_password">
-        <el-input v-model="user.current_password" show-password></el-input>
+        <el-input v-model="user.current_password" show-password id="current-password"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click.prevent="updateUser">登録</el-button>
+        <el-button type="primary" @click.prevent="updateUser">編集</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -65,7 +65,7 @@ export default {
           { validator: this.validatePasswordConfirmation, trigger: 'blur' },
         ],
         current_password: [
-          { required: true, message: 'パスワードを入力して下さい', trigger: 'blur' },
+          { required: true, message: '現在のパスワードを入力して下さい', trigger: 'blur' },
           { min: 6, message: 'パスワードは6文字以上です', trigger: 'blur' }
         ]
       },
@@ -82,24 +82,19 @@ export default {
     updateUser() {
       axios.patch('/users', { user: this.user })
         .then(res => {
-          const errors = res.data.result.errors
           // ユーザーの編集に成功した場合
-          if (errors.length === 0) {
-            const user = res.data.result.user
-            this.$store.dispatch('setCurrentUser', user) // storeのcurrentUserを更新する
-            this.$store.dispatch('setFlash', { message: 'ユーザー情報を編集しました', type: 'success' }) // flash
-            this.$router.push({
-              name: 'userPage',
-              params: { id: user.id }
-            })
-          // ユーザーの編集に失敗した場合
-          } else {
-            this.errors = errors
-          }
+          const user = res.data.result.user
+          this.$store.dispatch('setCurrentUser', user) // storeのcurrentUserを更新する
+          this.$store.dispatch('setFlash', { message: 'ユーザー情報を編集しました', type: 'success' }) // flash
+          this.$router.push({
+            name: 'userPage',
+            params: { id: user.id }
+          })
         })
         .catch(err => {
+          // ユーザー編集に失敗（エラーコードが返ってきた）場合
           console.error(err)
-          if (err.response.data.result.errors) {
+          if (err.response.data.result && err.response.data.result.errors) {
             this.errors = err.response.data.result.errors
           }
         })
@@ -107,7 +102,6 @@ export default {
   },
   mounted() {
     // マウント時に現在のユーザーの情報をフォームに設定
-    console.log(this.currentUser)
     this.user.name = this.currentUser.name
     this.user.email = this.currentUser.email
   }
