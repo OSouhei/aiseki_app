@@ -17,7 +17,7 @@
         <el-input type="textarea" v-model="room.content"></el-input>
       </el-form-item>
       <el-form-item label="店名" prop="shop_name">
-        <vue-simple-suggest v-model="room.shop_name" display-attribute="name" value-attribute="name" :list="shops" @change="setShops" @input="setShops" @select="setShop"></vue-simple-suggest>
+        <vue-simple-suggest v-model="room.shop_name" :list="getSuggestionList" display-attribute="name" value-attribute="name" @select="setShop"></vue-simple-suggest>
       </el-form-item>
       <el-form-item label="人数制限" prop="limit">
         <el-input v-model="room.limit"></el-input>
@@ -48,7 +48,6 @@ export default {
   data() {
     return {
       room: { title: '', content: '', shop_name: '', limit: '', date: '', shop_url: '' },
-      shops: [], // 検索した店
       errors: [],
       // 検証ルール
       rules: {
@@ -87,20 +86,16 @@ export default {
           this.$router.push('/')
         })
     },
-    setShops(keyword) {
-      searchShop(keyword)
-        .then(shops => {
-          console.log(shops)
-          this.shops = shops
-        })
-        .catch(err => {
-          console.error(err)
-        })
+    // 店名サーチのサジェストを設定
+    getSuggestionList: async function(keyword) {
+      return await searchShop(keyword)
     },
+    // 店の名前と、URL（ホットペッパーグルメ）を設定
     setShop(shop) {
       this.room.shop_name = shop.name
       this.room.shop_url = shop.url
     },
+    // 日付を設定
     setDate(time) {
       this.room.date = time
     }

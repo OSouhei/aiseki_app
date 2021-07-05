@@ -67,8 +67,11 @@ class RoomsController < ApplicationController
   # GET /rooms/search_shop
   def search_shop
     term = params[:keyword]
-    data = search_shops(term)
-    @shops = retrieve_shop_name_from_xml(data)
+    data = search_shops(term)["results"]["shop"]
+    @shops = []
+    data.each do |shop|
+      @shops << { name: shop["name"], url: shop["urls"]["pc"] }
+    end
     render json: {
       shops: @shops
     }
