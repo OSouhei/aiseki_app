@@ -25,17 +25,13 @@ class RoomsController < ApplicationController
   # POST /rooms
   def create
     @room = current_user.rooms.build(room_params)
-    if @room.save
-      render json: {
-        result: {
-          room: @room
-        }
-      }
-    else
-      render json: {
+    http_status = @room.save ? :ok : :bad_request
+    render json: {
+      result: {
+        room: @room,
         errors: @room.errors.full_messages
-      }, status: :bad_request
-    end
+      }
+    }, status: http_status
   end
 
   # PATCH /rooms/:id

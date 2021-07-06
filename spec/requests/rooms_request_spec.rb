@@ -125,14 +125,14 @@ RSpec.describe "Rooms", type: :request do
 
         it "has error data" do
           post rooms_path, params: { room: invalid_room_params }
-          err = JSON.parse(response.body)["errors"]
+          err = JSON.parse(response.body)["result"]["errors"]
           expect(err.length).to eq 2
         end
 
         # 後で日本語化する。。。
         it "has error messages data" do
           post rooms_path, params: { room: invalid_room_params }
-          err = JSON.parse(response.body)["errors"]
+          err = JSON.parse(response.body)["result"]["errors"]
           aggregate_failures do
             expect(err[0]).to eq "Titleを入力してください"
             expect(err[1]).to eq "Shop nameを入力してください"
