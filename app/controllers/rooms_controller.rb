@@ -5,6 +5,12 @@ class RoomsController < ApplicationController
   before_action :set_room, only: [:show, :update, :destroy, :join, :exit]
   before_action :room_owner?, only: [:update, :destroy]
 
+  # エラーを拾えなかった場合は、500 internal server errorを応答
+  rescue_from Exception, with: :render_status_500
+
+  # レコードが見つからなかった場合は、404 not foundを応答
+  rescue_from ActiveRecord::RecordNotFound, with: :render_status_404
+
   # GET /rooms
   def index
     @rooms = Room.all
@@ -19,7 +25,16 @@ class RoomsController < ApplicationController
   def show
     render json: {
       result: {
-        room: @room
+        room: {
+          id: @room.id,
+          title: @room.title,
+          content: @room.content,
+          shop_name: @room.shop_name,
+          shop_url: @room.shop_url,
+          limit: @room.limit,
+          owner_id: @room.owner.id,
+          owner_name: @room.owner.name
+        }
       }
     }
   end
@@ -105,10 +120,18 @@ class RoomsController < ApplicationController
   end
 
   def set_room
-    @room = Room.find_by(id: params[:id]) || redirect_to(root_path, alert: "ルームを見つけることができませんでした。") && return
+    @room = Room.find(params[:id])
   end
 
   def room_owner?
     redirect_to(root_path, alert: "このページにはアクセスできません。") and return unless @room.owner?(current_user)
+  end
+
+  def render_status_404(exception)
+    render json: { errors: [exception] }, status: :not_found
+  end
+
+  def render_status_500(exception)
+    render json: { errors: [exception] }, status: :internal_server_error
   end
 end

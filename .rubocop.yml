@@ -79,6 +79,10 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Enabled: false
 
+Metrics/ClassLength:
+  Exclude:
+    - 'app/controllers/rooms_controller.rb'
+
 Metrics/CyclomaticComplexity:
   Max: 10
 
@@ -93,7 +97,7 @@ Naming/AccessorMethodName:
 
 Naming/VariableNumber:
   Exclude:
-    - 'app/controllers/api/users_controller.rb'
+    - 'app/controllers/**/*.rb'
 
 Style/AsciiComments:
   Enabled: false

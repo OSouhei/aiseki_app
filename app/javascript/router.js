@@ -66,6 +66,16 @@ const routes = [
       title: 'ルーム作成',
       requiresAuth: true
     }
+  },
+  // ルーム個別ページ
+  {
+    path: '/rooms/:id',
+    name: 'roomPage',
+    component: () => import('./components/rooms/RoomPage'),
+    meta: {
+      title: '',
+      requiresAuth: null
+    }
   }
 ]
 

@@ -3,6 +3,7 @@ FactoryBot.define do
     title { "Test Room" }
     content { "This is test room." }
     shop_name { "Orion" }
+    shop_url { "https://foobar.com/shops/1" }
     date { Time.zone.local(2021, 12, 11, 15, 30) }
     limit { 3 }
     association :owner

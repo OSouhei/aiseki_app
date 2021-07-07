@@ -12,10 +12,10 @@
     },
     "hello_vue": {
       "js": [
-        "/packs/js/hello_vue-1c44494a822f638688b6.js"
+        "/packs/js/hello_vue-ac3c6c26fb8d7f2d2328.js"
       ],
       "js.map": [
-        "/packs/js/hello_vue-1c44494a822f638688b6.js.map"
+        "/packs/js/hello_vue-ac3c6c26fb8d7f2d2328.js.map"
       ]
     },
     "modules/getCurrentUser": {
@@ -24,6 +24,14 @@
       ],
       "js.map": [
         "/packs/js/modules/getCurrentUser-23d5c17ea90c38843dbc.js.map"
+      ]
+    },
+    "modules/getRoom": {
+      "js": [
+        "/packs/js/modules/getRoom-8d04234e7b9753ddc683.js"
+      ],
+      "js.map": [
+        "/packs/js/modules/getRoom-8d04234e7b9753ddc683.js.map"
       ]
     },
     "modules/getUser": {
@@ -59,12 +67,14 @@
       ]
     }
   },
-  "hello_vue.js": "/packs/js/hello_vue-1c44494a822f638688b6.js",
-  "hello_vue.js.map": "/packs/js/hello_vue-1c44494a822f638688b6.js.map",
+  "hello_vue.js": "/packs/js/hello_vue-ac3c6c26fb8d7f2d2328.js",
+  "hello_vue.js.map": "/packs/js/hello_vue-ac3c6c26fb8d7f2d2328.js.map",
   "media/fonts/element-icons.ttf": "/packs/media/fonts/element-icons-45201881.ttf",
   "media/fonts/element-icons.woff": "/packs/media/fonts/element-icons-313f7dac.woff",
   "modules/getCurrentUser.js": "/packs/js/modules/getCurrentUser-23d5c17ea90c38843dbc.js",
   "modules/getCurrentUser.js.map": "/packs/js/modules/getCurrentUser-23d5c17ea90c38843dbc.js.map",
+  "modules/getRoom.js": "/packs/js/modules/getRoom-8d04234e7b9753ddc683.js",
+  "modules/getRoom.js.map": "/packs/js/modules/getRoom-8d04234e7b9753ddc683.js.map",
   "modules/getUser.js": "/packs/js/modules/getUser-5848f4a5d7c5026b8758.js",
   "modules/getUser.js.map": "/packs/js/modules/getUser-5848f4a5d7c5026b8758.js.map",
   "modules/searchShop.js": "/packs/js/modules/searchShop-e1139af6b00a4a54903d.js",
