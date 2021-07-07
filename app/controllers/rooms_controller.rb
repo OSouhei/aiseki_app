@@ -1,4 +1,6 @@
 class RoomsController < ApplicationController
+  protect_from_forgery
+
   before_action :authenticate_user!, only: [:create, :update, :destroy, :join, :exit]
   before_action :set_room, only: [:show, :update, :destroy, :join, :exit]
   before_action :room_owner?, only: [:update, :destroy]
@@ -64,6 +66,8 @@ class RoomsController < ApplicationController
   def search_shop
     term = params[:keyword]
     data = search_shops(term)["results"]["shop"]
+    return if data.nil?
+
     @shops = []
     data.each do |shop|
       @shops << { name: shop["name"], url: shop["urls"]["pc"] }

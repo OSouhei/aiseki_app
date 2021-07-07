@@ -1,0 +1,11 @@
+ja:
+  activerecord:
+    models:
+      room: ルーム
+    attributes:
+      room:
+        title: ルーム名
+        content: ルームメッセージ
+        limit: 人数
+        shop_name: 店名
+        data: 日付

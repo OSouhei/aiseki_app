@@ -12,10 +12,10 @@
     },
     "hello_vue": {
       "js": [
-        "/packs/js/hello_vue-2db465e25e870ffa12be.js"
+        "/packs/js/hello_vue-f9c47145083569a439a9.js"
       ],
       "js.map": [
-        "/packs/js/hello_vue-2db465e25e870ffa12be.js.map"
+        "/packs/js/hello_vue-f9c47145083569a439a9.js.map"
       ]
     },
     "modules/getCurrentUser": {
@@ -57,18 +57,10 @@
       "js.map": [
         "/packs/js/plugins/csrf_token_plugin-3f3dd5606e5b518e6d1e.js.map"
       ]
-    },
-    "shop_name": {
-      "js": [
-        "/packs/js/shop_name-124b6f769f3f7f2129d8.js"
-      ],
-      "js.map": [
-        "/packs/js/shop_name-124b6f769f3f7f2129d8.js.map"
-      ]
     }
   },
-  "hello_vue.js": "/packs/js/hello_vue-2db465e25e870ffa12be.js",
-  "hello_vue.js.map": "/packs/js/hello_vue-2db465e25e870ffa12be.js.map",
+  "hello_vue.js": "/packs/js/hello_vue-f9c47145083569a439a9.js",
+  "hello_vue.js.map": "/packs/js/hello_vue-f9c47145083569a439a9.js.map",
   "media/fonts/element-icons.ttf": "/packs/media/fonts/element-icons-45201881.ttf",
   "media/fonts/element-icons.woff": "/packs/media/fonts/element-icons-313f7dac.woff",
   "modules/getCurrentUser.js": "/packs/js/modules/getCurrentUser-23d5c17ea90c38843dbc.js",
@@ -80,7 +72,5 @@
   "modules/validateEmail.js": "/packs/js/modules/validateEmail-e02d71fa143ebb41ee42.js",
   "modules/validateEmail.js.map": "/packs/js/modules/validateEmail-e02d71fa143ebb41ee42.js.map",
   "plugins/csrf_token_plugin.js": "/packs/js/plugins/csrf_token_plugin-3f3dd5606e5b518e6d1e.js",
-  "plugins/csrf_token_plugin.js.map": "/packs/js/plugins/csrf_token_plugin-3f3dd5606e5b518e6d1e.js.map",
-  "shop_name.js": "/packs/js/shop_name-124b6f769f3f7f2129d8.js",
-  "shop_name.js.map": "/packs/js/shop_name-124b6f769f3f7f2129d8.js.map"
+  "plugins/csrf_token_plugin.js.map": "/packs/js/plugins/csrf_token_plugin-3f3dd5606e5b518e6d1e.js.map"
 }

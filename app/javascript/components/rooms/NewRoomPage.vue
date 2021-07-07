@@ -11,19 +11,21 @@
         </ul>
       </div>
       <el-form-item label="タイトル" prop="title">
-        <el-input v-model="room.title"></el-input>
+        <el-input v-model="room.title" id="title"></el-input>
       </el-form-item>
       <el-form-item label="メッセージ" prop="content">
-        <el-input type="textarea" v-model="room.content"></el-input>
+        <el-input type="textarea" v-model="room.content" id="content"></el-input>
       </el-form-item>
       <el-form-item label="店名" prop="shop_name">
-        <vue-simple-suggest v-model="room.shop_name" :list="getSuggestionList" display-attribute="name" value-attribute="name" @select="setShop"></vue-simple-suggest>
+        <vue-simple-suggest v-model="room.shop_name" :list="getSuggestionList" display-attribute="name" value-attribute="name" @select="setShop">
+          <el-input v-model="room.shop_name" id="shop_name"></el-input>
+        </vue-simple-suggest>
       </el-form-item>
       <el-form-item label="人数制限" prop="limit">
-        <el-input v-model="room.limit"></el-input>
+        <el-input v-model="room.limit" id="limit"></el-input>
       </el-form-item>
       <el-form-item label="日付" prop="date">
-        <Datetime v-model="room.date" type="datetime" @input="setDate"></Datetime>
+        <Datetime v-model="room.date" type="datetime" @input="setDate" id="date"></Datetime>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" @click.prevent="createRoom">ルーム作成</el-button>
@@ -52,8 +54,8 @@ export default {
       // 検証ルール
       rules: {
         title: [
-          { required: true, message: 'ルームタイトルを入力して下さい', trigger: 'blur' },
-          { max: 30, message: 'ルームタイトルは30文字以内にして下さい', trigger: 'blur' }
+          { required: true, message: 'ルーム名を入力して下さい', trigger: 'blur' },
+          { max: 30, message: 'ルーム名は30文字以内にして下さい', trigger: 'blur' }
         ],
         content: [
           { max: 200, message: 'ルームメッセージは200文字以内にして下さい', trigger: 'blur' }
@@ -62,10 +64,7 @@ export default {
           { required: true, message: '店名を入力して下さい', trigger: 'blur' }
         ],
         limit: [
-          { type: 'integer', required: true, message: '上限人数を入力して下さい', trigger: 'blur' },
-        ],
-        date: [
-          { type: 'date', required: true, message: '日時を入力して下さい', trigger: 'blur' }
+          { required: true, message: '人数を入力して下さい', trigger: 'blur' }
         ]
       }
     }
@@ -74,21 +73,23 @@ export default {
     createRoom() {
       axios.post('/rooms', { room: this.room })
         .then(res => {
-          if (res.data.errors && res.data.errors.length !== 0) {
-            this.errors = res.data.errors
-          } else {
-            this.$store.dispatch('setFlash', { message: 'ルームを作成しました', type: 'success' })
-            this.$router.push('/')
-          }
+          const room = res.data.result.room
+          this.$store.dispatch('setFlash', { message: 'ルームを作成しました', type: 'success' })
+          this.$router.push('/') // 後で作成したルームページへ移動させる。。。
         })
         .catch(err => {
-          this.$store.dispatch('setFlash', { message: 'ルームの作成に失敗しました', type: 'error' })
-          this.$router.push('/')
+          console.error(err)
+          if (err.response.data.result && err.response.data.result.errors) {
+            this.errors = err.response.data.result.errors
+          }
         })
     },
     // 店名サーチのサジェストを設定
     getSuggestionList: async function(keyword) {
-      return await searchShop(keyword)
+      if (keyword.length === 0) return
+      const shops = await searchShop(keyword)
+      console.log(shops)
+      return shops
     },
     // 店の名前と、URL（ホットペッパーグルメ）を設定
     setShop(shop) {
