@@ -55,10 +55,11 @@ RSpec.describe "Create room", type: :system do
 
   scenario "guest user can't access new room page" do
     visit "/#/rooms/new"
+    expect(page).to have_content "このページにアクセスするにはログインする必要があります"
     expect(page).to have_title "ログイン | 相席アプリ"
     fill_in id: "email", with: user.email
     fill_in id: "password", with: user.password
     click_button id: "submit"
-    expect(page).to have_title "相席アプリ" # 後でフレンドリーフォワーディングに。。。
+    expect(page).to have_title "ルーム作成 | 相席アプリ"
   end
 end

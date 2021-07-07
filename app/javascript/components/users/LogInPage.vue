@@ -54,10 +54,14 @@ export default {
     login() {
       axios.post('/users/sign_in', { user: this.user })
         .then(res => {
-          let user = res.data.result.user
+          const user = res.data.result.user
           this.$store.dispatch('setCurrentUser', user) // ログイン中のユーザーを設定
           this.$store.dispatch('setFlash', { message: 'ログインしました', type: 'success' }) // flash
-          this.$router.push({ path: '/' }).catch(err => {}) // トップページに移動
+          if (this.$route.query && this.$route.query.path) {
+            this.$router.push({ path: this.$route.query.path }) // 認証が必要なページから遷移してきた場合は、そのページへ移動
+          } else {
+            this.$router.push({ path: '/' }).catch(err => {}) // トップページに移動
+          }
         })
         .catch(err => {
           console.error(err)

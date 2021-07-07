@@ -78,7 +78,7 @@ router.beforeEach((to, from, next) => {
   // 認証が必要なページで、ログインしていない場合
   if (to.meta.requiresAuth && !store.getters.isLoggedIn) {
     store.dispatch('setFlash', { message: 'このページにアクセスするにはログインする必要があります', type: 'warning' })
-    next('/log_in')
+    next({ path: '/log_in', query: { path: to.fullPath }})
   // 認証済みではアクセスできないページで、ログイン済みの場合
   } else if (to.meta.requiresAuth === false && store.getters.isLoggedIn) {
     store.dispatch('setFlash', { message: 'このページにはアクセスできません', type: 'warning' })
