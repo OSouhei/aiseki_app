@@ -32,6 +32,7 @@ class RoomsController < ApplicationController
           shop_name: @room.shop_name,
           shop_url: @room.shop_url,
           limit: @room.limit,
+          date: @room.date,
           owner_id: @room.owner.id,
           owner_name: @room.owner.name
         }
