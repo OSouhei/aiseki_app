@@ -156,8 +156,6 @@ RSpec.describe User, type: :model do
 
   describe "methods" do
     context "#join" do
-      let(:limited_room) { FactoryBot.create(:room, :limited) }
-
       it "join room" do
         user.join(room)
         expect(user.joining).to include room
@@ -172,12 +170,6 @@ RSpec.describe User, type: :model do
       it "return false when argument is nil" do
         expect {
           expect(user.join(nil)).to be_falsey
-        }.to_not change(Notification, :count)
-      end
-
-      it "returns false when room is limited" do
-        expect {
-          expect(user.join(limited_room)).to be_falsey
         }.to_not change(Notification, :count)
       end
     end

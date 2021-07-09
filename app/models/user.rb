@@ -4,8 +4,7 @@ class User < ApplicationRecord
   has_many :joining, through: :joining_rooms, source: :room
   has_many :passive_notifications, class_name: "Notification", foreign_key: :to, dependent: :destroy
   has_many :active_notifications, class_name: "Notification", foreign_key: :by, dependent: :destroy
-  # passive_notifications と同じ
-  has_many :notifications, foreign_key: :to, dependent: :destroy
+  has_many :notifications, foreign_key: :to, dependent: :destroy # passive_notifications と同じ
   has_many :bookmarks, dependent: :destroy
   has_many :booked_rooms, through: :bookmarks, source: :room
   has_many :active_relationships, class_name: "Relationship", foreign_key: :follower_id, dependent: :destroy
@@ -25,7 +24,7 @@ class User < ApplicationRecord
   validates :email, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }
 
   def join(room)
-    return false if room.nil? || room.limited?
+    return false if room.nil?
 
     joining << room
     active_notifications.create(to: room.owner.id, room_id: room.id, action: "join") # 通知を作成

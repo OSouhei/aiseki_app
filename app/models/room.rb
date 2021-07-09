@@ -6,20 +6,9 @@ class Room < ApplicationRecord
   has_many :booked_by, through: :booked, source: :user
   belongs_to :owner, class_name: "User", foreign_key: :user_id
 
-  validates :title, presence: true, length: { maximum: 30 }
-  validates :shop_name, presence: true
-  validates :content, length: { maximum: 200 }
-  validates :limit, presence: true, numericality: { only_integer: true }
-  validate :member_limit
-
-  def self.search(term = "")
-    if term.blank?
-      Room.all
-    else
-      term.downcase!
-      Room.where("lower(content) LIKE ?", "%#{term}%")
-    end
-  end
+  validates :name, presence: true, length: { maximum: 100 }
+  validates :theme, presence: true, length: { maximum: 200 }
+  validates :message, length: { maximum: 500 }
 
   def owner?(user)
     owner == user
@@ -29,19 +18,7 @@ class Room < ApplicationRecord
     members.include?(user)
   end
 
-  def limited?
-    limit <= members.count
-  end
-
-  def member_limit
-    errors.add(:limit, "must be more than members count") if limit && members.count > limit
-  end
-
   def booked_by?(user)
     booked_by.include?(user)
-  end
-
-  def display_time
-    date ? date.strftime("%Y/%m/%d %R") : "日付が設定されていません。"
   end
 end

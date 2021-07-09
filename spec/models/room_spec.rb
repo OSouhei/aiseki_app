@@ -30,68 +30,22 @@ RSpec.describe Room, type: :model do
   end
 
   describe "validation" do
-    context "title" do
-      it { should validate_presence_of(:title) }
-      it { should validate_length_of(:title).is_at_most(30) }
+    context "name" do
+      it { should validate_presence_of(:name) }
+      it { should validate_length_of(:name).is_at_most(100) }
     end
 
-    context "shop_name" do
-      it { should validate_presence_of(:shop_name) }
+    context "theme" do
+      it { should validate_presence_of(:theme) }
+      it { should validate_length_of(:theme).is_at_most(200) }
     end
 
-    context "content" do
-      it { should validate_length_of(:content).is_at_most(200) }
-    end
-  end
-
-  context "limit" do
-    let(:limited_room) { create(:room, :limited) }
-
-    it { should validate_presence_of(:limit) }
-    it { should validate_numericality_of(:limit).only_integer }
-
-    it "is invalid when room's member is more than limit" do
-      limited_room.members << create(:user)
-      limited_room.valid?
-      expect(limited_room.errors[:limit]).to include "must be more than members count"
+    context "message" do
+      it { should validate_length_of(:message).is_at_most(500) }
     end
   end
 
   describe "method" do
-    describe "#search" do
-      let!(:room1) { create(:room, content: "this is room1") }
-      let!(:room2) { create(:room, content: "this is room2") }
-      let!(:room3) { create(:room, content: "this is room3") }
-
-      context "when term is nil" do
-        it "returns all rooms" do
-          expect(described_class.search("")).to eq described_class.all
-        end
-
-        it "returns all rooms with default argument" do
-          expect(described_class.search).to eq described_class.all
-        end
-      end
-
-      context "term is present" do
-        it "returns search result" do
-          expect(described_class.search("room1")).to include room1
-        end
-
-        it "returns search results" do
-          aggregate_failures do
-            expect(described_class.search("room")).to include room1
-            expect(described_class.search("room")).to include room2
-            expect(described_class.search("room")).to include room3
-          end
-        end
-
-        it "searches case insensitive" do
-          expect(described_class.search("ROOM1")).to include room1
-        end
-      end
-    end
-
     describe "#owner?" do
       let(:user) { create(:user) }
       let(:user_room) { create(:room, owner: user) }
@@ -124,19 +78,6 @@ RSpec.describe Room, type: :model do
       end
     end
 
-    describe "#limited?" do
-      let(:room) { create(:room) }
-      let(:limited_room) { create(:room, :limited) }
-
-      it "returns true if argument is limited" do
-        expect(limited_room).to be_limited
-      end
-
-      it "returns false if argument is not limited" do
-        expect(room).to_not be_limited
-      end
-    end
-
     describe "#booked_by?" do
       let(:user) { create(:user) }
       let(:other_user) { create(:user) }
@@ -152,18 +93,6 @@ RSpec.describe Room, type: :model do
 
       it "returns false if user does not book the room" do
         expect(room).to_not be_booked_by other_user
-      end
-    end
-
-    describe "#display_time" do
-      it "returns formatted time" do
-        room.update(date: Time.zone.local(2021, 12, 11, 15, 30))
-        expect(room.display_time).to eq "2021/12/11 15:30"
-      end
-
-      it "returns string when date is nil" do
-        room.update(date: nil)
-        expect(room.display_time).to eq "日付が設定されていません。"
       end
     end
   end
