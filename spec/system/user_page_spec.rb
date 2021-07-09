@@ -23,7 +23,6 @@ RSpec.describe "User page", type: :system do
   scenario "user page has user information" do
     visit "/#/users/#{user.id}"
     expect(page).to have_content user.name
-    expect(page).to have_content user.email
     # ユーザー編集ページ・退会へのリンクがないか？
     expect(page).to_not have_link "編集"
     expect(page).to_not have_button "退会"

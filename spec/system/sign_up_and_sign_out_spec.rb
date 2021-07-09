@@ -29,7 +29,6 @@ RSpec.describe "Sign up and sign out", type: :system do
     }.to change(User, :count).by(1)
     # ユーザー個別ページに遷移しているか？
     expect(page).to have_content user.name
-    expect(page).to have_content user.email
     # ユーザーがログインしているか？
     expect(page).to have_button "アカウント情報"
     expect(page).to have_button "ログアウト"

@@ -21,7 +21,8 @@ class Api::UsersController < ApiController
       user: {
         id: @user.id,
         name: @user.name,
-        email: @user.email
+        email: @user.email,
+        created_at: @user.created_at.strftime("%Y年%m月")
       }
     }
   end

@@ -1,11 +1,21 @@
 <template>
   <div :id="'user-' + user.id">
-    <p>id: {{ user.id }}</p>
-    <p>name: {{ user.name }}</p>
-    <p>email: {{ user.email }}</p>
-
-    <router-link v-show="flag" :to="{ name: 'editUserPage' }">編集</router-link>
-    <el-button v-show="flag" @click="signout" type="primary" class="button" round>退会</el-button>
+    <div class="user-info">
+      <div class="background"></div>
+      <div class="main">
+        <div class="container">
+          <div class="block"><el-avatar :size="90" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" /></div>
+          <div class="link" v-show="flag">
+            <el-button type="primary" class="button" round><router-link :to="{ name: 'editUserPage', params: this.user.id }">編集</router-link></el-button>
+            <el-button v-show="flag" @click="signout" type="primary" class="button" round>退会</el-button>
+          </div>
+        </div>
+        <div class="content">
+          <h2>{{ user.name }}</h2>
+          <span>{{ this.user.created_at }}から利用しています。</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -17,7 +27,12 @@ import { BASE_TITLE } from '../../const'
 export default {
   data() {
     return {
-      user: {},
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        created_at: ''
+      },
       flag: false
     }
   },
@@ -55,13 +70,9 @@ export default {
     // 編集ページヘのリンクの表示・非表示
     setFlag() {
       // ログインしているユーザーとこのページのユーザーが同じ場合はユーザー編集ページへのリンクを表示
-      if (JSON.stringify(this.currentUser) === JSON.stringify(this.user)) {
-        this.flag = true
-      // 同じでない場合はユーザー編集ページへのリンクを非表示
-      } else {
-        this.flag = false
-      }
+      this.flag = this.currentUser.id === this.user.id ? true : false
     },
+    // 退会する
     signout() {
       if (!window.confirm('本当に退会しますか？')) return // キャンセルを押した場合は、return
       axios.delete('/users')
@@ -78,7 +89,6 @@ export default {
   },
   created() {
     this.setUser(this.$route.params.id)
-    this.setFlag()
   },
   watch: {
     // ルートパラメータだけが変化してもデータを更新
@@ -93,3 +103,49 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+h2 {
+  margin-bottom: 0;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+span {
+  font-size: 12px;
+  color: #777;
+}
+
+.background {
+  height: 120px;
+  background-color: #eee;
+}
+
+.container {
+  height: 50px;
+}
+
+.block {
+  position: relative;
+}
+
+.el-avatar {
+  position: absolute;
+  top: -45px;
+  left: 45px;
+}
+
+.link {
+  float: right;
+  margin-top: 5px;
+  margin-right: 45px;
+}
+
+.content {
+  padding-left: 60px;
+  padding-right: 60px;
+}
+</style>
